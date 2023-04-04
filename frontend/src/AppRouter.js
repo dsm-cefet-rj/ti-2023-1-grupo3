@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, ProfessionalsMarketplace } from "./pages";
+import { Home, ProfessionalsMarketplace, } from "./pages";
+import Agendamento from "./pages/Agendamento";
 
 const AppRouter = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const AppRouter = createBrowserRouter([
     path: "/professionals",
     element: <ProfessionalsMarketplace />,
   },
+  {
+  path: "/agendamento",
+  element: <Agendamento />,
+  }
 ]);
 
 export default AppRouter;
