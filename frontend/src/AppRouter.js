@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, ProfessionalsMarketplace } from "./pages";
+import { Home, ProfessionalProfile, ProfessionalsMarketplace } from "./pages";
 
 const AppRouter = createBrowserRouter([
   {
@@ -9,6 +9,10 @@ const AppRouter = createBrowserRouter([
   {
     path: "/professionals",
     element: <ProfessionalsMarketplace />,
+  },
+  {
+    path: "/profile",
+    element: <ProfessionalProfile />,
   },
 ]);
 
