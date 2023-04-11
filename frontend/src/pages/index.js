@@ -1,3 +1,4 @@
 export * from "./Home";
 export * from "./ProfessionalsMarketplace";
-//export * from "./Agendamento";
+export * from "./ProfessionalProfile";
+export * from "./Agendamento";
