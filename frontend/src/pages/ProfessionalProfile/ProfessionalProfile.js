@@ -21,13 +21,13 @@ function ProfessionalProfile() {
   return (
     <StyledBox>
       <StyledAvatar></StyledAvatar>
-      <Typography variant="h2">Jorge Silva</Typography>
-      <Typography variant="h8">4.87☆</Typography>
-      <Typography variant="h5"> Área de atuação: Psicólogo </Typography>
-      <Typography variant="h5"> CFP Nº XX/XXX </Typography>
-      <Typography variant="h5"> Valor: R$ 150 / 50 min </Typography>
-      <Typography variant="h6">
-        Formado em Psicologia pela UFRJ desde 2004, atuo como psicólogo no
+        <Typography variant="h2">Jorge Silva</Typography>
+        <Typography variant="h8">4.87☆</Typography>
+        <Typography variant="h5"> Área de atuação: Psicólogo </Typography>
+        <Typography variant="h5"> CFP Nº XX/XXX </Typography>
+        <Typography variant="h5"> Valor: R$ 150 / 50 min </Typography>
+        <Typography variant="h6"> 
+          Formado em Psicologia pela UFRJ desde 2004, atuo como psicólogo no
         intuito de ajudar pacientes no processo de autoconhecimento e superar
         suas angústias. Especializado no tratamento de pacientes com depressão
         ou ansiedade.
