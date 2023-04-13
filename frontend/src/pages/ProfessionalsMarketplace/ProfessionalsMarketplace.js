@@ -1,11 +1,13 @@
+import { useState, useEffect, useCallback } from "react";
+
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, InputAdornment, styled } from "@mui/material";
+import { Box, InputAdornment, Pagination, styled } from "@mui/material";
 
 import { ProfessionalCard } from "../../components/ProfessionalCard";
-import { professionalsMock } from "./professionals.mock";
-import { useMemo } from "react";
-import { useState } from "react";
+import { getPaginatedProfessionals } from "../../services";
+
+import debounce from "lodash.debounce";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -17,23 +19,38 @@ const StyledBox = styled(Box)(() => ({
 
 function ProfessionalsMarketplace() {
   const [searchText, setSearchText] = useState("");
+  const [page, setPage] = useState(1);
+  const [professionals, setProfessionals] = useState([]);
+  const [numOfPages, setNumOfPages] = useState(1);
 
-  const handleChange = (event) => setSearchText(event.target.value);
-
-  const filteredProfessionals = useMemo(
-    () =>
-      searchText
-        ? professionalsMock.filter((professional) => {
-            const name = professional.name.toLowerCase();
-            const search = searchText.toLowerCase();
-
-            return name.indexOf(search) > -1;
-          })
-        : professionalsMock,
-    [searchText]
+  const setDebouncedSearch = useCallback(
+    debounce((nextValue) => setSearchText(nextValue), 800),
+    []
   );
 
-  console.log(searchText, filteredProfessionals);
+  const LIMIT = 10;
+
+  const handleChange = (event) => setDebouncedSearch(event.target.value);
+
+  const handleChangePage = (event, value) => setPage(value);
+
+  const getProfessionals = async () => {
+    await getPaginatedProfessionals(searchText, page, LIMIT).then(
+      (response) => {
+        setNumOfPages(Number(response.headers["x-total-count"]) / 10);
+        setProfessionals(response.data);
+      }
+    );
+  };
+
+  const getProfessionalsCallback = useCallback(
+    () => getProfessionals(),
+    [page, searchText]
+  );
+
+  useEffect(() => {
+    getProfessionalsCallback();
+  }, [page, searchText]);
 
   return (
     <StyledBox>
@@ -49,9 +66,17 @@ function ProfessionalsMarketplace() {
         onChange={handleChange}
         fullWidth
       />
-      {filteredProfessionals.map((professional, index) => (
-        <ProfessionalCard professional={professional} key={index} />
-      ))}
+
+      {professionals.length > 0 &&
+        professionals.map((professional, index) => (
+          <ProfessionalCard professional={professional} key={index} />
+        ))}
+
+      <Pagination
+        defaultPage={1}
+        count={numOfPages}
+        onChange={handleChangePage}
+      />
     </StyledBox>
   );
 }
