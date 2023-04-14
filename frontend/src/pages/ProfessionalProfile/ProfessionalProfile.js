@@ -42,7 +42,7 @@ function ProfessionalProfile() {
 
   return (
     <StyledBox>
-      <StyledAvatar />
+      <StyledAvatar src={professional?.profilePicture} />
       <Typography variant="h2">{professional?.name ?? "-"}</Typography>
 
       <Typography variant="body1">
