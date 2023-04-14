@@ -16,7 +16,7 @@ const AppRouter = createBrowserRouter([
     element: <ProfessionalsMarketplace />,
   },
   {
-    path: "/profile",
+    path: "/profile/:id",
     element: <ProfessionalProfile />,
   },
   {

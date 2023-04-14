@@ -13,7 +13,9 @@
         "Depressão",
         "Problemas familiares"
       ],
-      "hourRate": 100
+      "hourRate": 100,
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
       "id": 2,
@@ -29,7 +31,10 @@
         "Problemas familiares",
         "TUDO"
       ],
-      "hourRate": 70000
+      "hourRate": 70000,
+      "rating": 4.85,
+      "cfp": "12/1234"
+  
     },
     {
       "id": 3,
@@ -42,7 +47,9 @@
       "specialities": [
         "Ansiedade"
       ],
-      "hourRate": 7
+      "hourRate": 7,
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
       "id": 4,
@@ -57,7 +64,9 @@
         "Problemas familiares",
         "TUDO"
       ],
-      "hourRate": 70
+      "hourRate": 70,
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
       "id": 5,
@@ -71,7 +80,9 @@
         "Ansiedade",
         "Depressão"
       ],
-      "hourRate": 324
+      "hourRate": 324,
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
       "id": 6,
@@ -85,7 +96,9 @@
         "Problemas familiares",
         "TUDO"
       ],
-      "hourRate": 700
+      "hourRate": 700,
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
       "id": 7,
@@ -100,7 +113,9 @@
         "Depressão",
         "TUDO"
       ],
-      "hourRate": 550
+      "hourRate": 550,
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
       "id": 8,
@@ -114,7 +129,9 @@
         "Ansiedade",
         "TUDO"
       ],
-      "hourRate": 45
+      "hourRate": 45,
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
       "id": 9,
@@ -127,7 +144,9 @@
       "specialities": [
         "TUDO"
       ],
-      "hourRate": 5678
+      "hourRate": 5678,
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
       "id": 10,
@@ -143,10 +162,12 @@
         "Problemas familiares",
         "TUDO"
       ],
-      "hourRate": 70
+      "hourRate": 70,
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 11,
+      "id": 11,
       "name": "Rachel Moen",
       "cellphone": "(14) 16135-0395",
       "email": "Erick_Ward@gmail.com",
@@ -160,10 +181,12 @@
         "ad",
         "ad"
       ],
-      "hourRate": "166"
+      "hourRate": "166",
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 12,
+      "id": 12,
       "name": "Mrs. Frances Harvey",
       "cellphone": "(64) 80053-6506",
       "email": "Judah_Sipes@yahoo.com",
@@ -177,10 +200,12 @@
         "totam",
         "totam"
       ],
-      "hourRate": "732"
+      "hourRate": "732",
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 13,
+      "id": 13,
       "name": "Lee Gutkowski",
       "cellphone": "(38) 37752-9549",
       "email": "Lesley7@hotmail.com",
@@ -194,10 +219,12 @@
         "nobis",
         "nobis"
       ],
-      "hourRate": "761"
+      "hourRate": "761",
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 14,
+      "id": 14,
       "name": "Gabriel Brakus",
       "cellphone": "(13) 21748-3602",
       "email": "Agustin.Witting@gmail.com",
@@ -211,10 +238,12 @@
         "quasi",
         "quasi"
       ],
-      "hourRate": "122"
+      "hourRate": "122",
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 15,
+      "id": 15,
       "name": "Gloria Marvin",
       "cellphone": "(77) 19529-8350",
       "email": "Litzy.OReilly@hotmail.com",
@@ -228,10 +257,12 @@
         "libero",
         "libero"
       ],
-      "hourRate": "24"
+      "hourRate": "24",
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 16,
+      "id": 16,
       "name": "Bradley Fisher",
       "cellphone": "(62) 02982-6962",
       "email": "Shemar98@gmail.com",
@@ -245,10 +276,12 @@
         "quas",
         "quas"
       ],
-      "hourRate": "180"
+      "hourRate": "180",
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 17,
+      "id": 17,
       "name": "Debbie Bruen",
       "cellphone": "(51) 64011-1823",
       "email": "Gennaro_Padberg@hotmail.com",
@@ -262,10 +295,12 @@
         "dolores",
         "dolores"
       ],
-      "hourRate": "536"
+      "hourRate": "536",
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 18,
+      "id": 18,
       "name": "Tyrone Flatley",
       "cellphone": "(34) 47223-8302",
       "email": "Elliot.Leuschke@gmail.com",
@@ -279,10 +314,12 @@
         "nesciunt",
         "nesciunt"
       ],
-      "hourRate": "55"
+      "hourRate": "55",
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 19,
+      "id": 19,
       "name": "Mr. Claire Wolf",
       "cellphone": "(38) 14816-9562",
       "email": "Pascale.Pfannerstill@hotmail.com",
@@ -296,10 +333,12 @@
         "fuga",
         "fuga"
       ],
-      "hourRate": "931"
+      "hourRate": "931",
+      "rating": 4.85,
+      "cfp": "12/1234"
     },
     {
-        "id": 20,
+      "id": 20,
       "name": "Ms. Clinton Wehner",
       "cellphone": "(60) 92028-1645",
       "email": "Eryn73@yahoo.com",
@@ -313,7 +352,9 @@
         "vel",
         "vel"
       ],
-      "hourRate": "63"
+      "hourRate": "63",
+      "rating": 4.85,
+      "cfp": "12/1234"
     }
   ]
 }

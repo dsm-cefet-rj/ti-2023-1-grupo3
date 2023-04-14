@@ -8,6 +8,7 @@ import { ProfessionalCard } from "../../components/ProfessionalCard";
 import { getPaginatedProfessionals } from "../../services";
 
 import debounce from "lodash.debounce";
+import { useNavigate } from "react-router-dom";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -30,17 +31,21 @@ function ProfessionalsMarketplace() {
 
   const LIMIT = 10;
 
+  const navigate = useNavigate();
+
   const handleChange = (event) => setDebouncedSearch(event.target.value);
 
   const handleChangePage = (event, value) => setPage(value);
 
+  const handleSeeMoreClick = (id) => navigate(`/profile/${id}`);
+
   const getProfessionals = async () => {
-    await getPaginatedProfessionals(searchText, page, LIMIT).then(
-      (response) => {
+    await getPaginatedProfessionals(searchText, page, LIMIT)
+      .then((response) => {
         setNumOfPages(Number(response.headers["x-total-count"]) / 10);
         setProfessionals(response.data);
-      }
-    );
+      })
+      .catch((error) => console.log(error));
   };
 
   const getProfessionalsCallback = useCallback(
@@ -69,7 +74,11 @@ function ProfessionalsMarketplace() {
 
       {professionals.length > 0 &&
         professionals.map((professional, index) => (
-          <ProfessionalCard professional={professional} key={index} />
+          <ProfessionalCard
+            professional={professional}
+            onClick={() => handleSeeMoreClick(professional.id)}
+            key={index}
+          />
         ))}
 
       <Pagination
