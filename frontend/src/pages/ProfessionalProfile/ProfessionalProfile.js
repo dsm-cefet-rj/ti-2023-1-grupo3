@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import StarIcon from "@mui/icons-material/Star";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProfessionalById } from "../../services";
 
 const StyledBox = styled(Box)(() => ({
@@ -24,6 +24,8 @@ const StyledAvatar = styled(Avatar)(() => ({
 }));
 
 function ProfessionalProfile() {
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const [professional, setProfessional] = useState();
@@ -39,6 +41,9 @@ function ProfessionalProfile() {
   useEffect(() => {
     getProfessionalCallback();
   }, []);
+
+  const handleScheduleConsultButtonClick = () =>
+    navigate(`/schedule-appointment/${id}`);
 
   return (
     <StyledBox>
@@ -74,7 +79,9 @@ function ProfessionalProfile() {
         </Box>
       )}
 
-      <Button variant="contained">Marcar consulta</Button>
+      <Button variant="contained" onClick={handleScheduleConsultButtonClick}>
+        Marcar consulta
+      </Button>
     </StyledBox>
   );
 }

@@ -3,7 +3,7 @@ import {
   Home,
   ProfessionalProfile,
   ProfessionalsMarketplace,
-  Agendamento,
+  ScheduleAppointment,
 } from "./pages";
 
 const AppRouter = createBrowserRouter([
@@ -20,8 +20,8 @@ const AppRouter = createBrowserRouter([
     element: <ProfessionalProfile />,
   },
   {
-    path: "/agendamento",
-    element: <Agendamento />,
+    path: "/schedule-appointment/:id",
+    element: <ScheduleAppointment />,
   },
 ]);
 

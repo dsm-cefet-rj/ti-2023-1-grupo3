@@ -15,7 +15,9 @@
       ],
       "hourRate": 100,
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [1, 2, 3],
+      "scheduledHours": ["09:00", "10:00", "11:00"]
     },
     {
       "id": 2,
@@ -33,8 +35,9 @@
       ],
       "hourRate": 70000,
       "rating": 4.85,
-      "cfp": "12/1234"
-  
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 3,
@@ -49,7 +52,9 @@
       ],
       "hourRate": 7,
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 4,
@@ -66,7 +71,9 @@
       ],
       "hourRate": 70,
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 5,
@@ -82,7 +89,9 @@
       ],
       "hourRate": 324,
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 6,
@@ -98,7 +107,9 @@
       ],
       "hourRate": 700,
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 7,
@@ -115,7 +126,9 @@
       ],
       "hourRate": 550,
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 8,
@@ -131,7 +144,9 @@
       ],
       "hourRate": 45,
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 9,
@@ -146,7 +161,9 @@
       ],
       "hourRate": 5678,
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 10,
@@ -164,7 +181,9 @@
       ],
       "hourRate": 70,
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 11,
@@ -183,7 +202,9 @@
       ],
       "hourRate": "166",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 12,
@@ -202,7 +223,9 @@
       ],
       "hourRate": "732",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 13,
@@ -221,7 +244,9 @@
       ],
       "hourRate": "761",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 14,
@@ -240,7 +265,9 @@
       ],
       "hourRate": "122",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 15,
@@ -259,7 +286,9 @@
       ],
       "hourRate": "24",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 16,
@@ -278,7 +307,9 @@
       ],
       "hourRate": "180",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 17,
@@ -297,7 +328,9 @@
       ],
       "hourRate": "536",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 18,
@@ -316,7 +349,9 @@
       ],
       "hourRate": "55",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 19,
@@ -335,7 +370,9 @@
       ],
       "hourRate": "931",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
     },
     {
       "id": 20,
@@ -354,7 +391,50 @@
       ],
       "hourRate": "63",
       "rating": 4.85,
-      "cfp": "12/1234"
+      "cfp": "12/1234",
+      "locationsIds": [],
+      "scheduledHours": []
+    }
+  ],
+  "locations": [
+    {
+      "id": 1,
+      "label": "Consultório 1",
+      "link": "",
+      "street": "Rua Fulano de tal",
+      "number": "100",
+      "complement": "Apto.302",
+      "cep": "20000000",
+      "city": "Rio de Janeiro",
+      "state": "Rio de Janeiro",
+      "neighborhood": "Del Castilho",
+      "professionalId": 1
+    },
+    {
+      "id": 2,
+      "label": "Consultório 2",
+      "link": "",
+      "street": "Rua Carioca",
+      "number": "7000",
+      "complement": "Sala 4",
+      "cep": "20333300",
+      "city": "Rio de Janeiro",
+      "state": "Rio de Janeiro",
+      "neighborhood": "Tijuca",
+      "professionalId": 1
+    },
+    {
+      "id": 3,
+      "label": "Remoto",
+      "link": "https://meet.com.br",
+      "street": "",
+      "number": "",
+      "complement": "",
+      "cep": "",
+      "city": "",
+      "state": "",
+      "neighborhood": "",
+      "professionalId": 1
     }
   ]
 }
