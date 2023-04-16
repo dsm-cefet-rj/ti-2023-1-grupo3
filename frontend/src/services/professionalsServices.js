@@ -9,3 +9,7 @@ export const getPaginatedProfessionals = async (searchName, page, limit) => {
 export const getProfessionalById = async (id) => {
   return await axiosInstance.get(`/professionals/${id}`);
 };
+
+export const updateProfessional = async (id, professional) => {
+  return await axiosInstance.get(`/professionals/${id}`, professional);
+};

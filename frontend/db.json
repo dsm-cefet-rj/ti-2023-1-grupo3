@@ -16,8 +16,16 @@
       "hourRate": 100,
       "rating": 4.85,
       "cfp": "12/1234",
-      "locationsIds": [1, 2, 3],
-      "scheduledHours": ["09:00", "10:00", "11:00"]
+      "locationsIds": [
+        1,
+        2,
+        3
+      ],
+      "scheduledHours": [
+        "09:00",
+        "10:00",
+        "11:00"
+      ]
     },
     {
       "id": 2,
@@ -435,6 +443,18 @@
       "state": "",
       "neighborhood": "",
       "professionalId": 1
+    }
+  ],
+  "appointments": [],
+  "clients": [
+    {
+      "id": 1,
+      "name": "Cliente 1",
+      "cellphone": "(21) 99999-9999",
+      "email": "cliente_1@email.com",
+      "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/541.jpg",
+      "cpf": "023.235.645-95",
+      "birthDate": "09/05/2000"
     }
   ]
 }

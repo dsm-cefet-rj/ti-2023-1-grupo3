@@ -9,6 +9,7 @@ import StarIcon from "@mui/icons-material/Star";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { getProfessionalById } from "../../services";
+import { toast } from "react-toastify";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -33,7 +34,10 @@ function ProfessionalProfile() {
   const getProfessional = async () => {
     await getProfessionalById(id)
       .then((response) => setProfessional(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast("Ocorreu um erro");
+        console.log(error);
+      });
   };
 
   const getProfessionalCallback = useCallback(() => getProfessional(), []);

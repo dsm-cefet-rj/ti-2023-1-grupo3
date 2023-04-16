@@ -9,6 +9,7 @@ import { getPaginatedProfessionals } from "../../services";
 
 import debounce from "lodash.debounce";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -45,7 +46,10 @@ function ProfessionalsMarketplace() {
         setNumOfPages(Number(response.headers["x-total-count"]) / 10);
         setProfessionals(response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast("Ocorreu um erro");
+        console.log(error);
+      });
   };
 
   const getProfessionalsCallback = useCallback(
