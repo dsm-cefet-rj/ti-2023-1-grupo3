@@ -6,27 +6,21 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import {
   Avatar,
   Box,
-  Button,
   IconButton,
   Menu,
   MenuItem,
   Tooltip,
   styled,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 const StyledTypography = styled(Typography)(() => ({
   fontWeight: "bold",
   color: "inherit",
   textDecoration: "none",
-}));
-
-const StyledButton = styled(Button)(() => ({
-  color: "white",
-  display: "block",
 }));
 
 const pageLinks = [{ label: "Profissionais", link: "/professionals" }];
@@ -42,22 +36,18 @@ function Navbar() {
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
-  const navigate = useNavigate();
-
-  const handleMenuLinkClick = (link) => navigate(link);
-
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="false">
         <Toolbar disableGutters>
           <StyledTypography
             variant="h6"
             component="a"
             href="/"
-            sx={{ display: { xs: "none", md: "flex" } }}
+            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
             noWrap
           >
-            Nome
+            <CalendarMonthIcon sx={{ mr: 1 }} /> PAC
           </StyledTypography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -88,10 +78,7 @@ function Navbar() {
               }}
             >
               {pageLinks.map((page) => (
-                <MenuItem
-                  key={page.label}
-                  onClick={() => handleMenuLinkClick(page.link)}
-                >
+                <MenuItem key={page.label} component="a" href={page.link}>
                   <Typography textAlign="center">{page.label}</Typography>
                 </MenuItem>
               ))}
@@ -108,17 +95,21 @@ function Navbar() {
               display: { xs: "flex", md: "none" },
             }}
           >
-            Nome
+            PAC
           </StyledTypography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pageLinks.map((page) => (
-              <StyledButton
-                key={page.label}
-                onClick={() => handleMenuLinkClick(page.link)}
+            {pageLinks.map((page, index) => (
+              <StyledTypography
+                variant="body1"
+                component="a"
+                href={page.link}
+                noWrap
+                key={index}
+                sx={{ mr: 1 }}
               >
                 {page.label}
-              </StyledButton>
+              </StyledTypography>
             ))}
           </Box>
 

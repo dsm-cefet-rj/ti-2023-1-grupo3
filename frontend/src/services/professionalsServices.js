@@ -6,6 +6,12 @@ export const getPaginatedProfessionals = async (searchName, page, limit) => {
   );
 };
 
+export const getHighestRatedProfessionals = async () => {
+  return await axiosInstance.get(
+    `/professionals?_sort=rating&_order=desc&_limit=5`
+  );
+};
+
 export const getProfessionalById = async (id) => {
   return await axiosInstance.get(`/professionals/${id}`);
 };

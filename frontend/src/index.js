@@ -12,11 +12,15 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import AppRouter from "./AppRouter";
+import { Navbar } from "./components";
+import { GlobalStyles } from "@mui/material";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
+    <GlobalStyles styles={{ body: { margin: 0 } }} />
+    <Navbar />
     <RouterProvider router={AppRouter} />
     <ToastContainer
       position="top-right"
