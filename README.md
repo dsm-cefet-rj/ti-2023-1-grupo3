@@ -6,7 +6,7 @@
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#wrench-instalação-e-uso">Instalação e uso</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-gerentes-e-desenvolvedores">Gerentes e Desenvolvedores</a>
+  <a href="#-gerentes-e-desenvolvedores">Gerentes e Desenvolvedores</a>
 </p>
 
 <br/>
