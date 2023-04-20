@@ -3,8 +3,7 @@ import * as React from "react";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-import { Avatar, Box, Button, CardMedia, styled } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
+import { Avatar, Box, Button, CardMedia, Rating, styled } from "@mui/material";
 
 const StyledCard = styled(Card)(() => ({
   width: "100%",
@@ -41,9 +40,15 @@ function ProfessionalCard(props) {
           <Typography color={"text.secondary"}>
             R$ {professional.hourRate} / 50 min
           </Typography>
-          <Typography color={"text.secondary"}>
-            {professional.rating} <StarIcon />
-          </Typography>
+          <Box display={"flex"} gap={1} mb={1}>
+            <Rating
+              name="size-small"
+              defaultValue={professional.rating ?? 0}
+              size="small"
+              readOnly
+            />
+            <Typography variant="body2">({professional.rating})</Typography>
+          </Box>
           <Button onClick={onClick}>Ver mais</Button>
         </CardContent>
       </StyledBox>

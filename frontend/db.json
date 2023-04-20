@@ -14,7 +14,7 @@
         "Problemas familiares"
       ],
       "hourRate": 100,
-      "rating": 4.85,
+      "rating": 5,
       "cfp": "12/1234",
       "locationsIds": [
         1,
@@ -314,7 +314,7 @@
         "quas"
       ],
       "hourRate": "180",
-      "rating": 4.85,
+      "rating": 4.98,
       "cfp": "12/1234",
       "locationsIds": [],
       "scheduledHours": []
@@ -335,7 +335,7 @@
         "dolores"
       ],
       "hourRate": "536",
-      "rating": 4.85,
+      "rating": 4.75,
       "cfp": "12/1234",
       "locationsIds": [],
       "scheduledHours": []

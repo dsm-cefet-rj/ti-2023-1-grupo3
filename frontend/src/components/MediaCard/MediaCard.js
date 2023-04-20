@@ -6,9 +6,21 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import StarIcon from "@mui/icons-material/Star";
 
 import { useNavigate } from "react-router-dom";
+import { Box, Rating, styled, useTheme } from "@mui/material";
+
+const StyledCard = styled(Card)(() => {
+  const theme = useTheme();
+
+  return {
+    width: 345,
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+    },
+    marginBottom: 10,
+  };
+});
 
 function MediaCard(props) {
   const { professional } = props ?? {};
@@ -21,15 +33,21 @@ function MediaCard(props) {
     navigate(`/schedule-appointment/${professional.id}`);
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia sx={{ height: 140 }} image={professional?.profilePicture} />
+    <StyledCard>
+      <CardMedia sx={{ minHeight: 140 }} image={professional?.profilePicture} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {professional?.name}
         </Typography>
-        <Typography color={"text.secondary"}>
-          {professional.rating} <StarIcon />
-        </Typography>
+        <Box display={"flex"} gap={1} mb={1}>
+          <Rating
+            name="size-small"
+            defaultValue={professional.rating ?? 0}
+            size="small"
+            readOnly
+          />
+          <Typography variant="body2">({professional.rating})</Typography>
+        </Box>
         <Typography variant="body2" color="text.secondary">
           {professional?.description}
         </Typography>
@@ -42,7 +60,7 @@ function MediaCard(props) {
           Marcar uma consulta
         </Button>
       </CardActions>
-    </Card>
+    </StyledCard>
   );
 }
 
