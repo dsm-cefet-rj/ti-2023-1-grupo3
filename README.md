@@ -32,8 +32,9 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 
 Para que a aplicação funcione corretamente, é necessário ter os seguintes programas:
 
-- [Git](https://git-scm.com),
-- [Node.js](https://nodejs.org/),
+- [Git](https://git-scm.com)
+- [Node.js](https://nodejs.org/)
+- [Yarn](https://yarnpkg.com/)
 
 ### Rodando a aplicação:
 
@@ -49,9 +50,9 @@ npm install
 #ou
 yarn
 
-# Rode a aplicação
+# Rode o servidor
 npm run run:server
-#ou
+# ou
 yarn run:server
 
 # Rode a aplicação
