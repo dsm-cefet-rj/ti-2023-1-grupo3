@@ -358,7 +358,23 @@
       "professionalId": 1
     }
   ],
-  "appointments": [],
+  "appointments": [
+    {
+      "id": 1,
+      "name": "Jorge Silva Santos",
+      "location": "Consultório 1",
+      "hour": "16:00",
+      "professionalId": 1
+    },
+    {
+      "id": 2,
+      "name": "Jorge Silva Santos",
+      "location": "Consultório 2",
+      "hour": "19:00",
+      "professionalId": 1
+    }
+
+  ],
   "clients": [
     {
       "id": 1,

@@ -1,3 +1,4 @@
+export * from "./AppointmentCard";
 export * from "./ImageCarousel";
 export * from "./MediaCard";
 export * from "./Navbar";

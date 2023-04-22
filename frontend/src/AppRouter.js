@@ -4,6 +4,7 @@ import {
   ProfessionalProfile,
   ProfessionalsMarketplace,
   ScheduleAppointment,
+  Schedules,
   SignUp,
 } from "./pages";
 
@@ -23,6 +24,10 @@ const AppRouter = createBrowserRouter([
   {
     path: "/schedule-appointment/:id",
     element: <ScheduleAppointment />,
+  },
+  {
+    path: "/schedules",
+    element: <Schedules />,
   },
   {
     path: "/signup",
