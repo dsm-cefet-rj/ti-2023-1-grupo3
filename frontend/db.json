@@ -8,24 +8,12 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/541.jpg",
       "jobTitle": "Psicanalista",
       "description": "Profissional formado com 55 anos de experiência",
-      "specialities": [
-        "Ansiedade",
-        "Depressão",
-        "Problemas familiares"
-      ],
+      "specialities": ["Ansiedade", "Depressão", "Problemas familiares"],
       "hourRate": 100,
       "rating": 4.85,
       "cfp": "12/1234",
-      "locationsIds": [
-        1,
-        2,
-        3
-      ],
-      "scheduledHours": [
-        "09:00",
-        "10:00",
-        "11:00"
-      ]
+      "locationsIds": [1, 2, 3],
+      "scheduledHours": ["09:00", "10:00", "11:00"]
     },
     {
       "id": 2,
@@ -55,9 +43,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/653.jpg",
       "jobTitle": "Psicólogo",
       "description": "Profissional formado com 1 ano de experiência",
-      "specialities": [
-        "Ansiedade"
-      ],
+      "specialities": ["Ansiedade"],
       "hourRate": 7,
       "rating": 4.85,
       "cfp": "12/1234",
@@ -72,11 +58,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/109.jpg",
       "jobTitle": "Psicanalista",
       "description": "Profissional formado com 29 anos de experiência",
-      "specialities": [
-        "Depressão",
-        "Problemas familiares",
-        "TUDO"
-      ],
+      "specialities": ["Depressão", "Problemas familiares", "TUDO"],
       "hourRate": 70,
       "rating": 4.85,
       "cfp": "12/1234",
@@ -91,10 +73,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/725.jpg",
       "jobTitle": "Psicólogo",
       "description": "Profissional formado com 17 anos de experiência",
-      "specialities": [
-        "Ansiedade",
-        "Depressão"
-      ],
+      "specialities": ["Ansiedade", "Depressão"],
       "hourRate": 324,
       "rating": 4.85,
       "cfp": "12/1234",
@@ -109,10 +88,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1217.jpg",
       "jobTitle": "Psicanalista",
       "description": "Profissional formado com 58 anos de experiência",
-      "specialities": [
-        "Problemas familiares",
-        "TUDO"
-      ],
+      "specialities": ["Problemas familiares", "TUDO"],
       "hourRate": 700,
       "rating": 4.85,
       "cfp": "12/1234",
@@ -127,11 +103,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/245.jpg",
       "jobTitle": "Psicólogo",
       "description": "Profissional formado com 16 anos de experiência",
-      "specialities": [
-        "Ansiedade",
-        "Depressão",
-        "TUDO"
-      ],
+      "specialities": ["Ansiedade", "Depressão", "TUDO"],
       "hourRate": 550,
       "rating": 4.85,
       "cfp": "12/1234",
@@ -146,10 +118,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/899.jpg",
       "jobTitle": "Psicólogo",
       "description": "Profissional formado com 17 anos de experiência",
-      "specialities": [
-        "Ansiedade",
-        "TUDO"
-      ],
+      "specialities": ["Ansiedade", "TUDO"],
       "hourRate": 45,
       "rating": 4.85,
       "cfp": "12/1234",
@@ -164,9 +133,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/804.jpg",
       "jobTitle": "Psicanalista",
       "description": "Profissional formado com 79 anos de experiência",
-      "specialities": [
-        "TUDO"
-      ],
+      "specialities": ["TUDO"],
       "hourRate": 5678,
       "rating": 4.85,
       "cfp": "12/1234",
@@ -201,13 +168,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/113.jpg",
       "jobTitle": "deleniti",
       "description": "Dolore dolor vero hic nulla ullam soluta nostrum aliquid officiis. Quod commodi amet. Maiores accusantium ad unde. Odio libero error. Porro veniam aut quidem fugit accusamus.",
-      "specialities": [
-        "ad",
-        "ad",
-        "ad",
-        "ad",
-        "ad"
-      ],
+      "specialities": ["ad", "ad", "ad", "ad", "ad"],
       "hourRate": "166",
       "rating": 4.85,
       "cfp": "12/1234",
@@ -222,13 +183,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/659.jpg",
       "jobTitle": "sit",
       "description": "Eius facere possimus dolorem. Laboriosam soluta mollitia occaecati ad. Provident ea quas delectus quae magni occaecati exercitationem dolores eius. Harum voluptas modi corrupti. Necessitatibus inventore amet dignissimos consectetur. Ab dolor autem.",
-      "specialities": [
-        "totam",
-        "totam",
-        "totam",
-        "totam",
-        "totam"
-      ],
+      "specialities": ["totam", "totam", "totam", "totam", "totam"],
       "hourRate": "732",
       "rating": 4.85,
       "cfp": "12/1234",
@@ -243,13 +198,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/558.jpg",
       "jobTitle": "quisquam",
       "description": "Repudiandae placeat magni dolorem praesentium velit voluptatibus. Reprehenderit porro ratione itaque culpa dolorum fugit. Ut modi voluptatem consectetur. Minima veritatis porro necessitatibus eius unde et. Minus eveniet eius quasi id enim inventore dignissimos provident.",
-      "specialities": [
-        "nobis",
-        "nobis",
-        "nobis",
-        "nobis",
-        "nobis"
-      ],
+      "specialities": ["nobis", "nobis", "nobis", "nobis", "nobis"],
       "hourRate": "761",
       "rating": 4.85,
       "cfp": "12/1234",
@@ -264,13 +213,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/647.jpg",
       "jobTitle": "eveniet",
       "description": "Et totam cumque aspernatur quaerat et facilis. Pariatur expedita omnis deleniti illum necessitatibus quas exercitationem ad quibusdam. Excepturi aliquam odit corporis minus excepturi nihil dignissimos consequatur omnis.",
-      "specialities": [
-        "quasi",
-        "quasi",
-        "quasi",
-        "quasi",
-        "quasi"
-      ],
+      "specialities": ["quasi", "quasi", "quasi", "quasi", "quasi"],
       "hourRate": "122",
       "rating": 4.85,
       "cfp": "12/1234",
@@ -285,13 +228,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/245.jpg",
       "jobTitle": "hic",
       "description": "Natus voluptas tempore id aspernatur reiciendis quia. Ut dolorem vitae exercitationem veritatis. Ab deleniti ducimus laborum quae. Ut dolores optio in alias ab similique. Neque iste ut impedit dolorem voluptas error a.",
-      "specialities": [
-        "libero",
-        "libero",
-        "libero",
-        "libero",
-        "libero"
-      ],
+      "specialities": ["libero", "libero", "libero", "libero", "libero"],
       "hourRate": "24",
       "rating": 4.85,
       "cfp": "12/1234",
@@ -306,13 +243,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/498.jpg",
       "jobTitle": "consequuntur",
       "description": "Magni qui cum expedita nam quidem eius quo quia. Nisi omnis rem id. Iusto officiis quis alias aperiam sit perferendis magni dicta mollitia.",
-      "specialities": [
-        "quas",
-        "quas",
-        "quas",
-        "quas",
-        "quas"
-      ],
+      "specialities": ["quas", "quas", "quas", "quas", "quas"],
       "hourRate": "180",
       "rating": 4.85,
       "cfp": "12/1234",
@@ -327,13 +258,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/295.jpg",
       "jobTitle": "pariatur",
       "description": "Inventore aliquam ad ut occaecati. Facere asperiores explicabo. Quas necessitatibus consequatur fuga at rem necessitatibus. Debitis repudiandae consectetur voluptates. Tempore perferendis facere incidunt praesentium provident facilis dolore dignissimos. Illum fuga placeat nostrum.",
-      "specialities": [
-        "dolores",
-        "dolores",
-        "dolores",
-        "dolores",
-        "dolores"
-      ],
+      "specialities": ["dolores", "dolores", "dolores", "dolores", "dolores"],
       "hourRate": "536",
       "rating": 4.85,
       "cfp": "12/1234",
@@ -369,13 +294,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1240.jpg",
       "jobTitle": "voluptate",
       "description": "Dolor facere consectetur necessitatibus dignissimos. Possimus minus quae autem eligendi deleniti accusamus. Sapiente unde unde quaerat repudiandae quaerat maiores voluptas non neque. Distinctio magnam quidem minus repellendus voluptatem cupiditate. Sint odit expedita blanditiis earum fugiat ut.",
-      "specialities": [
-        "fuga",
-        "fuga",
-        "fuga",
-        "fuga",
-        "fuga"
-      ],
+      "specialities": ["fuga", "fuga", "fuga", "fuga", "fuga"],
       "hourRate": "931",
       "rating": 4.85,
       "cfp": "12/1234",
@@ -390,13 +309,7 @@
       "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/576.jpg",
       "jobTitle": "neque",
       "description": "Commodi dolore velit adipisci voluptate architecto molestiae. Error maxime dolorum fuga. Cupiditate quos quidem assumenda quo. Dolorem dolor eius est aliquid. Facere quaerat laudantium debitis eaque aliquam. Dolor veritatis harum doloremque fuga ipsum.",
-      "specialities": [
-        "vel",
-        "vel",
-        "vel",
-        "vel",
-        "vel"
-      ],
+      "specialities": ["vel", "vel", "vel", "vel", "vel"],
       "hourRate": "63",
       "rating": 4.85,
       "cfp": "12/1234",

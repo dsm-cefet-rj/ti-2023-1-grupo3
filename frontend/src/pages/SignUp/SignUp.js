@@ -21,6 +21,10 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -35,6 +39,7 @@ const StyledForm = styled("form")(() => {
     display: "flex",
     flexDirection: "column",
     width: "90%",
+    alignItems: "center",
     [theme.breakpoints.up("lg")]: {
       width: "40%",
     },
@@ -48,6 +53,9 @@ function RegisterForm() {
     name: "",
     email: "",
     password: "",
+    cpf: "",
+    phone: "",
+    dateOfBirth: "",
     crp: "",
     userType: "",
   };
@@ -56,6 +64,9 @@ function RegisterForm() {
     name: yup.string().required("Campo obrigatório"),
     email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
     password: yup.string().required("Campo obrigatório"),
+    cpf: yup.string().required("Campo obrigatório"),
+    phone: yup.string().required("Campo obrigatório"),
+    dateOfBirth: yup.string().required("Campo obrigatório"),
     crp: yup.string().when("userType", {
       is: "psychologist",
       then: yup.string().required("Campo obrigatório"),
@@ -99,6 +110,7 @@ function RegisterForm() {
                   aria-label="userType"
                   name="userType"
                   value={values.userType}
+                  required
                   onChange={(event) => {
                     handleChange(event);
                     handleUserTypeChange(event);
@@ -119,7 +131,13 @@ function RegisterForm() {
             </Box>
 
             <Box>
-              <TextField id="name" label="Nome" type="name" margin="normal" />
+              <TextField
+                id="name"
+                label="Nome"
+                type="name"
+                margin="normal"
+                required
+              />
             </Box>
 
             <Box>
@@ -129,18 +147,83 @@ function RegisterForm() {
                 label="Email"
                 variant="outlined"
                 margin="normal"
+                required
               />
               <ErrorMessage name="email" />
             </Box>
+            <Box>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker", "DatePicker"]}>
+                  <DatePicker
+                    label="Data de Nascimento"
+                    margin="normal"
+                    format="DD/MM/YYYY"
+                    disableFuture
+                    required
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </Box>
+            <Box>
+              <TextField
+                id="phone"
+                label="Telefone"
+                name="phone"
+                type="tel"
+                margin="normal"
+                required
+                value={values.phone}
+                onChange={handleChange}
+                onBlur={(e) => {
+                  const phoneRegex = /^(\d{2})?(\d{4,5}\d{4})$/;
+                  if (phoneRegex.test(e.target.value)) {
+                    e.target.setCustomValidity("");
+                  } else {
+                    e.target.setCustomValidity(
+                      "Insira um número de telefone válido"
+                    );
+                  }
+                }}
+              />
+            </Box>
+            <Box>
+              <TextField
+                id="cpf"
+                label="CPF"
+                type="string"
+                margin="normal"
+                required
+                value={values.cpf}
+                onChange={handleChange}
+                onBlur={(e) => {
+                  const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+                  if (cpfRegex.test(e.target.value)) {
+                    e.target.setCustomValidity("");
+                  } else {
+                    e.target.setCustomValidity(
+                      "Insira um número de CPF válido"
+                    );
+                  }
+                }}
+              />
+
+              <ErrorMessage name="cpf" />
+            </Box>
             {showCRP && (
               <Box>
-                <TextField id="crp" label="CRP" type="crp" margin="normal" />
+                <TextField
+                  id="crp"
+                  label="CRP"
+                  type="crp"
+                  margin="normal"
+                  required
+                />
                 <ErrorMessage name="crp" />
               </Box>
             )}
 
             <Box>
-              <FormControl variant="outlined" margin="normal">
+              <FormControl variant="outlined" margin="normal" required>
                 <InputLabel htmlFor="outlined-adornment-password">
                   Senha
                 </InputLabel>
@@ -164,7 +247,9 @@ function RegisterForm() {
               </FormControl>
             </Box>
 
-            <Button type="submit">Cadastrar</Button>
+            <Button type="submit" variant="contained">
+              Cadastrar
+            </Button>
           </StyledForm>
         )}
       </Formik>
