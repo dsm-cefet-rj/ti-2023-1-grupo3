@@ -10,7 +10,7 @@
       "description": "Profissional formado com 55 anos de experiência",
       "specialities": ["Ansiedade", "Depressão", "Problemas familiares"],
       "hourRate": 100,
-      "rating": 4.85,
+      "rating": 5,
       "cfp": "12/1234",
       "locationsIds": [1, 2, 3],
       "scheduledHours": ["09:00", "10:00", "11:00"]
@@ -245,7 +245,7 @@
       "description": "Magni qui cum expedita nam quidem eius quo quia. Nisi omnis rem id. Iusto officiis quis alias aperiam sit perferendis magni dicta mollitia.",
       "specialities": ["quas", "quas", "quas", "quas", "quas"],
       "hourRate": "180",
-      "rating": 4.85,
+      "rating": 4.98,
       "cfp": "12/1234",
       "locationsIds": [],
       "scheduledHours": []
@@ -260,7 +260,7 @@
       "description": "Inventore aliquam ad ut occaecati. Facere asperiores explicabo. Quas necessitatibus consequatur fuga at rem necessitatibus. Debitis repudiandae consectetur voluptates. Tempore perferendis facere incidunt praesentium provident facilis dolore dignissimos. Illum fuga placeat nostrum.",
       "specialities": ["dolores", "dolores", "dolores", "dolores", "dolores"],
       "hourRate": "536",
-      "rating": 4.85,
+      "rating": 4.75,
       "cfp": "12/1234",
       "locationsIds": [],
       "scheduledHours": []
