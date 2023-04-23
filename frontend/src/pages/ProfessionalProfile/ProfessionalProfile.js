@@ -50,8 +50,8 @@ function ProfessionalProfile() {
 
   return (
     <StyledBox>
-      <StyledAvatar src={professional?.profilePicture} />
-      <Typography variant="h2">{professional?.name ?? "-"}</Typography>
+      <StyledAvatar src={professional?.user?.profilePicture} />
+      <Typography variant="h2">{professional?.user?.name ?? "-"}</Typography>
 
       {professional?.rating && (
         <Box display={"flex"} gap={1} mb={1}>

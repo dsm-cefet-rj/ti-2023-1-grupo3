@@ -32,22 +32,24 @@ function ProfessionalCard(props) {
         <CardContent>
           <Typography variant="h5">{professional.name}</Typography>
           <Typography variant="caption" gutterBottom>
-            {professional.jobTitle}
+            {professional?.professional?.jobTitle}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            {professional.description}
+            {professional?.professional?.description}
           </Typography>
           <Typography color={"text.secondary"}>
-            R$ {professional.hourRate} / 50 min
+            R$ {professional?.professional?.hourRate} / 50 min
           </Typography>
           <Box display={"flex"} gap={1} mb={1}>
             <Rating
               name="size-small"
-              defaultValue={professional.rating ?? 0}
+              defaultValue={professional?.professional?.rating ?? 0}
               size="small"
               readOnly
             />
-            <Typography variant="body2">({professional.rating})</Typography>
+            <Typography variant="body2">
+              ({professional?.professional?.rating})
+            </Typography>
           </Box>
           <Button onClick={onClick}>Ver mais</Button>
         </CardContent>

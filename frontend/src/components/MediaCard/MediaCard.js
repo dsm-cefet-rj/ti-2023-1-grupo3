@@ -34,10 +34,13 @@ function MediaCard(props) {
 
   return (
     <StyledCard>
-      <CardMedia sx={{ minHeight: 140 }} image={professional?.profilePicture} />
+      <CardMedia
+        sx={{ minHeight: 140 }}
+        image={professional?.user?.profilePicture}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {professional?.name}
+          {professional?.user?.name}
         </Typography>
         <Box display={"flex"} gap={1} mb={1}>
           <Rating

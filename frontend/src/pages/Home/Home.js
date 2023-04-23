@@ -12,8 +12,13 @@ import {
   useTheme,
 } from "@mui/material";
 
+import { useDispatch } from "react-redux";
+import { initializeUser } from "../../store/userSlice";
+
 function Home() {
   const theme = useTheme();
+  const dispatch = useDispatch();
+
   const matchesXl = useMediaQuery(theme.breakpoints.down("xl"));
   const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -29,6 +34,7 @@ function Home() {
 
   useEffect(() => {
     getProfessionalsCallback();
+    dispatch(initializeUser(21));
   }, []);
 
   const [currentStep, setCurrentStep] = useState(0);

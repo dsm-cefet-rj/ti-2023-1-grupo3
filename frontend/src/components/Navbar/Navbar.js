@@ -16,6 +16,8 @@ import {
   Tooltip,
   styled,
 } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectIsUserInitialized, selectUser } from "../../store/userSlice";
 
 const StyledTypography = styled(Typography)(() => ({
   fontWeight: "bold",
@@ -25,6 +27,7 @@ const StyledTypography = styled(Typography)(() => ({
 
 const pageLinks = [{ label: "Profissionais", link: "/professionals" }];
 const settingsLinks = ["Conta", "Sair"];
+const unloggedLinks = ["Entrar"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -35,6 +38,11 @@ function Navbar() {
 
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
   const handleCloseUserMenu = () => setAnchorElUser(null);
+
+  const user = useSelector(selectUser);
+  const isUserInitialized = useSelector(selectIsUserInitialized);
+
+  const userLogged = isUserInitialized && !!user;
 
   return (
     <AppBar position="static">
@@ -114,9 +122,11 @@ function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Configurações">
+            <Tooltip
+              title={userLogged ? "Configurações" : "Faça login ou cadastre-se"}
+            >
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar />
+                <Avatar src={userLogged ? user.profilePicture : undefined} />
               </IconButton>
             </Tooltip>
 
@@ -136,11 +146,17 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settingsLinks.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {userLogged
+                ? settingsLinks.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))
+                : unloggedLinks.map((link) => (
+                    <MenuItem key={link} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{link}</Typography>
+                    </MenuItem>
+                  ))}
             </Menu>
           </Box>
         </Toolbar>
