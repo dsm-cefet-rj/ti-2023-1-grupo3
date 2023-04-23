@@ -9,16 +9,11 @@
       "hourRate": 100,
       "rating": 5,
       "cfp": "12/1234",
-<<<<<<< HEAD
-      "locationsIds": [1, 2, 3],
-      "scheduledHours": ["09:00", "10:00", "11:00"]
-=======
       "scheduledHours": [
         "09:00",
         "10:00",
         "11:00"
       ]
->>>>>>> ba6cb0e (fix: db structure and add initial profile page)
     },
     {
       "id": 2,
@@ -287,29 +282,8 @@
       "professionalId": 1
     }
   ],
-<<<<<<< HEAD
-  "appointments": [
-    {
-      "id": 1,
-      "name": "Jorge Silva Santos",
-      "location": "Consultório 1",
-      "hour": "16:00",
-      "professionalId": 1
-    },
-    {
-      "id": 2,
-      "name": "Jorge Silva Santos",
-      "location": "Consultório 2",
-      "hour": "19:00",
-      "professionalId": 1
-    }
-
-  ],
-  "clients": [
-=======
   "appointments": [],
   "users": [
->>>>>>> ba6cb0e (fix: db structure and add initial profile page)
     {
       "id": 1,
       "name": "Jorge Silva Santos",
