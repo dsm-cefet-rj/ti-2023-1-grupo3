@@ -13,7 +13,9 @@
 
 ## 💻 Projeto
 
-Escrever mais sobre o projeto.
+Este é um projeto para controle de agendamento de consultas com psicólogos, que tem como objetivo facilitar o processo de marcação de consultas e gerenciamento de agendas para os profissionais de psicologia.
+
+Sendo assim, como principais caracteristicas, temos um projeto que foi desenvolvido com o intuito de proporcionar um ambiente digital para que os pacientes possam agendar suas consultas de forma simples e rápida, além de ajudar os profissionais de psicologia a gerenciar suas agendas e atender seus pacientes de forma mais ágil e eficiente.
 
 <div align="center">
 <img alt="Tela Principal" title="Tela Principal" src="https://user-images.githubusercontent.com/62712246/233226840-98c7c917-40a4-4274-80ce-2eff7a02ace9.png" height="350px" />
