@@ -22,7 +22,6 @@ function Schedules() {
   const [appointments, setAppointments] = useState([]);
   const [numOfPages, setNumOfPages] = useState(1);
 
-
   const LIMIT = 10;
 
   const navigate = useNavigate();
@@ -54,7 +53,6 @@ function Schedules() {
 
   return (
     <StyledBox>
-
       {appointments.length > 0 &&
         appointments.map((appointment, index) => (
           <AppointmentCard
