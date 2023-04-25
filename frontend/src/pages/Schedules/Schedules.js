@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 
 import { Box, Pagination, styled } from "@mui/material";
 
@@ -28,7 +29,16 @@ function Schedules() {
 
   const handleChangePage = (value) => setPage(value);
 
-  const handleSeeMoreClick = () => navigate(`/`);
+  const removeAppointment = (id) => {
+    axios.delete('http://localhost:3000/appointments/' + id)
+      .then(function(response) {
+        this.setState({
+          filtered: response
+        })
+      }).catch(function(error) {
+        console.log(error)
+      })
+  }
 
   const getAppointments = async () => {
     await getPaginatedAppointments(searchText, page, LIMIT)
@@ -57,7 +67,7 @@ function Schedules() {
         appointments.map((appointment, index) => (
           <AppointmentCard
             appointment={appointment}
-            onClick={() => handleSeeMoreClick(appointment.id)}
+            onClick={() => removeAppointment(appointment.id)}
             key={index}
           />
         ))}

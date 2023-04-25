@@ -35,7 +35,7 @@ function AppointmentCard(props) {
             {appointment.location}
           </Typography>
           <Typography color={"text.secondary"}>{appointment.hour}</Typography>
-          <Button onClick={onClick}>Cancelar</Button>
+          <Button onClick={onClick}>Desmarcar</Button>
         </CardContent>
       </StyledBox>
     </StyledCard>
