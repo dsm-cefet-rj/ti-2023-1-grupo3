@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import {
   Home,
+  Account,
   ProfessionalProfile,
   ProfessionalsMarketplace,
   ScheduleAppointment,
@@ -16,7 +17,7 @@ function AppRouter() {
       <Navbar />
       <Routes>
         <Route exact path={"/"} element={<Home />} />
-        <Route exact path={"/"} element={<Home />} />
+        <Route exact path={"/account/:id"} element={<Account />} />
         <Route
           exact
           path={"/professionals"}

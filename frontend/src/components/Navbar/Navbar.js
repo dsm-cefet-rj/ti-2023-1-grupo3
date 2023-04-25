@@ -28,7 +28,9 @@ const StyledTypography = styled(Typography)(() => ({
 
 const pageLinks = [
   { label: "Profissionais", link: "/professionals" },
-  { label: "Consultas marcadas", link: "/appointments" },
+  { label: "Perfil", link: "/account/21" },
+  { label: "Login", link: "/login" },
+  { label: "Cadastrar", link: "/signup" },
 ];
 const settingsLinks = ["Conta", "Sair"];
 const unloggedLinks = ["Entrar"];
