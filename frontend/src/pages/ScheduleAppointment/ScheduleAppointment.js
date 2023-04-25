@@ -18,6 +18,9 @@ import {
 import { createHourList } from "../../helpers";
 import { initialValues, validationSchema } from "./validation";
 
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userSlice";
+
 const StyledBox = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
@@ -41,6 +44,8 @@ const StyledForm = styled("form")(() => {
 function ScheduleAppointment() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const user = useSelector(selectUser);
+  console.log(user);
 
   const [locations, setLocations] = useState([]);
   const [professional, setProfessional] = useState();
@@ -49,8 +54,8 @@ function ScheduleAppointment() {
     const appointment = {
       locationId: values.location.id,
       time: values.time,
-      professionalId: id,
-      clientId: 1, // TO DO => Vai pegar o id no store - Precisa setar o redux
+      professionalId: Number(id),
+      userId: Number(user?.id),
     };
 
     await createAppointment(appointment)

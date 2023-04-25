@@ -318,62 +318,6 @@
       "rating": 4.85,
       "crp": "12/1234",
       "scheduledHours": []
-    },
-    {
-      "birthDate": "1993-01-10T02:00:00.000Z",
-      "cellphone": "21 91234-5678",
-      "cpf": "123.456.789-10",
-      "email": "joao.pedro@gmail.com",
-      "name": "João Pedro",
-      "password": "123456",
-      "crp": "1234125",
-      "userType": "professionals",
-      "complement": "Sou apaixonado pela minha profissão! ",
-      "specialities": "Adolescentes",
-      "locations": "Rua Florida 94",
-      "id": 21
-    },
-    {
-      "email": "pedro.joao@gmail.com",
-      "password": "123456",
-      "id": 22
-    },
-    {
-      "email": "pedro.joao@gmail.com",
-      "password": "123456",
-      "id": 23
-    },
-    {
-      "pedro.joao@gmail.com": "",
-      "id": 24
-    },
-    {
-      "pedro.joao@gmail.com": "",
-      "id": 25
-    },
-    {
-      "pedro.joao@gmail.com": "",
-      "id": 26
-    },
-    {
-      "pedro.joao@gmail.com": "",
-      "id": 27
-    },
-    {
-      "pedro.joao@gmail.com": "",
-      "id": 28
-    },
-    {
-      "pedro.joao@gmail.com": "",
-      "id": 29
-    },
-    {
-      "pedro.joao@gmail.com": "",
-      "id": 30
-    },
-    {
-      "pedro.joao@gmail.com": "",
-      "id": 31
     }
   ],
   "locations": [
@@ -415,50 +359,139 @@
       "state": "",
       "neighborhood": "",
       "professionalId": 1
-    }
-  ],
-  "appointments": [
-    {
-      "id": 1,
-      "name": "Jorge Silva Santos",
-      "location": "Consultório 1",
-      "hour": "16:00",
-      "professionalId": 1
-    },
-    {
-      "id": 2,
-      "name": "Jorge Silva Santos",
-      "location": "Consultório 2",
-      "hour": "19:00",
-      "professionalId": 1
-    },
-    {
-      "id": 3,
-      "name": "Bernice Skiles",
-      "location": "Remoto",
-      "hour": "21:00",
-      "professionalId": 2
     },
     {
       "id": 4,
-      "name": "Bernice Skiles",
-      "location": "Consultório 2",
-      "hour": "07:00",
+      "label": "Consultório 123",
+      "link": "",
+      "street": "Rua Fulano de tal",
+      "number": "100",
+      "complement": "Apto.302",
+      "cep": "20000000",
+      "city": "Rio de Janeiro",
+      "state": "Rio de Janeiro",
+      "neighborhood": "Del Castilho",
       "professionalId": 2
     },
     {
       "id": 5,
-      "name": "Jorge Silva Santos",
-      "location": "Consultório 1",
-      "hour": "17:00",
-      "professionalId": 1
+      "label": "Consultório 234",
+      "link": "",
+      "street": "Rua Carioca",
+      "number": "7000",
+      "complement": "Sala 4",
+      "cep": "20333300",
+      "city": "Rio de Janeiro",
+      "state": "Rio de Janeiro",
+      "neighborhood": "Tijuca",
+      "professionalId": 2
     },
     {
       "id": 6,
-      "name": "Jorge Silva Santos",
-      "location": "Consultório 2",
-      "hour": "20:00",
-      "professionalId": 1
+      "label": "Remoto 1",
+      "link": "https://meet.com.br",
+      "street": "",
+      "number": "",
+      "complement": "",
+      "cep": "",
+      "city": "",
+      "state": "",
+      "neighborhood": "",
+      "professionalId": 2
+    },
+    {
+      "id": 7,
+      "label": "Consultório 9",
+      "link": "",
+      "street": "Rua Fulano de tal",
+      "number": "100",
+      "complement": "Apto.302",
+      "cep": "20000000",
+      "city": "Rio de Janeiro",
+      "state": "Rio de Janeiro",
+      "neighborhood": "Del Castilho",
+      "professionalId": 3
+    },
+    {
+      "id": 8,
+      "label": "Consultório 90",
+      "link": "",
+      "street": "Rua Carioca",
+      "number": "7000",
+      "complement": "Sala 4",
+      "cep": "20333300",
+      "city": "Rio de Janeiro",
+      "state": "Rio de Janeiro",
+      "neighborhood": "Tijuca",
+      "professionalId": 3
+    },
+    {
+      "id": 9,
+      "label": "Remoto 2",
+      "link": "https://meet.com.br",
+      "street": "",
+      "number": "",
+      "complement": "",
+      "cep": "",
+      "city": "",
+      "state": "",
+      "neighborhood": "",
+      "professionalId": 3
+    },
+    {
+      "id": 10,
+      "label": "Consultório 1",
+      "link": "",
+      "street": "Rua Fulano de tal",
+      "number": "100",
+      "complement": "Apto.302",
+      "cep": "20000000",
+      "city": "Rio de Janeiro",
+      "state": "Rio de Janeiro",
+      "neighborhood": "Del Castilho",
+      "professionalId": 4
+    },
+    {
+      "id": 11,
+      "label": "Consultório 2",
+      "link": "",
+      "street": "Rua Carioca",
+      "number": "7000",
+      "complement": "Sala 4",
+      "cep": "20333300",
+      "city": "Rio de Janeiro",
+      "state": "Rio de Janeiro",
+      "neighborhood": "Tijuca",
+      "professionalId": 4
+    },
+    {
+      "id": 12,
+      "label": "Remoto",
+      "link": "https://meet.com.br",
+      "street": "",
+      "number": "",
+      "complement": "",
+      "cep": "",
+      "city": "",
+      "state": "",
+      "neighborhood": "",
+      "professionalId": 4
+    }
+  ],
+  "appointments": [
+    {
+      "locationId": 1,
+      "time": "05:00",
+      "professionalId": 1,
+      "userId": 21,
+      "id": 1
+    },
+    {
+      "locationId": 1,
+      "time": "07:00",
+      "professionalId": 1,
+      "userId": 21,
+      "id": 2
     }
   ],
   "users": [
@@ -683,32 +716,15 @@
       "professionalId": 20
     },
     {
-      "birthDate": "1993-01-10T02:00:00.000Z",
-      "cellphone": "21 91234-5678",
-      "cpf": "123.456.789-10",
-      "email": "pedro.joao@gmail.com",
-      "name": "Pedro João",
-      "password": "123456",
-      "crp": "1234125",
-      "userType": "users",
-      "complement": "",
-      "specialities": "",
-      "locations": "",
-      "id": 22
-    },
-    {
-      "birthDate": "1999-08-19T03:00:00.000Z",
-      "cellphone": "21 98765-1234",
-      "cpf": "123.789.567-66",
-      "email": "daniel.silva@email.com",
-      "name": "Daniel Silva",
-      "password": "abcde",
-      "crp": "",
-      "userType": "users",
-      "complement": "",
-      "specialities": "",
-      "locations": "",
-      "id": 23
+      "id": 21,
+      "name": "Cliente",
+      "cellphone": "(21) 99999-9999",
+      "email": "cliente@email.com",
+      "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/541.jpg",
+      "cpf": "023.235.645-95",
+      "birthDate": "09/05/2000",
+      "type": "CLIENT",
+      "professionalId": ""
     }
   ]
 }

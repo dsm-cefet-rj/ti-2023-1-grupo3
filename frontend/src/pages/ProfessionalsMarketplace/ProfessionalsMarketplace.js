@@ -47,7 +47,7 @@ function ProfessionalsMarketplace() {
         setProfessionals(response.data);
       })
       .catch((error) => {
-        toast("Ocorreu um erro");
+        toast.error("Ocorreu um erro");
         console.log(error);
       });
   };

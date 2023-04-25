@@ -1,13 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
 
 import { Box, Pagination, styled } from "@mui/material";
 
 import { AppointmentCard } from "../../components/AppointmentCard";
-import { getPaginatedAppointments } from "../../services";
+import {
+  deleteAppointment,
+  getPaginatedClientAppointments,
+  getPaginatedProfessionalAppointments,
+} from "../../services";
 
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userSlice";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -17,49 +21,56 @@ const StyledBox = styled(Box)(() => ({
   gap: "20px",
 }));
 
-function Schedules() {
-  const [searchText] = useState("");
+function Appointments() {
   const [page, setPage] = useState(1);
   const [appointments, setAppointments] = useState([]);
   const [numOfPages, setNumOfPages] = useState(1);
 
-  const LIMIT = 10;
+  const user = useSelector(selectUser);
 
-  const navigate = useNavigate();
+  const LIMIT = 10;
 
   const handleChangePage = (value) => setPage(value);
 
-  const removeAppointment = (id) => {
-    axios.delete('http://localhost:3000/appointments/' + id)
-      .then(function(response) {
-        this.setState({
-          filtered: response
-        })
-      }).catch(function(error) {
-        console.log(error)
-      })
-  }
+  const removeAppointment = async (id) => {
+    await deleteAppointment(id)
+      .then(() => toast.success("Consulta deletada com sucesso"))
+      .catch((error) => {
+        toast.error("Ocorreu um erro");
+        console.log(error);
+      });
+  };
 
   const getAppointments = async () => {
-    await getPaginatedAppointments(searchText, page, LIMIT)
+    if (!user) return;
+
+    if (user.type === "PROFESSIONAL")
+      await getPaginatedProfessionalAppointments(Number(user.id), page, LIMIT)
+        .then((response) => {
+          setNumOfPages(Number(response.headers["x-total-count"]) / 10);
+          setAppointments(response.data);
+        })
+        .catch((error) => {
+          toast.error("Ocorreu um erro");
+          console.log(error);
+        });
+
+    await getPaginatedClientAppointments(Number(user.id), page, LIMIT)
       .then((response) => {
         setNumOfPages(Number(response.headers["x-total-count"]) / 10);
         setAppointments(response.data);
       })
       .catch((error) => {
-        toast("Ocorreu um erro");
+        toast.error("Ocorreu um erro");
         console.log(error);
       });
   };
 
-  const getAppointmentsCallback = useCallback(
-    () => getAppointments(),
-    [page, searchText]
-  );
+  const getAppointmentsCallback = useCallback(() => getAppointments(), [page]);
 
   useEffect(() => {
     getAppointmentsCallback();
-  }, [page, searchText]);
+  }, [page]);
 
   return (
     <StyledBox>
@@ -81,4 +92,4 @@ function Schedules() {
   );
 }
 
-export default Schedules;
+export default Appointments;

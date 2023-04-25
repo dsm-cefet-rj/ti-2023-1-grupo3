@@ -4,6 +4,7 @@ import { getUserById } from "../services";
 export const initializeUser = createAsyncThunk(
   "user/initializeUser",
   async (userId) => {
+    console.log(userId);
     const response = await getUserById(userId);
 
     return response.data;

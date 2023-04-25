@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectIsUserInitialized, selectUser } from "../../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const StyledTypography = styled(Typography)(() => ({
   fontWeight: "bold",
@@ -25,7 +26,10 @@ const StyledTypography = styled(Typography)(() => ({
   textDecoration: "none",
 }));
 
-const pageLinks = [{ label: "Profissionais", link: "/professionals" }];
+const pageLinks = [
+  { label: "Profissionais", link: "/professionals" },
+  { label: "Consultas marcadas", link: "/appointments" },
+];
 const settingsLinks = ["Conta", "Sair"];
 const unloggedLinks = ["Entrar"];
 
@@ -43,6 +47,10 @@ function Navbar() {
   const isUserInitialized = useSelector(selectIsUserInitialized);
 
   const userLogged = isUserInitialized && !!user;
+
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => navigate(path);
 
   return (
     <AppBar position="static">
@@ -86,7 +94,10 @@ function Navbar() {
               }}
             >
               {pageLinks.map((page) => (
-                <MenuItem key={page.label} component="a" href={page.link}>
+                <MenuItem
+                  key={page.label}
+                  onClick={() => handleNavigate(page.link)}
+                >
                   <Typography textAlign="center">{page.label}</Typography>
                 </MenuItem>
               ))}
@@ -110,8 +121,7 @@ function Navbar() {
             {pageLinks.map((page, index) => (
               <StyledTypography
                 variant="body1"
-                component="a"
-                href={page.link}
+                onClick={() => handleNavigate(page.link)}
                 noWrap
                 key={index}
                 sx={{ mr: 1 }}

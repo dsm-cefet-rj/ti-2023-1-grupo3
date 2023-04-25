@@ -7,13 +7,12 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import { RouterProvider } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import AppRouter from "./AppRouter";
-import { Navbar } from "./components";
 import { GlobalStyles } from "@mui/material";
 import { Provider } from "react-redux";
 import { store } from "./store";
@@ -24,8 +23,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <GlobalStyles styles={{ body: { margin: 0 } }} />
-      <Navbar />
-      <RouterProvider router={AppRouter} />
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
       <ToastContainer
         position="top-right"
         autoClose={5000}
