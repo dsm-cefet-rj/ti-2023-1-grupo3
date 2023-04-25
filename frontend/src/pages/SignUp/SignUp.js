@@ -1,260 +1,307 @@
-import * as React from "react";
-import { Formik, ErrorMessage } from "formik";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
+import React from "react";
 import {
-  Box,
-  styled,
-  useTheme,
   Button,
-  RadioGroup,
-  InputLabel,
-  FormControlLabel,
-  IconButton,
-  OutlinedInput,
   FormControl,
-  InputAdornment,
-  TextField,
+  FormControlLabel,
   FormLabel,
   Radio,
+  RadioGroup,
+  TextField,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import axios from "axios";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
-const StyledBox = styled(Box)(() => ({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-}));
+const initialValues = {
+  name: "",
+  email: "",
+  password: "",
+  cpf: "",
+  cellphone: "",
+  birthDate: null,
+  crp: "",
+  userType: "",
+  complement: "",
+  specialities: "",
+  locations: "",
+};
 
-const StyledForm = styled("form")(() => {
-  const theme = useTheme();
-
-  return {
-    display: "flex",
-    flexDirection: "column",
-    width: "90%",
-    alignItems: "center",
-    [theme.breakpoints.up("lg")]: {
-      width: "40%",
-    },
-    padding: 20,
-  };
+const validationSchema = yup.object().shape({
+  name: yup.string().required("Campo obrigatório"),
+  email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
+  cpf: yup.string().required("Campo obrigatório"),
+  cellphone: yup.string().required("Campo obrigatório"),
+  birthDate: yup.date().required("Campo obrigatório"),
 });
 
-function RegisterForm() {
+export default function Formulario() {
   const navigate = useNavigate();
-  const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-    cpf: "",
-    phone: "",
-    dateOfBirth: "",
-    crp: "",
-    userType: "",
-  };
-
-  const validationSchema = yup.object().shape({
-    name: yup.string().required("Campo obrigatório"),
-    email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
-    password: yup.string().required("Campo obrigatório"),
-    cpf: yup.string().required("Campo obrigatório"),
-    phone: yup.string().required("Campo obrigatório"),
-    dateOfBirth: yup.string().required("Campo obrigatório"),
-    crp: yup.string().when("userType", {
-      is: "psychologist",
-      then: yup.string().required("Campo obrigatório"),
-      otherwise: yup.string(),
-    }),
+  const { handleSubmit, formState, control, watch } = useForm({
+    mode: "onSubmit",
+    defaultValues: initialValues,
+    resolver: yupResolver(validationSchema),
   });
-  const handleSubmit = () => {
-    toast.success("Cadastro realizado com sucesso!");
-    navigate("/");
-  };
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-  const handleUserTypeChange = (event) => {
-    const { value } = event.target;
-    if (value === "psychologist") {
-      setShowCRP(true);
-    } else {
-      setShowCRP(false);
+  const userType = watch("userType");
+  console.log(userType);
+  const onSubmit = async (values) => {
+    console.log(values);
+    if (!values) {
+      return;
+    }
+    try {
+      await axios.post(`http://localhost:3000/${userType}`, values);
+      toast.success("Cadastro realizado com sucesso!");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        "Ocorreu um erro ao salvar seus dados. Tente novamente mais tarde."
+      );
     }
   };
-  const [showCRP, setShowCRP] = useState(false);
+
+  const { errors } = formState;
   return (
-    <StyledBox>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, handleChange }) => (
-          <StyledForm onSubmit={handleSubmit}>
-            <Box>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Tipo de perfil</FormLabel>
-                <RadioGroup
-                  aria-label="userType"
-                  name="userType"
-                  value={values.userType}
-                  required
-                  onChange={(event) => {
-                    handleChange(event);
-                    handleUserTypeChange(event);
-                  }}
-                >
-                  <FormControlLabel
-                    value="patient"
-                    control={<Radio />}
-                    label="Paciente"
-                  />
-                  <FormControlLabel
-                    value="psychologist"
-                    control={<Radio />}
-                    label="Psicólogo"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Box>
-
-            <Box>
-              <TextField
-                id="name"
-                label="Nome"
-                type="name"
-                margin="normal"
-                required
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="userType"
+        control={control}
+        render={({ field }) => (
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Tipo de perfil</FormLabel>
+            <RadioGroup
+              aria-label="userType"
+              name="userType"
+              {...field}
+              required
+            >
+              <FormControlLabel
+                value="users"
+                control={<Radio />}
+                label="Paciente"
               />
-            </Box>
-
-            <Box>
-              <TextField
-                id="email"
-                type="email"
-                label="Email"
-                variant="outlined"
-                margin="normal"
-                required
+              <FormControlLabel
+                value="professionals"
+                control={<Radio />}
+                label="Psicólogo"
               />
-              <ErrorMessage name="email" />
-            </Box>
-            <Box>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DatePicker", "DatePicker"]}>
-                  <DatePicker
-                    label="Data de Nascimento"
-                    margin="normal"
-                    format="DD/MM/YYYY"
-                    disableFuture
-                    required
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-            </Box>
-            <Box>
-              <TextField
-                id="phone"
-                label="Telefone"
-                name="phone"
-                type="tel"
-                margin="normal"
-                required
-                value={values.phone}
-                onChange={handleChange}
-                onBlur={(e) => {
-                  const phoneRegex = /^(\d{2})?(\d{4,5}\d{4})$/;
-                  if (phoneRegex.test(e.target.value)) {
-                    e.target.setCustomValidity("");
-                  } else {
-                    e.target.setCustomValidity(
-                      "Insira um número de telefone válido"
-                    );
-                  }
-                }}
-              />
-            </Box>
-            <Box>
-              <TextField
-                id="cpf"
-                label="CPF"
-                type="string"
-                margin="normal"
-                required
-                value={values.cpf}
-                onChange={handleChange}
-                onBlur={(e) => {
-                  const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-                  if (cpfRegex.test(e.target.value)) {
-                    e.target.setCustomValidity("");
-                  } else {
-                    e.target.setCustomValidity(
-                      "Insira um número de CPF válido"
-                    );
-                  }
-                }}
-              />
-
-              <ErrorMessage name="cpf" />
-            </Box>
-            {showCRP && (
-              <Box>
-                <TextField
-                  id="crp"
-                  label="CRP"
-                  type="crp"
-                  margin="normal"
-                  required
-                />
-                <ErrorMessage name="crp" />
-              </Box>
-            )}
-
-            <Box>
-              <FormControl variant="outlined" margin="normal" required>
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Senha
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
-            </Box>
-
-            <Button type="submit" variant="contained">
-              Cadastrar
-            </Button>
-          </StyledForm>
+            </RadioGroup>
+          </FormControl>
         )}
-      </Formik>
-    </StyledBox>
+      />
+      <Controller
+        name="name"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="name"
+            label="Nome"
+            error={!!errors.name}
+            helperText={errors?.name?.message}
+            variant="outlined"
+            autoFocus
+            fullWidth
+            required
+          />
+        )}
+      />
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="email"
+            label="Email"
+            margin="normal"
+            error={!!errors.email}
+            helperText={errors?.email?.message}
+            variant="outlined"
+            autoFocus
+            fullWidth
+            required
+          />
+        )}
+      />
+      <Controller
+        name="birthDate"
+        control={control}
+        render={({ field }) => (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={["DatePicker", "DatePicker"]}>
+              <DatePicker
+                {...field}
+                label="Data de Nascimento"
+                margin="normal"
+                format="DD/MM/YYYY"
+                disableFuture
+                fullWidth
+                required
+              />
+            </DemoContainer>
+          </LocalizationProvider>
+        )}
+      />
+      <Controller
+        name="cellphone"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="cellphone"
+            label="Telefone"
+            margin="normal"
+            error={!!errors.cellphone}
+            helperText="Ex: 21 12345-1234"
+            variant="outlined"
+            autoFocus
+            fullWidth
+            required
+            onBlur={(e) => {
+              const cellphoneRegex = /^(\d{2} )?(\d{4,5}-\d{4})$/;
+              if (cellphoneRegex.test(e.target.value)) {
+                e.target.setCustomValidity("");
+              } else {
+                e.target.setCustomValidity(
+                  "Insira um número de telefone válido"
+                );
+              }
+            }}
+          />
+        )}
+      />
+      <Controller
+        name="cpf"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="cpf"
+            label="CPF"
+            margin="normal"
+            error={!!errors.cpf}
+            helperText="Ex: 123.456.789-10"
+            variant="outlined"
+            autoFocus
+            fullWidth
+            required
+            onBlur={(e) => {
+              const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+              if (cpfRegex.test(e.target.value)) {
+                e.target.setCustomValidity("");
+              } else {
+                e.target.setCustomValidity("Insira um número de CPF válido");
+              }
+            }}
+          />
+        )}
+      />
+      {userType == "professionals" && (
+        <Controller
+          name="crp"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              id="crp"
+              label="CRP"
+              margin="normal"
+              error={!!errors.crp}
+              helperText={errors?.crp?.message}
+              variant="outlined"
+              autoFocus
+              fullWidth
+              required
+            />
+          )}
+        />
+      )}
+      {userType == "professionals" && (
+        <Controller
+          name="complement"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              id="complement"
+              label="Descrição"
+              margin="normal"
+              error={!!errors.complement}
+              helperText={errors?.complement?.message}
+              rows={4}
+              variant="outlined"
+              autoFocus
+              fullWidth
+              required
+            />
+          )}
+        />
+      )}
+      {userType == "professionals" && (
+        <Controller
+          name="specialities"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              id="specialities"
+              label="Especialidades"
+              type="string"
+              margin="normal"
+              variant="outlined"
+              autoFocus
+              fullWidth
+              required
+            />
+          )}
+        />
+      )}
+
+      {userType == "professionals" && (
+        <Controller
+          name="locations"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              id="locations"
+              label="Local(is)"
+              type="string"
+              margin="normal"
+              variant="outlined"
+              fullWidth
+              helperText="Caso haja mais de um, separe por vírgula"
+              required
+            />
+          )}
+        />
+      )}
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="password"
+            label="Senha"
+            type="password"
+            margin="normal"
+            variant="outlined"
+            required
+            fullWidth
+          />
+        )}
+      />
+      <Button type="submit" variant="contained" fullWidth>
+        Cadastrar
+      </Button>
+    </form>
   );
 }
-
-export default RegisterForm;

@@ -5,19 +5,11 @@
       "userId": 1,
       "jobTitle": "Psicanalista",
       "description": "Profissional formado com 55 anos de experiência",
-      "specialities": [
-        "Ansiedade",
-        "Depressão",
-        "Problemas familiares"
-      ],
+      "specialities": ["Ansiedade", "Depressão", "Problemas familiares"],
       "hourRate": 100,
       "rating": 5,
-      "cfp": "12/1234",
-      "scheduledHours": [
-        "09:00",
-        "10:00",
-        "11:00"
-      ]
+      "crp": "12/1234",
+      "scheduledHours": ["09:00", "10:00", "11:00"]
     },
     {
       "id": 2,
@@ -32,7 +24,7 @@
       ],
       "hourRate": 70000,
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -40,12 +32,10 @@
       "userId": 3,
       "jobTitle": "Psicólogo",
       "description": "Profissional formado com 1 ano de experiência",
-      "specialities": [
-        "Ansiedade"
-      ],
+      "specialities": ["Ansiedade"],
       "hourRate": 7,
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -53,14 +43,10 @@
       "userId": 4,
       "jobTitle": "Psicanalista",
       "description": "Profissional formado com 29 anos de experiência",
-      "specialities": [
-        "Depressão",
-        "Problemas familiares",
-        "TUDO"
-      ],
+      "specialities": ["Depressão", "Problemas familiares", "TUDO"],
       "hourRate": 70,
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -68,13 +54,10 @@
       "userId": 5,
       "jobTitle": "Psicólogo",
       "description": "Profissional formado com 17 anos de experiência",
-      "specialities": [
-        "Ansiedade",
-        "Depressão"
-      ],
+      "specialities": ["Ansiedade", "Depressão"],
       "hourRate": 324,
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -82,13 +65,10 @@
       "userId": 6,
       "jobTitle": "Psicanalista",
       "description": "Profissional formado com 58 anos de experiência",
-      "specialities": [
-        "Problemas familiares",
-        "TUDO"
-      ],
+      "specialities": ["Problemas familiares", "TUDO"],
       "hourRate": 700,
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -96,14 +76,10 @@
       "userId": 7,
       "jobTitle": "Psicólogo",
       "description": "Profissional formado com 16 anos de experiência",
-      "specialities": [
-        "Ansiedade",
-        "Depressão",
-        "TUDO"
-      ],
+      "specialities": ["Ansiedade", "Depressão", "TUDO"],
       "hourRate": 550,
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -111,13 +87,10 @@
       "userId": 8,
       "jobTitle": "Psicólogo",
       "description": "Profissional formado com 17 anos de experiência",
-      "specialities": [
-        "Ansiedade",
-        "TUDO"
-      ],
+      "specialities": ["Ansiedade", "TUDO"],
       "hourRate": 45,
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -125,12 +98,10 @@
       "userId": 9,
       "jobTitle": "Psicanalista",
       "description": "Profissional formado com 79 anos de experiência",
-      "specialities": [
-        "TUDO"
-      ],
+      "specialities": ["TUDO"],
       "hourRate": 5678,
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -146,7 +117,7 @@
       ],
       "hourRate": 70,
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -154,16 +125,10 @@
       "userId": 11,
       "jobTitle": "deleniti",
       "description": "Dolore dolor vero hic nulla ullam soluta nostrum aliquid officiis. Quod commodi amet. Maiores accusantium ad unde. Odio libero error. Porro veniam aut quidem fugit accusamus.",
-      "specialities": [
-        "ad",
-        "ad",
-        "ad",
-        "ad",
-        "ad"
-      ],
+      "specialities": ["ad", "ad", "ad", "ad", "ad"],
       "hourRate": "166",
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -171,16 +136,10 @@
       "userId": 12,
       "jobTitle": "sit",
       "description": "Eius facere possimus dolorem. Laboriosam soluta mollitia occaecati ad. Provident ea quas delectus quae magni occaecati exercitationem dolores eius. Harum voluptas modi corrupti. Necessitatibus inventore amet dignissimos consectetur. Ab dolor autem.",
-      "specialities": [
-        "totam",
-        "totam",
-        "totam",
-        "totam",
-        "totam"
-      ],
+      "specialities": ["totam", "totam", "totam", "totam", "totam"],
       "hourRate": "732",
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -188,16 +147,10 @@
       "userId": 13,
       "jobTitle": "quisquam",
       "description": "Repudiandae placeat magni dolorem praesentium velit voluptatibus. Reprehenderit porro ratione itaque culpa dolorum fugit. Ut modi voluptatem consectetur. Minima veritatis porro necessitatibus eius unde et. Minus eveniet eius quasi id enim inventore dignissimos provident.",
-      "specialities": [
-        "nobis",
-        "nobis",
-        "nobis",
-        "nobis",
-        "nobis"
-      ],
+      "specialities": ["nobis", "nobis", "nobis", "nobis", "nobis"],
       "hourRate": "761",
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -205,16 +158,10 @@
       "userId": 14,
       "jobTitle": "eveniet",
       "description": "Et totam cumque aspernatur quaerat et facilis. Pariatur expedita omnis deleniti illum necessitatibus quas exercitationem ad quibusdam. Excepturi aliquam odit corporis minus excepturi nihil dignissimos consequatur omnis.",
-      "specialities": [
-        "quasi",
-        "quasi",
-        "quasi",
-        "quasi",
-        "quasi"
-      ],
+      "specialities": ["quasi", "quasi", "quasi", "quasi", "quasi"],
       "hourRate": "122",
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -222,16 +169,10 @@
       "userId": 15,
       "jobTitle": "hic",
       "description": "Natus voluptas tempore id aspernatur reiciendis quia. Ut dolorem vitae exercitationem veritatis. Ab deleniti ducimus laborum quae. Ut dolores optio in alias ab similique. Neque iste ut impedit dolorem voluptas error a.",
-      "specialities": [
-        "libero",
-        "libero",
-        "libero",
-        "libero",
-        "libero"
-      ],
+      "specialities": ["libero", "libero", "libero", "libero", "libero"],
       "hourRate": "24",
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -239,16 +180,10 @@
       "userId": 16,
       "jobTitle": "consequuntur",
       "description": "Magni qui cum expedita nam quidem eius quo quia. Nisi omnis rem id. Iusto officiis quis alias aperiam sit perferendis magni dicta mollitia.",
-      "specialities": [
-        "quas",
-        "quas",
-        "quas",
-        "quas",
-        "quas"
-      ],
+      "specialities": ["quas", "quas", "quas", "quas", "quas"],
       "hourRate": "180",
       "rating": 4.98,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -256,16 +191,10 @@
       "userId": 17,
       "jobTitle": "pariatur",
       "description": "Inventore aliquam ad ut occaecati. Facere asperiores explicabo. Quas necessitatibus consequatur fuga at rem necessitatibus. Debitis repudiandae consectetur voluptates. Tempore perferendis facere incidunt praesentium provident facilis dolore dignissimos. Illum fuga placeat nostrum.",
-      "specialities": [
-        "dolores",
-        "dolores",
-        "dolores",
-        "dolores",
-        "dolores"
-      ],
+      "specialities": ["dolores", "dolores", "dolores", "dolores", "dolores"],
       "hourRate": "536",
       "rating": 4.75,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -282,7 +211,7 @@
       ],
       "hourRate": "55",
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -290,16 +219,10 @@
       "userId": 19,
       "jobTitle": "voluptate",
       "description": "Dolor facere consectetur necessitatibus dignissimos. Possimus minus quae autem eligendi deleniti accusamus. Sapiente unde unde quaerat repudiandae quaerat maiores voluptas non neque. Distinctio magnam quidem minus repellendus voluptatem cupiditate. Sint odit expedita blanditiis earum fugiat ut.",
-      "specialities": [
-        "fuga",
-        "fuga",
-        "fuga",
-        "fuga",
-        "fuga"
-      ],
+      "specialities": ["fuga", "fuga", "fuga", "fuga", "fuga"],
       "hourRate": "931",
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -307,17 +230,67 @@
       "userId": 20,
       "jobTitle": "neque",
       "description": "Commodi dolore velit adipisci voluptate architecto molestiae. Error maxime dolorum fuga. Cupiditate quos quidem assumenda quo. Dolorem dolor eius est aliquid. Facere quaerat laudantium debitis eaque aliquam. Dolor veritatis harum doloremque fuga ipsum.",
-      "specialities": [
-        "vel",
-        "vel",
-        "vel",
-        "vel",
-        "vel"
-      ],
+      "specialities": ["vel", "vel", "vel", "vel", "vel"],
       "hourRate": "63",
       "rating": 4.85,
-      "cfp": "12/1234",
+      "crp": "12/1234",
       "scheduledHours": []
+    },
+    {
+      "birthDate": "1993-01-10T02:00:00.000Z",
+      "cellphone": "21 91234-5678",
+      "cpf": "123.456.789-10",
+      "email": "joao.pedro@gmail.com",
+      "name": "João Pedro",
+      "password": "123456",
+      "crp": "1234125",
+      "userType": "professionals",
+      "complement": "Sou apaixonado pela minha profissão! ",
+      "specialities": "Adolescentes",
+      "locations": "Rua Florida 94",
+      "id": 21
+    },
+    {
+      "email": "pedro.joao@gmail.com",
+      "password": "123456",
+      "id": 22
+    },
+    {
+      "email": "pedro.joao@gmail.com",
+      "password": "123456",
+      "id": 23
+    },
+    {
+      "pedro.joao@gmail.com": "",
+      "id": 24
+    },
+    {
+      "pedro.joao@gmail.com": "",
+      "id": 25
+    },
+    {
+      "pedro.joao@gmail.com": "",
+      "id": 26
+    },
+    {
+      "pedro.joao@gmail.com": "",
+      "id": 27
+    },
+    {
+      "pedro.joao@gmail.com": "",
+      "id": 28
+    },
+    {
+      "pedro.joao@gmail.com": "",
+      "id": 29
+    },
+    {
+      "pedro.joao@gmail.com": "",
+      "id": 30
+    },
+    {
+      "pedro.joao@gmail.com": "",
+      "id": 31
     }
   ],
   "locations": [
@@ -593,6 +566,34 @@
       "birthDate": "09/05/2000",
       "type": "CLIENT",
       "professionalId": ""
+    },
+    {
+      "birthDate": "1993-01-10T02:00:00.000Z",
+      "cellphone": "21 91234-5678",
+      "cpf": "123.456.789-10",
+      "email": "pedro.joao@gmail.com",
+      "name": "Pedro João",
+      "password": "123456",
+      "crp": "1234125",
+      "userType": "users",
+      "complement": "",
+      "specialities": "",
+      "locations": "",
+      "id": 22
+    },
+    {
+      "birthDate": "1999-08-19T03:00:00.000Z",
+      "cellphone": "21 98765-1234",
+      "cpf": "123.789.567-66",
+      "email": "daniel.silva@email.com",
+      "name": "Daniel Silva",
+      "password": "abcde",
+      "crp": "",
+      "userType": "users",
+      "complement": "",
+      "specialities": "",
+      "locations": "",
+      "id": 23
     }
   ]
 }

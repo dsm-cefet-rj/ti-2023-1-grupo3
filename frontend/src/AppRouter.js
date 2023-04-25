@@ -6,6 +6,7 @@ import {
   ScheduleAppointment,
   Schedules,
   SignUp,
+  LogIn,
 } from "./pages";
 
 const AppRouter = createBrowserRouter([
@@ -32,6 +33,10 @@ const AppRouter = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/login",
+    element: <LogIn />,
   },
 ]);
 
