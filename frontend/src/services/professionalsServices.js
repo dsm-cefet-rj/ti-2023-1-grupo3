@@ -1,24 +1,22 @@
 import { axiosInstance } from "./axiosInstance";
 
-export const getPaginatedProfessionals = async (searchName, page, limit) => {
+export const getProfessionals = async () => {
   return await axiosInstance.get(
-    `/users?_expand=professional&type=PROFESSIONAL&name_like=${searchName}&_page=${page}&_limit=${limit}`
+    `/professionals?_expand=user&_embed=locations`
   );
-};
-
-export const getHighestRatedProfessionals = async () => {
-  return await axiosInstance.get(
-    `/professionals?_sort=rating&_order=desc&_limit=5&_expand=user`
-  );
-};
-
-export const getProfessionalById = async (id) => {
-  return await axiosInstance.get(`/professionals/${id}?_expand=user`);
 };
 
 export const updateProfessional = async (id, professional) => {
-  return await axiosInstance.get(
+  return await axiosInstance.patch(
     `/professionals/${id}?_expand=user`,
     professional
   );
+};
+
+export const createProfessional = async (professional) => {
+  return await axiosInstance.post(`/professionals?_expand=user`, professional);
+};
+
+export const deleteProfessional = async (id) => {
+  return await axiosInstance.delete(`/professionals/${id}`);
 };

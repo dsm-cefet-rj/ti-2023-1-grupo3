@@ -12,7 +12,7 @@
       ],
       "hourRate": 100,
       "rating": 5,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": [
         "09:00",
         "10:00",
@@ -32,7 +32,7 @@
       ],
       "hourRate": 70000,
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -45,7 +45,7 @@
       ],
       "hourRate": 7,
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -60,7 +60,7 @@
       ],
       "hourRate": 70,
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -74,7 +74,7 @@
       ],
       "hourRate": 324,
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -88,7 +88,7 @@
       ],
       "hourRate": 700,
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -103,7 +103,7 @@
       ],
       "hourRate": 550,
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -117,7 +117,7 @@
       ],
       "hourRate": 45,
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -130,7 +130,7 @@
       ],
       "hourRate": 5678,
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -146,7 +146,7 @@
       ],
       "hourRate": 70,
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -163,7 +163,7 @@
       ],
       "hourRate": "166",
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -180,7 +180,7 @@
       ],
       "hourRate": "732",
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -197,7 +197,7 @@
       ],
       "hourRate": "761",
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -214,7 +214,7 @@
       ],
       "hourRate": "122",
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -231,7 +231,7 @@
       ],
       "hourRate": "24",
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -248,7 +248,7 @@
       ],
       "hourRate": "180",
       "rating": 4.98,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -265,7 +265,7 @@
       ],
       "hourRate": "536",
       "rating": 4.75,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -282,7 +282,7 @@
       ],
       "hourRate": "55",
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -299,7 +299,7 @@
       ],
       "hourRate": "931",
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     },
     {
@@ -316,7 +316,7 @@
       ],
       "hourRate": "63",
       "rating": 4.85,
-      "crp": "12/1234",
+      "cfp": "12/1234",
       "scheduledHours": []
     }
   ],

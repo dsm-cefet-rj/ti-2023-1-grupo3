@@ -27,29 +27,29 @@ function ProfessionalCard(props) {
     <StyledCard elevation={2}>
       <StyledBox>
         <CardMedia
-          component={() => <StyledAvatar src={professional.profilePicture} />}
+          component={() => (
+            <StyledAvatar src={professional?.user?.profilePicture} />
+          )}
         />
         <CardContent>
-          <Typography variant="h5">{professional.name}</Typography>
+          <Typography variant="h5">{professional?.user?.name}</Typography>
           <Typography variant="caption" gutterBottom>
-            {professional?.professional?.jobTitle}
+            {professional?.jobTitle}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            {professional?.professional?.description}
+            {professional?.description}
           </Typography>
           <Typography color={"text.secondary"}>
-            R$ {professional?.professional?.hourRate} / 50 min
+            R$ {professional?.hourRate} / 50 min
           </Typography>
           <Box display={"flex"} gap={1} mb={1}>
             <Rating
               name="size-small"
-              defaultValue={professional?.professional?.rating ?? 0}
+              defaultValue={professional?.rating ?? 0}
               size="small"
               readOnly
             />
-            <Typography variant="body2">
-              ({professional?.professional?.rating})
-            </Typography>
+            <Typography variant="body2">({professional?.rating})</Typography>
           </Box>
           <Button onClick={onClick}>Ver mais</Button>
         </CardContent>

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState, useEffect, useCallback } from "react";
 
 import Typography from "@mui/material/Typography";
 import { Avatar, Rating, styled } from "@mui/material";
@@ -7,8 +6,8 @@ import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { getProfessionalById } from "../../services";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { selectProfessionalById } from "../../store/slices/professionalSlice";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -28,25 +27,12 @@ function ProfessionalProfile() {
 
   const { id } = useParams();
 
-  const [professional, setProfessional] = useState();
-
-  const getProfessional = async () => {
-    await getProfessionalById(id)
-      .then((response) => setProfessional(response.data))
-      .catch((error) => {
-        toast("Ocorreu um erro");
-        console.log(error);
-      });
-  };
-
-  const getProfessionalCallback = useCallback(() => getProfessional(), []);
-
-  useEffect(() => {
-    getProfessionalCallback();
-  }, []);
-
   const handleScheduleConsultButtonClick = () =>
     navigate(`/schedule-appointment/${id}`);
+
+  const professional = useSelector((state) =>
+    selectProfessionalById(state, id)
+  );
 
   return (
     <StyledBox>

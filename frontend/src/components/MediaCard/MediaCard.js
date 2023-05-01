@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 
 import { useNavigate } from "react-router-dom";
 import { Box, Rating, styled, useTheme } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectProfessionalById } from "../../store/slices/professionalSlice";
 
 const StyledCard = styled(Card)(() => {
   const theme = useTheme();
@@ -23,14 +25,18 @@ const StyledCard = styled(Card)(() => {
 });
 
 function MediaCard(props) {
-  const { professional } = props ?? {};
+  const { id } = props ?? {};
+
+  const professional = useSelector((state) =>
+    selectProfessionalById(state, id)
+  );
 
   const navigate = useNavigate();
 
-  const handleSeeMoreClick = () => navigate(`/profile/${professional.id}`);
+  const handleSeeMoreClick = () => navigate(`/profile/${id}`);
 
   const handleScheduleAppointmentClick = () =>
-    navigate(`/schedule-appointment/${professional.id}`);
+    navigate(`/schedule-appointment/${id}`);
 
   return (
     <StyledCard>

@@ -11,7 +11,7 @@ import {
 
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../store/userSlice";
+import { selectUser } from "../../store/slices/userSlice";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",

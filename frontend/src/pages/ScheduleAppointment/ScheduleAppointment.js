@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useMemo } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -11,15 +11,13 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Box, InputLabel, styled, useTheme } from "@mui/material";
 
-import {
-  createAppointment,
-  getLocationsByProfessionalId,
-} from "../../services";
+import { createAppointment } from "../../services";
 import { createHourList } from "../../helpers";
 import { initialValues, validationSchema } from "./validation";
 
 import { useSelector } from "react-redux";
-import { selectUser } from "../../store/userSlice";
+import { selectUser } from "../../store/slices/userSlice";
+import { selectProfessionalById } from "../../store/slices/professionalSlice";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -44,11 +42,11 @@ const StyledForm = styled("form")(() => {
 function ScheduleAppointment() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const user = useSelector(selectUser);
-  console.log(user);
 
-  const [locations, setLocations] = useState([]);
-  const [professional, setProfessional] = useState();
+  const user = useSelector(selectUser);
+  const professional = useSelector((state) =>
+    selectProfessionalById(state, id)
+  );
 
   const onSubmit = async () => {
     const appointment = {
@@ -72,24 +70,6 @@ function ScheduleAppointment() {
     onSubmit: onSubmit,
   });
 
-  const getLocations = async () => {
-    await getLocationsByProfessionalId(id)
-      .then((response) => {
-        setLocations(response.data);
-        setProfessional(response.data?.[0]?.professional ?? undefined);
-      })
-      .catch((error) => {
-        toast.error("Ocorreu um erro");
-        console.log(error);
-      });
-  };
-
-  const getLocationsCallback = useCallback(() => getLocations(), []);
-
-  useEffect(() => {
-    getLocationsCallback();
-  }, []);
-
   const scheduledHours = useMemo(
     () => createHourList(professional?.scheduledHours ?? []),
     [professional, professional?.scheduledHours]
@@ -111,12 +91,17 @@ function ScheduleAppointment() {
             fullWidth
           >
             <MenuItem value="" disabled />
-            {locations.length > 0 &&
-              locations.map((loc, index) => (
+            {professional?.locations.length > 0 ? (
+              professional?.locations.map((loc, index) => (
                 <MenuItem value={loc} key={index}>
                   {loc.label}
                 </MenuItem>
-              ))}
+              ))
+            ) : (
+              <MenuItem value="" disabled>
+                Não existem localidades disponíveis no momento
+              </MenuItem>
+            )}
           </Select>
         </Box>
 

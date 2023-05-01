@@ -17,7 +17,10 @@ import {
   styled,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { selectIsUserInitialized, selectUser } from "../../store/userSlice";
+import {
+  selectIsUserInitialized,
+  selectUser,
+} from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const StyledTypography = styled(Typography)(() => ({

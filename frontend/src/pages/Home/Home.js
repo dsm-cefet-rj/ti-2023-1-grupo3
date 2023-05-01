@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import { ImageCarousel, MediaCard, VerticalStepper } from "../../components";
-import { getHighestRatedProfessionals } from "../../services";
 import { slides, steps } from "./Home.constants";
 
 import {
@@ -12,8 +11,14 @@ import {
   useTheme,
 } from "@mui/material";
 
-import { useDispatch } from "react-redux";
-import { initializeUser } from "../../store/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getProfessionals } from "../../store";
+import {
+  selectAllProfessionals,
+  selectProfessionalsThunksStatus,
+} from "../../store/slices/professionalSlice";
+import { initializeUser } from "../../store/slices/userSlice";
 
 function Home() {
   const theme = useTheme();
@@ -22,20 +27,19 @@ function Home() {
   const matchesXl = useMediaQuery(theme.breakpoints.down("xl"));
   const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [professionals, setProfessionals] = useState([]);
+  const professionals = useSelector(selectAllProfessionals);
+  const status = useSelector(selectProfessionalsThunksStatus);
 
-  const getProfessionals = async () => {
-    await getHighestRatedProfessionals().then((response) =>
-      setProfessionals(response.data)
-    );
-  };
-
-  const getProfessionalsCallback = useCallback(() => getProfessionals(), []);
+  const shouldLoadStatus = ["not_loaded", "saved", "deleted"];
+  const shouldLoad = shouldLoadStatus.includes(status);
 
   useEffect(() => {
-    getProfessionalsCallback();
     dispatch(initializeUser(21));
   }, []);
+
+  useEffect(() => {
+    shouldLoad && dispatch(getProfessionals());
+  }, [shouldLoad]);
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -44,6 +48,12 @@ function Home() {
 
   const handlePrevStep = () =>
     currentStep > 0 ? setCurrentStep(currentStep - 1) : null;
+
+  const highestRateProfessionals = useMemo(() => {
+    return (professionals ?? [])
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 5);
+  }, [professionals]);
 
   return (
     <>
@@ -101,10 +111,13 @@ function Home() {
           justifyContent={matchesXl ? "center" : "space-between"}
           gap={2}
         >
-          {professionals.length > 0 &&
-            professionals.map((professional, index) => (
-              <MediaCard professional={professional} key={index} />
-            ))}
+          {highestRateProfessionals.map((professional, index) => (
+            <MediaCard
+              id={professional.id}
+              professional={professional}
+              key={index}
+            />
+          ))}
         </Box>
       </Box>
     </>

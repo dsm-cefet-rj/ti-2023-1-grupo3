@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useEffect, useCallback } from "react";
 
 import Typography from "@mui/material/Typography";
-import { Avatar, Rating, styled } from "@mui/material";
+import { Avatar, styled } from "@mui/material";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 
@@ -45,8 +45,7 @@ function Account() {
     getUserCallback();
   }, []);
 
-  const handleAppointmentButtonClick = () =>
-    navigate(`/appointments/`);
+  const handleAppointmentButtonClick = () => navigate(`/appointments/`);
 
   return (
     <StyledBox>
@@ -55,8 +54,9 @@ function Account() {
 
       <Typography variant="h5">Email: {user?.email ?? "-"}</Typography>
       <Typography variant="h5">Telefone: {user?.cellphone ?? "-"}</Typography>
-      <Typography variant="h5">Data de Nascimento: {user?.birthDate ?? "-"}</Typography>
-
+      <Typography variant="h5">
+        Data de Nascimento: {user?.birthDate ?? "-"}
+      </Typography>
 
       <Button variant="contained" onClick={handleAppointmentButtonClick}>
         Consultas Marcadas
