@@ -29,15 +29,6 @@ const StyledTypography = styled(Typography)(() => ({
   textDecoration: "none",
 }));
 
-const pageLinks = [
-  { label: "Profissionais", link: "/professionals" },
-  { label: "Perfil", link: "/account/21" },
-  { label: "Login", link: "/login" },
-  { label: "Cadastrar", link: "/signup" },
-];
-const settingsLinks = ["Conta", "Sair"];
-const unloggedLinks = ["Entrar"];
-
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -56,6 +47,17 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleNavigate = (path) => navigate(path);
+
+  const pageLinks = [{ label: "Profissionais", link: "/professionals" }];
+  const settingsLinks = [
+    { label: "Perfil", link: "/account" },
+    { label: "Consultas Marcadas", link: "/appointments" },
+    { label: "Sair", link: "" },
+  ];
+  const unloggedLinks = [
+    { label: "Login", link: "/login" },
+    { label: "Cadastrar", link: "/signup" },
+  ];
 
   return (
     <AppBar position="static">
@@ -163,13 +165,21 @@ function Navbar() {
             >
               {userLogged
                 ? settingsLinks.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
+                    <MenuItem
+                      key={setting.label}
+                      onClick={() => handleNavigate(setting.link)}
+                    >
+                      <Typography textAlign="center">
+                        {setting.label}
+                      </Typography>
                     </MenuItem>
                   ))
                 : unloggedLinks.map((link) => (
-                    <MenuItem key={link} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{link}</Typography>
+                    <MenuItem
+                      key={link.label}
+                      onClick={() => handleNavigate(link.link)}
+                    >
+                      <Typography textAlign="center">{link.label}</Typography>
                     </MenuItem>
                   ))}
             </Menu>

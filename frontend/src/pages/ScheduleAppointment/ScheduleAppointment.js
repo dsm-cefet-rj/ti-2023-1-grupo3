@@ -9,15 +9,24 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { Box, InputLabel, styled, useTheme } from "@mui/material";
+import {
+  Box,
+  InputLabel,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
-import { createAppointment } from "../../services";
 import { createHourList } from "../../helpers";
 import { initialValues, validationSchema } from "./validation";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/slices/userSlice";
 import { selectProfessionalById } from "../../store/slices/professionalSlice";
+import { createAppointment } from "../../store";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -43,20 +52,27 @@ function ScheduleAppointment() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const theme = useTheme();
+
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
+
   const user = useSelector(selectUser);
   const professional = useSelector((state) =>
     selectProfessionalById(state, id)
   );
 
-  const onSubmit = async () => {
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
     const appointment = {
       locationId: values.location.id,
       time: values.time,
+      date: values.date,
       professionalId: Number(id),
       userId: Number(user?.id),
     };
 
-    await createAppointment(appointment)
+    dispatch(createAppointment(appointment))
       .then(() => {
         toast.success("Seu agendamento foi realizado com sucesso");
         navigate(-2);
@@ -64,11 +80,12 @@ function ScheduleAppointment() {
       .catch(() => toast.error("Ocorreu um erro"));
   };
 
-  const { values, handleChange, handleBlur, handleSubmit } = useFormik({
-    initialValues: initialValues,
-    validationSchema: validationSchema,
-    onSubmit: onSubmit,
-  });
+  const { values, handleChange, handleBlur, handleSubmit, setFieldValue } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: validationSchema,
+      onSubmit: onSubmit,
+    });
 
   const scheduledHours = useMemo(
     () => createHourList(professional?.scheduledHours ?? []),
@@ -105,22 +122,48 @@ function ScheduleAppointment() {
           </Select>
         </Box>
 
-        <Box marginBottom={5}>
-          <InputLabel id="time">Horário: </InputLabel>
-          <Select
-            value={values.time}
-            onChange={handleChange("time")}
-            onBlur={handleBlur("time")}
-            name="time"
-            id="time"
-            fullWidth
-          >
-            {scheduledHours.map((hour, index) => (
-              <MenuItem value={hour} key={index}>
-                {hour}
-              </MenuItem>
-            ))}
-          </Select>
+        <Box
+          display={"flex"}
+          flexDirection={matchesSm ? "column" : "row"}
+          gap={2}
+          marginBottom={5}
+        >
+          <Box flex={1}>
+            <InputLabel id="date">Data: </InputLabel>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer
+                components={["DatePicker"]}
+                sx={{ paddingTop: 0, flexDirection: "column" }}
+              >
+                <DesktopDatePicker
+                  id="date"
+                  format="DD/MM/YYYY"
+                  disablePast
+                  required
+                  value={values.date}
+                  onChange={(value) => setFieldValue("date", value)}
+                />
+              </DemoContainer>
+            </LocalizationProvider>
+          </Box>
+
+          <Box flex={1}>
+            <InputLabel id="time">Horário: </InputLabel>
+            <Select
+              value={values.time}
+              onChange={handleChange("time")}
+              onBlur={handleBlur("time")}
+              name="time"
+              id="time"
+              fullWidth
+            >
+              {scheduledHours.map((hour, index) => (
+                <MenuItem value={hour} key={index}>
+                  {hour}
+                </MenuItem>
+              ))}
+            </Select>
+          </Box>
         </Box>
 
         <Button type="submit" variant="contained" fullWidth>

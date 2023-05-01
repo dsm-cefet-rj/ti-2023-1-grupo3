@@ -1,10 +1,17 @@
-import { eachHourOfInterval, endOfToday, format, startOfToday } from "date-fns";
+import {
+  addHours,
+  eachHourOfInterval,
+  endOfToday,
+  format,
+  startOfToday,
+  subHours,
+} from "date-fns";
 
-export const createHourList = (hiddenHours) => {
+export const createHourList = (hiddenHours, startTime, endTime) => {
   let result;
 
-  const start = startOfToday();
-  const end = endOfToday();
+  const start = startTime || addHours(startOfToday(), 9);
+  const end = endTime || subHours(endOfToday(), 6);
 
   const hourList = eachHourOfInterval({
     start: start,

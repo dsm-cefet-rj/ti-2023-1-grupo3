@@ -481,17 +481,11 @@
   "appointments": [
     {
       "locationId": 1,
-      "time": "05:00",
+      "time": "14:00",
+      "date": "2023-05-02T03:00:00.000Z",
       "professionalId": 1,
       "userId": 21,
-      "id": 1
-    },
-    {
-      "locationId": 1,
-      "time": "07:00",
-      "professionalId": 1,
-      "userId": 21,
-      "id": 2
+      "id": 3
     }
   ],
   "users": [

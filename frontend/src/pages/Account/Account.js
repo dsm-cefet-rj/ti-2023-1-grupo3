@@ -1,14 +1,11 @@
 import * as React from "react";
-import { useState, useEffect, useCallback } from "react";
 
 import Typography from "@mui/material/Typography";
 import { Avatar, styled } from "@mui/material";
 import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
 
-import { useNavigate, useParams } from "react-router-dom";
-import { getUserById } from "../../services";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/slices/userSlice";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -24,28 +21,7 @@ const StyledAvatar = styled(Avatar)(() => ({
 }));
 
 function Account() {
-  const navigate = useNavigate();
-
-  const { id } = useParams();
-
-  const [user, setUser] = useState();
-
-  const getUser = async () => {
-    await getUserById(id)
-      .then((response) => setUser(response.data))
-      .catch((error) => {
-        toast("Ocorreu um erro");
-        console.log(error);
-      });
-  };
-
-  const getUserCallback = useCallback(() => getUser(), []);
-
-  useEffect(() => {
-    getUserCallback();
-  }, []);
-
-  const handleAppointmentButtonClick = () => navigate(`/appointments/`);
+  const user = useSelector(selectUser);
 
   return (
     <StyledBox>
@@ -57,10 +33,6 @@ function Account() {
       <Typography variant="h5">
         Data de Nascimento: {user?.birthDate ?? "-"}
       </Typography>
-
-      <Button variant="contained" onClick={handleAppointmentButtonClick}>
-        Consultas Marcadas
-      </Button>
     </StyledBox>
   );
 }

@@ -17,7 +17,7 @@ function AppRouter() {
       <Navbar />
       <Routes>
         <Route exact path={"/"} element={<Home />} />
-        <Route exact path={"/account/:id"} element={<Account />} />
+        <Route exact path={"/account"} element={<Account />} />
         <Route
           exact
           path={"/professionals"}
