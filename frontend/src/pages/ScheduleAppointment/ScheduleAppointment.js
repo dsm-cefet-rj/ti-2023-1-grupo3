@@ -17,7 +17,7 @@ import {
   useTheme,
 } from "@mui/material";
 
-import { createHourList } from "../../helpers";
+import { createHourList, formatHourList } from "../../helpers";
 import { initialValues, validationSchema } from "./validation";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -27,6 +27,15 @@ import { createAppointment } from "../../store";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { getDate, getMonth, getYear, toDate } from "date-fns";
+import { updateProfessional } from "../../services";
+import { useEffect } from "react";
+import {
+  selectAppointmentsThunksError,
+  selectAppointmentsThunksStatus,
+  setStatus,
+} from "../../store/slices/appointmentSlice";
+import { setStatus as setProfessionalStatus } from "../../store/slices/professionalSlice";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -61,23 +70,40 @@ function ScheduleAppointment() {
     selectProfessionalById(state, id)
   );
 
+  const status = useSelector(selectAppointmentsThunksStatus);
+  const error = useSelector(selectAppointmentsThunksError);
+
   const dispatch = useDispatch();
 
   const onSubmit = () => {
+    const { location, time, date } = values;
+
     const appointment = {
-      locationId: values.location.id,
-      time: values.time,
-      date: values.date,
+      locationId: location.id,
+      time: time,
+      date: date,
       professionalId: Number(id),
       userId: Number(user?.id),
     };
 
-    dispatch(createAppointment(appointment))
-      .then(() => {
-        toast.success("Seu agendamento foi realizado com sucesso");
-        navigate(-2);
-      })
-      .catch(() => toast.error("Ocorreu um erro"));
+    const timeList = time.split(":");
+
+    const newDate = new Date(date);
+
+    const scheduledTime = toDate(
+      new Date(
+        getYear(newDate),
+        getMonth(newDate),
+        getDate(newDate),
+        timeList[0],
+        timeList[1]
+      )
+    );
+
+    const hoursList = [...professional.scheduledHours, scheduledTime];
+
+    dispatch(createAppointment(appointment));
+    dispatch(updateProfessional(Number(id), { scheduledHours: hoursList }));
   };
 
   const { values, handleChange, handleBlur, handleSubmit, setFieldValue } =
@@ -87,10 +113,32 @@ function ScheduleAppointment() {
       onSubmit: onSubmit,
     });
 
-  const scheduledHours = useMemo(
-    () => createHourList(professional?.scheduledHours ?? []),
-    [professional, professional?.scheduledHours]
-  );
+  const scheduledHours = useMemo(() => {
+    if (!values.date) return [];
+
+    const hiddenHours = formatHourList(
+      professional?.scheduledHours ?? [],
+      values.date
+    );
+
+    console.log("----", hiddenHours);
+
+    return createHourList(hiddenHours);
+  }, [professional, professional?.scheduledHours, values.date]);
+
+  useEffect(() => {
+    if (status === "saved") {
+      toast.success("Seu agendamento foi realizado com sucesso");
+      dispatch(setStatus("not_loaded"));
+      dispatch(setProfessionalStatus("not_loaded"));
+      navigate(-2);
+    }
+
+    if (error) {
+      console.error(error);
+      toast.error("Ocorreu um erro");
+    }
+  }, [status, error]);
 
   return (
     <StyledBox>
@@ -156,12 +204,19 @@ function ScheduleAppointment() {
               name="time"
               id="time"
               fullWidth
+              disabled={!values.date}
             >
-              {scheduledHours.map((hour, index) => (
-                <MenuItem value={hour} key={index}>
-                  {hour}
+              {scheduledHours.length > 0 ? (
+                scheduledHours.map((hour, index) => (
+                  <MenuItem value={hour} key={index}>
+                    {hour}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem value="" disabled>
+                  Não existem horários disponíveis
                 </MenuItem>
-              ))}
+              )}
             </Select>
           </Box>
         </Box>

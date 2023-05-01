@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Avatar, Box, Button, CardMedia, styled } from "@mui/material";
 import { getUserById } from "../../services";
 import { toast } from "react-toastify";
+import { format } from "date-fns";
 
 const StyledCard = styled(Card)(() => ({
   width: "100%",
@@ -25,7 +26,7 @@ const StyledAvatar = styled(Avatar)(() => ({
 
 function AppointmentCard(props) {
   const { appointment, onClick } = props;
-  const { location, professional } = appointment || {};
+  const { location, professional, date, time } = appointment || {};
 
   const [professionalUser, setProfessionalUser] = useState();
 
@@ -63,6 +64,9 @@ function AppointmentCard(props) {
           </Typography>
           <Typography variant="body1" gutterBottom>
             {location?.label}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {format(new Date(date), "dd/MM/yyyy")} - {time}h
           </Typography>
           <Typography color={"text.secondary"}>{appointment?.hour}</Typography>
           <Button onClick={onClick}>Desmarcar</Button>

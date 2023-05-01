@@ -14,9 +14,8 @@
       "rating": 5,
       "cfp": "12/1234",
       "scheduledHours": [
-        "09:00",
-        "10:00",
-        "11:00"
+        "2023-05-12T17:00:00.000Z",
+        "2023-05-04T15:00:00.000Z"
       ]
     },
     {
@@ -33,7 +32,9 @@
       "hourRate": 70000,
       "rating": 4.85,
       "cfp": "12/1234",
-      "scheduledHours": []
+      "scheduledHours": [
+        "2023-05-09T20:00:00.000Z"
+      ]
     },
     {
       "id": 3,
@@ -480,12 +481,12 @@
   ],
   "appointments": [
     {
-      "locationId": 1,
-      "time": "14:00",
-      "date": "2023-05-02T03:00:00.000Z",
+      "locationId": 2,
+      "time": "12:00",
+      "date": "2023-05-04T03:00:00.000Z",
       "professionalId": 1,
       "userId": 21,
-      "id": 3
+      "id": 1
     }
   ],
   "users": [

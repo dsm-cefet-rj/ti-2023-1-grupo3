@@ -17,7 +17,11 @@ const initialState = professionalAdapter.getInitialState({
 export const professionalSlice = createSlice({
   name: "professional",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getProfessionals.pending, (state) => {
       state.status = "loading";
@@ -87,5 +91,7 @@ export const selectProfessionalsThunksStatus = (state) =>
 
 export const selectProfessionalsThunksError = (state) =>
   state?.professional.error;
+
+export const { setStatus } = professionalSlice.actions;
 
 export default professionalSlice.reducer;

@@ -18,7 +18,11 @@ const initialState = appointmentAdapter.getInitialState({
 export const appointmentSlice = createSlice({
   name: "appointment",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getClientAppointments.pending, (state) => {
       state.status = "loading";
@@ -102,5 +106,7 @@ export const selectAppointmentsThunksStatus = (state) =>
 
 export const selectAppointmentsThunksError = (state) =>
   state?.appointment.error;
+
+export const { setStatus } = appointmentSlice.actions;
 
 export default appointmentSlice.reducer;
