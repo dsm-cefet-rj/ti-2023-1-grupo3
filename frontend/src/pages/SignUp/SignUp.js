@@ -1,101 +1,63 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
-import React from "react";
+import React, { useState } from "react";
 import {
-  Button,
+  Box,
   FormControl,
   FormControlLabel,
   FormLabel,
   Radio,
   RadioGroup,
-  TextField,
+  useTheme,
 } from "@mui/material";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { ClientForm } from "../../components/ClientForm";
+import styled from "styled-components";
 
-const initialValues = {
-  name: "",
-  email: "",
-  password: "",
-  cpf: "",
-  cellphone: "",
-  birthDate: null,
-  crp: "",
-  userType: "",
-  complement: "",
-  specialities: "",
-  locations: "",
-};
+const StyledBox = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+}));
 
-const validationSchema = yup.object().shape({
-  name: yup.string().required("Campo obrigatório"),
-  email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
-  cpf: yup.string().required("Campo obrigatório"),
-  cellphone: yup.string().required("Campo obrigatório"),
-  birthDate: yup.date().required("Campo obrigatório"),
+const StyledContentBox = styled(Box)(() => {
+  const theme = useTheme();
+
+  return {
+    display: "flex",
+    flexDirection: "column",
+    width: "90%",
+    [theme.breakpoints.up("lg")]: {
+      width: "40%",
+    },
+    padding: 20,
+  };
 });
 
 export default function Formulario() {
-  const navigate = useNavigate();
-  const { handleSubmit, formState, control, watch } = useForm({
-    mode: "onSubmit",
-    defaultValues: initialValues,
-    resolver: yupResolver(validationSchema),
-  });
-  const userType = watch("userType");
-  console.log(userType);
-  const onSubmit = async (values) => {
-    console.log(values);
-    if (!values) {
-      return;
-    }
-    try {
-      await axios.post(`http://localhost:3000/${userType}`, values);
-      toast.success("Cadastro realizado com sucesso!");
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-      toast.error(
-        "Ocorreu um erro ao salvar seus dados. Tente novamente mais tarde."
-      );
-    }
-  };
+  const [userType, setUserType] = useState("CLIENT");
 
-  const { errors } = formState;
+  const handleUserTypeChange = (event) => setUserType(event.target.value ?? "");
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name="userType"
-        control={control}
-        render={({ field }) => (
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Tipo de perfil</FormLabel>
-            <RadioGroup
-              aria-label="userType"
-              name="userType"
-              {...field}
-              required
-            >
-              <FormControlLabel
-                value="users"
-                control={<Radio />}
-                label="Paciente"
-              />
-              <FormControlLabel
-                value="professionals"
-                control={<Radio />}
-                label="Psicólogo"
-              />
-            </RadioGroup>
-          </FormControl>
-        )}
-      />
-      <Controller
+    <StyledBox>
+      <StyledContentBox>
+        <FormControl>
+          <FormLabel>Tipo de perfil</FormLabel>
+          <RadioGroup value={userType} onChange={handleUserTypeChange}>
+            <FormControlLabel
+              value="CLIENT"
+              control={<Radio />}
+              label="Paciente"
+            />
+            <FormControlLabel
+              value="PROFESSIONAL"
+              control={<Radio />}
+              label="Psicólogo"
+            />
+          </RadioGroup>
+        </FormControl>
+
+        {userType === "CLIENT" && <ClientForm />}
+      </StyledContentBox>
+      {/* <Controller
         name="name"
         control={control}
         render={({ field }) => (
@@ -298,10 +260,7 @@ export default function Formulario() {
             fullWidth
           />
         )}
-      />
-      <Button type="submit" variant="contained" fullWidth>
-        Cadastrar
-      </Button>
-    </form>
+      /> */}
+    </StyledBox>
   );
 }

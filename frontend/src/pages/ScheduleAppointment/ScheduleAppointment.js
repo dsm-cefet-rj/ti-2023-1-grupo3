@@ -177,7 +177,7 @@ function ScheduleAppointment() {
           marginBottom={5}
         >
           <Box flex={1}>
-            <InputLabel id="date">Data: </InputLabel>
+            <InputLabel>Data: </InputLabel>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer
                 components={["DatePicker"]}
