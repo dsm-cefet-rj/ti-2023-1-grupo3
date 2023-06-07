@@ -21,7 +21,6 @@ import { createHourList, formatHourList } from "../../helpers";
 import { initialValues, validationSchema } from "./validation";
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../store/slices/userSlice";
 import { selectProfessionalById } from "../../store/slices/professionalSlice";
 import { createAppointment } from "../../store";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -36,6 +35,7 @@ import {
   setStatus,
 } from "../../store/slices/appointmentSlice";
 import { setStatus as setProfessionalStatus } from "../../store/slices/professionalSlice";
+import { selectLoggedUser } from "../../store/slices/userSlice";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -65,7 +65,7 @@ function ScheduleAppointment() {
 
   const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const user = useSelector(selectUser);
+  const user = useSelector(selectLoggedUser);
   const professional = useSelector((state) =>
     selectProfessionalById(state, id)
   );
@@ -120,8 +120,6 @@ function ScheduleAppointment() {
       professional?.scheduledHours ?? [],
       values.date
     );
-
-    console.log("----", hiddenHours);
 
     return createHourList(hiddenHours);
   }, [professional, professional?.scheduledHours, values.date]);

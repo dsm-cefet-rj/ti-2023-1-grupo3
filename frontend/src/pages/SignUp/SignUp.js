@@ -31,7 +31,7 @@ const StyledContentBox = styled(Box)(() => {
   };
 });
 
-export default function Formulario() {
+function SignUp() {
   const [userType, setUserType] = useState("CLIENT");
 
   const handleUserTypeChange = (event) => setUserType(event.target.value ?? "");
@@ -264,3 +264,5 @@ export default function Formulario() {
     </StyledBox>
   );
 }
+
+export default SignUp;

@@ -6,7 +6,7 @@ import { AppointmentCard } from "../../components/AppointmentCard";
 
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../../store/slices/userSlice";
+import { selectLoggedUser } from "../../store/slices/userSlice";
 import {
   deleteAppointment,
   getClientAppointments,
@@ -30,7 +30,7 @@ function Appointments() {
   const [page, setPage] = useState(1);
   const [numOfPages, setNumOfPages] = useState();
 
-  const user = useSelector(selectUser);
+  const user = useSelector(selectLoggedUser);
   const appointments = useSelector(selectAllAppointments);
   const status = useSelector(selectAppointmentsThunksStatus);
 

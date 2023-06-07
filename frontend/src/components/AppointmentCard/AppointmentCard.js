@@ -1,13 +1,12 @@
 import * as React from "react";
-import { useState, useEffect, useCallback } from "react";
 
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { Avatar, Box, Button, CardMedia, styled } from "@mui/material";
-import { getUserById } from "../../services";
-import { toast } from "react-toastify";
 import { format } from "date-fns";
+import { useSelector } from "react-redux";
+import { selectUserById } from "../../store/slices/userSlice";
 
 const StyledCard = styled(Card)(() => ({
   width: "100%",
@@ -28,27 +27,9 @@ function AppointmentCard(props) {
   const { appointment, onClick } = props;
   const { location, professional, date, time } = appointment || {};
 
-  const [professionalUser, setProfessionalUser] = useState();
-
-  const getProfessionalUserInformation = async () => {
-    if (!professional) return;
-
-    await getUserById(Number(professional.userId))
-      .then((response) => setProfessionalUser(response.data))
-      .catch((error) => {
-        toast.error("Ocorreu um erro");
-        console.log(error);
-      });
-  };
-
-  const getProfessionalUserInformationCallback = useCallback(
-    () => getProfessionalUserInformation(),
-    [professional]
+  const professionalUser = useSelector((state) =>
+    selectUserById(state, professional.userId)
   );
-
-  useEffect(() => {
-    getProfessionalUserInformationCallback();
-  }, [professional]);
 
   return (
     <StyledCard elevation={2}>

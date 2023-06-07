@@ -6,12 +6,38 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { cellphoneMask, cpfMask } from "../../helpers";
+import {
+  selectUserThunksError,
+  selectUserThunksStatus,
+} from "../../store/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { createUser } from "../../store";
 
 function ClientForm() {
-  const onSubmit = async (values) => {
-    console.log(values);
+  const status = useSelector(selectUserThunksStatus);
+  const error = useSelector(selectUserThunksError);
+
+  const dispatch = useDispatch();
+
+  const onSubmit = (values) => {
+    console.log("entrou", values);
 
     if (!values) return;
+
+    const userData = {
+      name: values.name,
+      email: values.email,
+      password: "",
+      cpf: values.cpf,
+      cellphone: values.cellphone,
+      birthDate: values.birthDate,
+      profilePicture: values.profilePicture,
+      type: "CLIENT",
+    };
+
+    dispatch(createUser(userData));
   };
 
   const {
@@ -47,7 +73,16 @@ function ClientForm() {
 
   const handleCellphoneBlur = () => setFieldTouched("cellphone", true);
 
-  console.log(touched, errors);
+  useEffect(() => {
+    if (status === "saved") toast.success("Usuário foi cadastrado com sucesso");
+
+    if (error) {
+      console.error(error);
+      toast.error("Ocorreu um erro");
+    }
+  }, [status, error]);
+
+  console.log(errors, touched);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -115,8 +150,8 @@ function ClientForm() {
               format="DD/MM/YYYY"
               disableFuture
               required
-              value={values.burthDate}
-              onChange={(value) => setFieldValue("burthDate", value)}
+              value={values.birthDate}
+              onChange={(value) => setFieldValue("birthDate", value)}
               onBlur={() => setFieldTouched("birthDate", true)}
             />
           </DemoContainer>
