@@ -5,7 +5,7 @@ export const getUserById = async (id) => {
 };
 
 export const getUsers = async () => {
-  return await axiosInstance.get(`/users?_expand=professional`);
+  return await axiosInstance.get(`/users`);
 };
 
 export const updateUser = async (id, user) => {

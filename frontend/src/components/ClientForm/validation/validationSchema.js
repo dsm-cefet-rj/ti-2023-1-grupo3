@@ -13,5 +13,12 @@ export const validationSchema = yup.object().shape({
   cellphone: yup.string().required("Campo obrigatório"),
   birthDate: yup.date().required("Campo obrigatório"),
   profilePicture: yup.string(),
-  password: "",
+  password: yup
+    .string()
+    .min(8, "A senha deve ter no mínimo 8 caracteres")
+    .required("Campo obrigatório"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "A senhas devem ser iguais")
+    .required("Campo obrigatório"),
 });

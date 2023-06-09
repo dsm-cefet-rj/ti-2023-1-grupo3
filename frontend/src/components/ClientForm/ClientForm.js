@@ -27,11 +27,11 @@ function ClientForm() {
     const userData = {
       name: values.name,
       email: values.email,
-      password: "",
+      password: values.password,
       cpf: values.cpf,
       cellphone: values.cellphone,
       birthDate: values.birthDate,
-      profilePicture: values.profilePicture,
+      profilePicture: "",
       type: "CLIENT",
     };
 
@@ -76,6 +76,21 @@ function ClientForm() {
 
   const handleBirthDateBlur = () => setFieldTouched("birthDate", true);
 
+  const handlePasswordChange = (event) =>
+    setFieldValue("password", event.target.value ?? "");
+
+  const handlePasswordBlur = () => setFieldTouched("password", true);
+
+  const handleConfirmPasswordChange = (event) =>
+    setFieldValue("confirmPassword", event.target.value ?? "");
+
+  const handleConfirmPasswordBlur = () =>
+    setFieldTouched("confirmPassword", true);
+
+  const handleProfilePictureChange = (event) => {
+    setFieldValue("profilePicture", URL.createObjectURL(event.target.files[0]));
+  };
+
   useEffect(() => {
     if (status === "saved") toast.success("Usuário foi cadastrado com sucesso");
 
@@ -84,8 +99,6 @@ function ClientForm() {
       toast.error("Ocorreu um erro");
     }
   }, [status, error]);
-
-  console.log(touched, errors);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -154,6 +167,13 @@ function ClientForm() {
         label="Data de Nascimento"
       />
 
+      <Typography variant="subtitle1">Foto de perfil</Typography>
+      <input type="file" onChange={handleProfilePictureChange} />
+
+      <Typography variant="h5" fontWeight={"bold"} my={2}>
+        Informações de login
+      </Typography>
+
       <Box mb={2}>
         <TextField
           label="Email"
@@ -162,6 +182,30 @@ function ClientForm() {
           helperText={touched.email && errors.email}
           onChange={handleEmailChange}
           onBlur={handleEmailBlur}
+          fullWidth
+        />
+      </Box>
+
+      <Box mb={2}>
+        <TextField
+          label="Senha"
+          value={values.password}
+          error={touched.password && !!errors.password}
+          helperText={touched.password && errors.password}
+          onChange={handlePasswordChange}
+          onBlur={handlePasswordBlur}
+          fullWidth
+        />
+      </Box>
+
+      <Box mb={2}>
+        <TextField
+          label="Confirme a senha"
+          value={values.confirmPassword}
+          error={touched.confirmPassword && !!errors.confirmPassword}
+          helperText={touched.confirmPassword && errors.confirmPassword}
+          onChange={handleConfirmPasswordChange}
+          onBlur={handleConfirmPasswordBlur}
           fullWidth
         />
       </Box>
