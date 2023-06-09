@@ -1,3 +1,16 @@
+export const locationInitialValues = {
+  label: "",
+  link: "",
+  street: "",
+  number: "",
+  complement: "",
+  cep: "",
+  city: "",
+  state: "",
+  neighborhood: "",
+  appointmentType: "ON_SITE",
+};
+
 export const initialValues = {
   name: "",
   email: "",
@@ -10,6 +23,7 @@ export const initialValues = {
   jobTitle: "",
   description: "",
   specialities: [],
-  hourRate: null,
+  hourRate: undefined,
   cfp: "",
+  locations: [locationInitialValues],
 };

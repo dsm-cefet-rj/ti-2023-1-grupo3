@@ -1,13 +1,22 @@
 import {
   Box,
   Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
   InputAdornment,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from "@mui/material";
 import InputMask from "react-input-mask";
-import { useFormik } from "formik";
-import { initialValues, validationSchema } from "./validation";
+import { getIn, useFormik } from "formik";
+import {
+  initialValues,
+  locationInitialValues,
+  validationSchema,
+} from "./validation";
 import { cellphoneMask, cfpMask, cpfMask } from "../../helpers";
 import {
   selectUserThunksError,
@@ -18,6 +27,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { createUser } from "../../store";
 import { DatePicker } from "../DatePicker";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function ProfessionalForm() {
   const status = useSelector(selectUserThunksStatus);
@@ -115,6 +125,80 @@ function ProfessionalForm() {
 
   const handleHourRateBlur = () => setFieldTouched("hourRate", true);
 
+  const handleAppointmentTypeChange = (value, formIndex) =>
+    setFieldValue(
+      `locations[${formIndex}].appointmentType`,
+      value ?? "ON_SITE"
+    );
+
+  const handleCepChange = (event, formIndex) =>
+    setFieldValue(`locations[${formIndex}].cep`, event.target.value ?? "");
+
+  const handleCepBlur = (formIndex) =>
+    setFieldTouched(`locations[${formIndex}].cep`, true);
+
+  const handleStreetChange = (event, formIndex) =>
+    setFieldValue(`locations[${formIndex}].street`, event.target.value ?? "");
+
+  const handleStreetBlur = (formIndex) =>
+    setFieldTouched(`locations[${formIndex}].street`, true);
+
+  const handleNumberChange = (event, formIndex) =>
+    setFieldValue(`locations[${formIndex}].number`, event.target.value ?? "");
+
+  const handleNumberBlur = (formIndex) =>
+    setFieldTouched(`locations[${formIndex}].number`, true);
+
+  const handleComplementChange = (event, formIndex) =>
+    setFieldValue(
+      `locations[${formIndex}].complement`,
+      event.target.value ?? ""
+    );
+
+  const handleComplementBlur = (formIndex) =>
+    setFieldTouched(`locations[${formIndex}].complement`, true);
+
+  const handleNeighborhoodChange = (event, formIndex) =>
+    setFieldValue(
+      `locations[${formIndex}].neighborhood`,
+      event.target.value ?? ""
+    );
+
+  const handleNeighborhoodBlur = (formIndex) =>
+    setFieldTouched(`locations[${formIndex}].neighborhood`, true);
+
+  const handleCityChange = (event, formIndex) =>
+    setFieldValue(`locations[${formIndex}].city`, event.target.value ?? "");
+
+  const handleCityBlur = (formIndex) =>
+    setFieldTouched(`locations[${formIndex}].city`, true);
+
+  const handleStateChange = (event, formIndex) =>
+    setFieldValue(`locations[${formIndex}].state`, event.target.value ?? "");
+
+  const handleStateBlur = (formIndex) =>
+    setFieldTouched(`locations[${formIndex}].state`, true);
+
+  const handleLinkChange = (event, formIndex) =>
+    setFieldValue(`locations[${formIndex}].link`, event.target.value ?? "");
+
+  const handleLinkBlur = (formIndex) =>
+    setFieldTouched(`locations[${formIndex}].link`, true);
+
+  const handleAddNewLocation = () => {
+    const newLocationList = [...values.locations, locationInitialValues];
+
+    setFieldValue("locations", newLocationList);
+  };
+
+  const handleDeleteNewLocation = (formIndex) => {
+    const arrayClone = [...values.locations];
+
+    arrayClone.splice(formIndex, 1);
+
+    setFieldValue("locations", arrayClone);
+  };
+
   useEffect(() => {
     if (status === "saved") toast.success("Usuário foi cadastrado com sucesso");
 
@@ -192,11 +276,16 @@ function ProfessionalForm() {
       />
 
       <Typography variant="subtitle1">Foto de perfil</Typography>
-      <input type="file" onChange={handleProfilePictureChange} />
+      <input
+        type="file"
+        value={values.profilePicture}
+        onChange={handleProfilePictureChange}
+      />
 
       <Typography variant="h5" fontWeight={"bold"} my={2}>
         Informações profissionais
       </Typography>
+
       <Box mb={2}>
         <TextField
           label="Profissão"
@@ -257,6 +346,212 @@ function ProfessionalForm() {
           fullWidth
         />
       </Box>
+
+      <Typography variant="h5" fontWeight={"bold"} my={2}>
+        Endereços
+      </Typography>
+
+      {console.log(values.locations)}
+      {values.locations.length > 0 &&
+        values.locations.map((location, index) => {
+          return (
+            <Box key={index}>
+              <Typography variant="h6" mb={2}>
+                Endereço {index + 1}
+              </Typography>
+
+              <FormControl>
+                <FormLabel>Tipo de consulta</FormLabel>
+                <RadioGroup
+                  value={location.appointmentType}
+                  onChange={(_, value) =>
+                    handleAppointmentTypeChange(value, index)
+                  }
+                >
+                  <FormControlLabel
+                    value="ON_SITE"
+                    control={<Radio />}
+                    label="Presencial"
+                  />
+                  <FormControlLabel
+                    value="REMOTE"
+                    control={<Radio />}
+                    label="Remoto"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              {location.appointmentType === "ON_SITE" && (
+                <>
+                  <Box my={2}>
+                    <TextField
+                      label="CEP"
+                      value={location.cep}
+                      onChange={(e) => handleCepChange(e, index)}
+                      onBlur={() => handleCepBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].cep`) &&
+                        !!getIn(errors, `locations[${index}].cep`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].cep`) &&
+                        getIn(errors, `locations[${index}].cep`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
+
+                  <Box mb={2}>
+                    <TextField
+                      label="Rua"
+                      value={location.street}
+                      onChange={(e) => handleStreetChange(e, index)}
+                      onBlur={() => handleStreetBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].street`) &&
+                        !!getIn(errors, `locations[${index}].street`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].street`) &&
+                        getIn(errors, `locations[${index}].street`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
+
+                  <Box mb={2}>
+                    <TextField
+                      label="Número"
+                      value={location.number}
+                      onChange={(e) => handleNumberChange(e, index)}
+                      onBlur={() => handleNumberBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].number`) &&
+                        !!getIn(errors, `locations[${index}].number`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].number`) &&
+                        getIn(errors, `locations[${index}].number`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
+
+                  <Box mb={2}>
+                    <TextField
+                      label="Complemento"
+                      value={location.complement}
+                      onChange={(e) => handleComplementChange(e, index)}
+                      onBlur={() => handleComplementBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].complement`) &&
+                        !!getIn(errors, `locations[${index}].complement`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].complement`) &&
+                        getIn(errors, `locations[${index}].complement`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
+
+                  <Box mb={2}>
+                    <TextField
+                      label="Bairro"
+                      value={location.neighborhood}
+                      onChange={(e) => handleNeighborhoodChange(e, index)}
+                      onBlur={() => handleNeighborhoodBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].neighborhood`) &&
+                        !!getIn(errors, `locations[${index}].neighborhood`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].neighborhood`) &&
+                        getIn(errors, `locations[${index}].neighborhood`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
+
+                  <Box mb={2}>
+                    <TextField
+                      label="Cidade"
+                      value={location.city}
+                      onChange={(e) => handleCityChange(e, index)}
+                      onBlur={() => handleCityBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].city`) &&
+                        !!getIn(errors, `locations[${index}].city`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].city`) &&
+                        getIn(errors, `locations[${index}].city`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
+
+                  <Box mb={2}>
+                    <TextField
+                      label="Estado"
+                      value={location.state}
+                      onChange={(e) => handleStateChange(e, index)}
+                      onBlur={() => handleStateBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].state`) &&
+                        !!getIn(errors, `locations[${index}].state`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].state`) &&
+                        getIn(errors, `locations[${index}].state`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
+                </>
+              )}
+
+              {location.appointmentType === "REMOTE" && (
+                <>
+                  <Box my={2}>
+                    <TextField
+                      label="LINK"
+                      value={location.link}
+                      onChange={(e) => handleLinkChange(e, index)}
+                      onBlur={() => handleLinkBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].link`) &&
+                        !!getIn(errors, `locations[${index}].link`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].link`) &&
+                        getIn(errors, `locations[${index}].link`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
+                </>
+              )}
+
+              <Button
+                variant="contained"
+                color="error"
+                startIcon={<DeleteIcon />}
+                sx={{
+                  mb: 2,
+                }}
+                onClick={() => handleDeleteNewLocation(index)}
+                disabled={values.locations.length < 2}
+              >
+                Remover Endereço
+              </Button>
+            </Box>
+          );
+        })}
+
+      <Button variant="outlined" onClick={handleAddNewLocation}>
+        Adicionar novo endereço
+      </Button>
 
       <Typography variant="h5" fontWeight={"bold"} my={2}>
         Informações de login

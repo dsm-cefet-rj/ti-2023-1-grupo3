@@ -26,4 +26,50 @@ export const validationSchema = yup.object().shape({
   specialities: yup.array().of(yup.string()).required("Campo obrigatório"),
   hourRate: yup.number().min(25).required("Campo obrigatório"),
   cfp: yup.string().required("Campo obrigatório"),
+  locations: yup.array().of(
+    yup.object().shape({
+      appointmentType: yup.mixed().oneOf(["ON_SITE", "REMOTE"]),
+      label: yup.string().when("appointmentType", {
+        is: "ON_SITE",
+        then: () => yup.string().required("Campo obrigatório"),
+        otherwise: () => yup.string(),
+      }),
+      link: yup.string().when("appointmentType", {
+        is: "REMOTE",
+        then: () => yup.string().required("Campo obrigatório"),
+        otherwise: () => yup.string(),
+      }),
+      street: yup.string().when("appointmentType", {
+        is: "ON_SITE",
+        then: () => yup.string().required("Campo obrigatório"),
+        otherwise: () => yup.string(),
+      }),
+      number: yup.string().when("appointmentType", {
+        is: "ON_SITE",
+        then: () => yup.string().required("Campo obrigatório"),
+        otherwise: () => yup.string(),
+      }),
+      complement: yup.string(),
+      cep: yup.string().when("appointmentType", {
+        is: "ON_SITE",
+        then: () => yup.string().required("Campo obrigatório"),
+        otherwise: () => yup.string(),
+      }),
+      city: yup.string().when("appointmentType", {
+        is: "ON_SITE",
+        then: () => yup.string().required("Campo obrigatório"),
+        otherwise: () => yup.string(),
+      }),
+      state: yup.string().when("appointmentType", {
+        is: "ON_SITE",
+        then: () => yup.string().required("Campo obrigatório"),
+        otherwise: () => yup.string(),
+      }),
+      neighborhood: yup.string().when("appointmentType", {
+        is: "ON_SITE",
+        then: () => yup.string().required("Campo obrigatório"),
+        otherwise: () => yup.string(),
+      }),
+    })
+  ),
 });

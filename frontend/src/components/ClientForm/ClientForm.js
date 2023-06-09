@@ -166,7 +166,11 @@ function ClientForm() {
       />
 
       <Typography variant="subtitle1">Foto de perfil</Typography>
-      <input type="file" onChange={handleProfilePictureChange} />
+      <input
+        type="file"
+        value={values.profilePicture}
+        onChange={handleProfilePictureChange}
+      />
 
       <Typography variant="h5" fontWeight={"bold"} my={2}>
         Informações de login
