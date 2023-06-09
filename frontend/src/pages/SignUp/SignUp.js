@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { ClientForm } from "../../components/ClientForm";
 import styled from "styled-components";
+import ProfessionalForm from "../../components/ProfessionalForm/ProfessionalForm";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -56,6 +57,7 @@ function SignUp() {
         </FormControl>
 
         {userType === "CLIENT" && <ClientForm />}
+        {userType === "PROFESSIONAL" && <ProfessionalForm />}
       </StyledContentBox>
       {/* <Controller
         name="name"

@@ -20,8 +20,6 @@ function ClientForm() {
   const dispatch = useDispatch();
 
   const onSubmit = (values) => {
-    console.log("entrou", values);
-
     if (!values) return;
 
     const userData = {
