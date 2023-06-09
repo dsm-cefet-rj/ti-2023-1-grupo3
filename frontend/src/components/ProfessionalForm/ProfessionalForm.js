@@ -4,6 +4,7 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  IconButton,
   InputAdornment,
   Radio,
   RadioGroup,
@@ -23,13 +24,16 @@ import {
   selectUserThunksStatus,
 } from "../../store/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { createUser } from "../../store";
 import { DatePicker } from "../DatePicker";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 function ProfessionalForm() {
+  const [tempSpeciality, setTempSpeciality] = useState("");
+
   const status = useSelector(selectUserThunksStatus);
   const error = useSelector(selectUserThunksError);
 
@@ -124,6 +128,29 @@ function ProfessionalForm() {
     setFieldValue("hourRate", event.target.value ?? "");
 
   const handleHourRateBlur = () => setFieldTouched("hourRate", true);
+
+  const handleSpecialityChange = (event) =>
+    setTempSpeciality(event.target.value ?? "");
+
+  const handleSpecialityBlur = () => setFieldTouched("specialities", true);
+
+  const handleAddSpeciality = () => {
+    if (tempSpeciality === "") return;
+
+    const newList = [...values.specialities, tempSpeciality];
+
+    setFieldValue("specialities", newList);
+
+    setTempSpeciality("");
+  };
+
+  const handleRemoveSpeciality = (specialitiesIndex) => {
+    const arrayClone = [...values.specialities];
+
+    arrayClone.splice(specialitiesIndex, 1);
+
+    setFieldValue("specialities", arrayClone);
+  };
 
   const handleAppointmentTypeChange = (value, formIndex) =>
     setFieldValue(
@@ -345,6 +372,52 @@ function ProfessionalForm() {
           type="number"
           fullWidth
         />
+      </Box>
+
+      <Box mb={2}>
+        <TextField
+          label="Especialidades"
+          value={tempSpeciality}
+          error={touched.specialities && !!errors.specialities}
+          helperText={touched.specialities && errors.specialities}
+          onChange={handleSpecialityChange}
+          onBlur={handleSpecialityBlur}
+          fullWidth
+        />
+
+        <Button
+          variant="outlined"
+          EndIcon={<AddIcon />}
+          onClick={handleAddSpeciality}
+          disabled={tempSpeciality === ""}
+          sx={{
+            mt: 2,
+          }}
+        >
+          Adicionar especilidade
+        </Button>
+
+        {values.specialities.length > 0 && (
+          <Box mt={2}>
+            <Typography variant="h6">Lista de especialidades</Typography>
+            <ul>
+              {values.specialities.map((speciality, index) => (
+                <li key={index}>
+                  {speciality}
+                  <IconButton
+                    size="small"
+                    onClick={() => handleRemoveSpeciality(index)}
+                    sx={{
+                      ml: 1,
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </li>
+              ))}
+            </ul>
+          </Box>
+        )}
       </Box>
 
       <Typography variant="h5" fontWeight={"bold"} my={2}>
