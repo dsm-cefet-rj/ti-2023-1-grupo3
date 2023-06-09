@@ -1,10 +1,7 @@
-import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import InputMask from "react-input-mask";
 import { useFormik } from "formik";
 import { initialValues, validationSchema } from "./validation";
-import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { cellphoneMask, cpfMask } from "../../helpers";
 import {
   selectUserThunksError,
@@ -14,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { createUser } from "../../store";
+import { DatePicker } from "../DatePicker";
 
 function ClientForm() {
   const status = useSelector(selectUserThunksStatus);
@@ -73,6 +71,11 @@ function ClientForm() {
 
   const handleCellphoneBlur = () => setFieldTouched("cellphone", true);
 
+  const handleBirthDateChange = (value) =>
+    setFieldValue("birthDate", value ?? "");
+
+  const handleBirthDateBlur = () => setFieldTouched("birthDate", true);
+
   useEffect(() => {
     if (status === "saved") toast.success("Usuário foi cadastrado com sucesso");
 
@@ -82,7 +85,7 @@ function ClientForm() {
     }
   }, [status, error]);
 
-  console.log(errors, touched);
+  console.log(touched, errors);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -138,25 +141,18 @@ function ClientForm() {
         </InputMask>
       </Box>
 
-      <Box mb={2}>
-        <InputLabel>Data de Nascimento: </InputLabel>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer
-            components={["DatePicker"]}
-            sx={{ paddingTop: 0, flexDirection: "column" }}
-          >
-            <DesktopDatePicker
-              id="date"
-              format="DD/MM/YYYY"
-              disableFuture
-              required
-              value={values.birthDate}
-              onChange={(value) => setFieldValue("birthDate", value)}
-              onBlur={() => setFieldTouched("birthDate", true)}
-            />
-          </DemoContainer>
-        </LocalizationProvider>
-      </Box>
+      <DatePicker
+        format="DD/MM/YYYY"
+        disableFuture
+        required
+        value={values.birthDate}
+        error={errors.birthDate}
+        touched={touched.birthDate}
+        helperText={errors.birthDate}
+        onChange={handleBirthDateChange}
+        onBlur={handleBirthDateBlur}
+        label="Data de Nascimento"
+      />
 
       <Box mb={2}>
         <TextField
