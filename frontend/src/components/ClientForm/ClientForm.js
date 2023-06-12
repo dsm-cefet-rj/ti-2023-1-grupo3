@@ -1,4 +1,11 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import InputMask from "react-input-mask";
 import { useFormik } from "formik";
 import { initialValues, validationSchema } from "./validation";
@@ -8,12 +15,28 @@ import {
   selectUserThunksStatus,
 } from "../../store/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { createUser } from "../../store";
 import { DatePicker } from "../DatePicker";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function ClientForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClickShowConfirmPassword = () =>
+    setShowConfirmPassword((show) => !show);
+  const handleMouseDownConfirmPassword = (event) => {
+    event.preventDefault();
+  };
+
   const status = useSelector(selectUserThunksStatus);
   const error = useSelector(selectUserThunksError);
 
@@ -191,6 +214,21 @@ function ClientForm() {
       <Box mb={2}>
         <TextField
           label="Senha"
+          type={showPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
           value={values.password}
           error={touched.password && !!errors.password}
           helperText={touched.password && errors.password}
@@ -203,6 +241,21 @@ function ClientForm() {
       <Box mb={2}>
         <TextField
           label="Confirme a senha"
+          type={showConfirmPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle confirm password visibility"
+                  onClick={handleClickShowConfirmPassword}
+                  onMouseDown={handleMouseDownConfirmPassword}
+                  edge="end"
+                >
+                  {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
           value={values.confirmPassword}
           error={touched.confirmPassword && !!errors.confirmPassword}
           helperText={touched.confirmPassword && errors.confirmPassword}

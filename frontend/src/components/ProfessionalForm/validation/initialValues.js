@@ -23,7 +23,7 @@ export const initialValues = {
   jobTitle: "",
   description: "",
   specialities: [],
-  hourRate: undefined,
+  hourRate: "",
   cfp: "",
   locations: [locationInitialValues],
 };

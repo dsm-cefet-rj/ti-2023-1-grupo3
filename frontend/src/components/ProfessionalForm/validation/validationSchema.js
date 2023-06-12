@@ -24,16 +24,12 @@ export const validationSchema = yup.object().shape({
   jobTitle: yup.string().required("Campo obrigatório"),
   description: yup.string().required("Campo obrigatório"),
   specialities: yup.array().of(yup.string()).required("Campo obrigatório"),
-  hourRate: yup.number().min(25).required("Campo obrigatório"),
+  hourRate: yup.string().required("Campo obrigatório"),
   cfp: yup.string().required("Campo obrigatório"),
   locations: yup.array().of(
     yup.object().shape({
       appointmentType: yup.mixed().oneOf(["ON_SITE", "REMOTE"]),
-      label: yup.string().when("appointmentType", {
-        is: "ON_SITE",
-        then: () => yup.string().required("Campo obrigatório"),
-        otherwise: () => yup.string(),
-      }),
+      label: yup.string().required("Campo obrigatório"),
       link: yup.string().when("appointmentType", {
         is: "REMOTE",
         then: () => yup.string().required("Campo obrigatório"),

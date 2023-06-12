@@ -26,21 +26,65 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { createUser } from "../../store";
 import { DatePicker } from "../DatePicker";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { createLocation } from "../../store";
 
 function ProfessionalForm() {
   const [tempSpeciality, setTempSpeciality] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClickShowConfirmPassword = () =>
+    setShowConfirmPassword((show) => !show);
+  const handleMouseDownConfirmPassword = (event) => {
+    event.preventDefault();
+  };
 
   const status = useSelector(selectUserThunksStatus);
   const error = useSelector(selectUserThunksError);
 
   const dispatch = useDispatch();
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     if (!values) return;
+
+    const locationsData = values.locations.map((item) => {
+      return {
+        label: item.label,
+        link: item.link,
+        street: item.street,
+        number: item.number,
+        complement: item.complement,
+        cep: item.cep,
+        city: item.city,
+        state: item.state,
+        neighborhood: item.neighborhood,
+        appointmentType: item.appointmentType,
+      };
+    });
+
+    locationsData.map((location) => dispatch(createLocation(location)));
+
+    // await Promise.all(savedLocations).then((items) => console.log(items));
+
+    // console.log("---", savedLocations);
+
+    const professionalData = {
+      jobTitle: values.jobTitle,
+      description: values.description,
+      specialities: values.specialities ?? [],
+      hourRate: values.hourRate,
+      cfp: values.cpf,
+    };
 
     const userData = {
       name: values.name,
@@ -50,10 +94,12 @@ function ProfessionalForm() {
       cellphone: values.cellphone,
       birthDate: values.birthDate,
       profilePicture: "",
-      type: "CLIENT",
+      type: "PROFESSIONAL",
     };
 
-    dispatch(createUser(userData));
+    console.log(userData, locationsData, professionalData);
+
+    // dispatch(createUser(userData));
   };
 
   const {
@@ -157,6 +203,12 @@ function ProfessionalForm() {
       `locations[${formIndex}].appointmentType`,
       value ?? "ON_SITE"
     );
+
+  const handleLabelChange = (event, formIndex) =>
+    setFieldValue(`locations[${formIndex}].label`, event.target.value ?? "");
+
+  const handleLabelBlur = (formIndex) =>
+    setFieldTouched(`locations[${formIndex}].label`, true);
 
   const handleCepChange = (event, formIndex) =>
     setFieldValue(`locations[${formIndex}].cep`, event.target.value ?? "");
@@ -369,7 +421,6 @@ function ProfessionalForm() {
               <InputAdornment position="start">R$</InputAdornment>
             ),
           }}
-          type="number"
           fullWidth
         />
       </Box>
@@ -387,7 +438,7 @@ function ProfessionalForm() {
 
         <Button
           variant="outlined"
-          EndIcon={<AddIcon />}
+          endIcon={<AddIcon />}
           onClick={handleAddSpeciality}
           disabled={tempSpeciality === ""}
           sx={{
@@ -424,7 +475,6 @@ function ProfessionalForm() {
         Endereços
       </Typography>
 
-      {console.log(values.locations)}
       {values.locations.length > 0 &&
         values.locations.map((location, index) => {
           return (
@@ -456,6 +506,24 @@ function ProfessionalForm() {
 
               {location.appointmentType === "ON_SITE" && (
                 <>
+                  <Box mb={2}>
+                    <TextField
+                      label="Identificador"
+                      value={location.label}
+                      onChange={(e) => handleLabelChange(e, index)}
+                      onBlur={() => handleLabelBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].label`) &&
+                        !!getIn(errors, `locations[${index}].label`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].label`) &&
+                        getIn(errors, `locations[${index}].label`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
+
                   <Box my={2}>
                     <TextField
                       label="CEP"
@@ -586,6 +654,23 @@ function ProfessionalForm() {
 
               {location.appointmentType === "REMOTE" && (
                 <>
+                  <Box mb={2}>
+                    <TextField
+                      label="Identificador"
+                      value={location.label}
+                      onChange={(e) => handleLabelChange(e, index)}
+                      onBlur={() => handleLabelBlur(index)}
+                      error={
+                        getIn(touched, `locations[${index}].label`) &&
+                        !!getIn(errors, `locations[${index}].label`)
+                      }
+                      helperText={
+                        getIn(touched, `locations[${index}].label`) &&
+                        getIn(errors, `locations[${index}].label`)
+                      }
+                      fullWidth
+                    />
+                  </Box>
                   <Box my={2}>
                     <TextField
                       label="LINK"
@@ -645,6 +730,21 @@ function ProfessionalForm() {
       <Box mb={2}>
         <TextField
           label="Senha"
+          type={showPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
           value={values.password}
           error={touched.password && !!errors.password}
           helperText={touched.password && errors.password}
@@ -657,6 +757,21 @@ function ProfessionalForm() {
       <Box mb={2}>
         <TextField
           label="Confirme a senha"
+          type={showConfirmPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle confirm password visibility"
+                  onClick={handleClickShowConfirmPassword}
+                  onMouseDown={handleMouseDownConfirmPassword}
+                  edge="end"
+                >
+                  {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
           value={values.confirmPassword}
           error={touched.confirmPassword && !!errors.confirmPassword}
           helperText={touched.confirmPassword && errors.confirmPassword}
