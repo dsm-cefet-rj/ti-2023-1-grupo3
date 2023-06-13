@@ -15,7 +15,8 @@
       "cfp": "12/1234",
       "scheduledHours": [
         "2023-05-12T17:00:00.000Z",
-        "2023-05-04T15:00:00.000Z"
+        "2023-05-04T15:00:00.000Z",
+        "2023-06-22T13:00:00.000Z"
       ]
     },
     {
@@ -711,15 +712,15 @@
       "professionalId": 20
     },
     {
-      "id": 21,
-      "name": "Carlos Fonseca",
-      "cellphone": "(21) 99999-9999",
-      "email": "cliente@email.com",
-      "profilePicture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/734.jpg",
-      "cpf": "023.235.645-95",
-      "birthDate": "09/05/2000",
+      "name": "Pedro Teste",
+      "email": "pedro@teste.com",
+      "password": "senha123",
+      "cpf": "469.315.570-50",
+      "cellphone": "(12) 12222-2222",
+      "birthDate": "2000-05-09T03:00:00.000Z",
+      "profilePicture": "",
       "type": "CLIENT",
-      "professionalId": ""
+      "id": 21
     }
   ]
 }

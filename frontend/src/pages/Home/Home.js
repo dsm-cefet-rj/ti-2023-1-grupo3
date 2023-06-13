@@ -13,12 +13,12 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { getProfessionals } from "../../store";
+import { getProfessionals, getUsers } from "../../store";
 import {
   selectAllProfessionals,
   selectProfessionalsThunksStatus,
 } from "../../store/slices/professionalSlice";
-import { initializeUser } from "../../store/slices/userSlice";
+import { selectUserById, setLoggedUser } from "../../store/slices/userSlice";
 
 function Home() {
   const theme = useTheme();
@@ -33,9 +33,15 @@ function Home() {
   const shouldLoadStatus = ["not_loaded", "saved", "deleted"];
   const shouldLoad = shouldLoadStatus.includes(status);
 
+  const user = useSelector((state) => selectUserById(state, 21));
+
   useEffect(() => {
-    dispatch(initializeUser(21));
+    dispatch(getUsers());
   }, []);
+
+  useEffect(() => {
+    dispatch(setLoggedUser(user));
+  }, [user]);
 
   useEffect(() => {
     shouldLoad && dispatch(getProfessionals());

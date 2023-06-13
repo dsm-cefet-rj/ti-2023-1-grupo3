@@ -1,42 +1,94 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getUserById } from "../../services";
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
-export const initializeUser = createAsyncThunk(
-  "user/initializeUser",
-  async (userId) => {
-    console.log(userId);
-    const response = await getUserById(userId);
+import { createUser, deleteUser, getUsers, updateUser } from "../thunks";
 
-    return response.data;
-  }
-);
+const userAdapter = createEntityAdapter();
+
+const initialState = userAdapter.getInitialState({
+  status: "not_loaded",
+  error: null,
+  loggedUser: null,
+});
 
 export const userSlice = createSlice({
   name: "user",
-  initialState: {
-    user: null,
-    initialized: false,
-  },
+  initialState: initialState,
   reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
+    setStatus: (state, action) => {
+      state.status = action.payload;
     },
-
-    clearUser: (state) => {
-      state.user = null;
+    setLoggedUser: (state, action) => {
+      state.loggedUser = action.payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(initializeUser.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.initialized = true;
+    builder.addCase(getUsers.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(getUsers.fulfilled, (state, action) => {
+      state.status = "loaded";
+      userAdapter.setAll(state, action.payload);
+    });
+
+    builder.addCase(getUsers.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+
+    builder.addCase(updateUser.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.status = "saved";
+      userAdapter.upsertOne(state, action.payload);
+    });
+
+    builder.addCase(updateUser.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+
+    builder.addCase(createUser.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(createUser.fulfilled, (state, action) => {
+      state.status = "saved";
+      userAdapter.addOne(state, action.payload);
+    });
+
+    builder.addCase(createUser.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+
+    builder.addCase(deleteUser.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      state.status = "deleted";
+      userAdapter.removeOne(state, action.payload);
+    });
+
+    builder.addCase(deleteUser.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
     });
   },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
+export const { selectAll: selectAllUsers, selectById: selectUserById } =
+  userAdapter.getSelectors((state) => state?.user);
 
-export const selectUser = (state) => state.user.user;
-export const selectIsUserInitialized = (state) => state.user.initialized;
+export const selectUserThunksStatus = (state) => state?.user.status;
+
+export const selectUserThunksError = (state) => state?.user.error;
+
+export const selectLoggedUser = (state) => state?.user.loggedUser;
+
+export const { setStatus, setLoggedUser } = userSlice.actions;
 
 export default userSlice.reducer;

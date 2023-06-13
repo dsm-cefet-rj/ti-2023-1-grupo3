@@ -20,7 +20,7 @@ import { store } from "./store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
+  <>
     <Provider store={store}>
       <GlobalStyles styles={{ body: { margin: 0 } }} />
       <BrowserRouter>
@@ -38,5 +38,5 @@ root.render(
         pauseOnHover
       />
     </Provider>
-  </React.StrictMode>
+  </>
 );

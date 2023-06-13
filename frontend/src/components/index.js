@@ -1,5 +1,6 @@
 export * from "./AppointmentCard";
 export * from "./ClientForm";
+export * from "./DatePicker";
 export * from "./ImageCarousel";
 export * from "./MediaCard";
 export * from "./Navbar";

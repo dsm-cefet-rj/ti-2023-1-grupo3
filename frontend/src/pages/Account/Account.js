@@ -5,7 +5,7 @@ import { Avatar, styled } from "@mui/material";
 import { Box } from "@mui/material";
 
 import { useSelector } from "react-redux";
-import { selectUser } from "../../store/slices/userSlice";
+import { selectLoggedUser } from "../../store/slices/userSlice";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -21,7 +21,7 @@ const StyledAvatar = styled(Avatar)(() => ({
 }));
 
 function Account() {
-  const user = useSelector(selectUser);
+  const user = useSelector(selectLoggedUser);
 
   return (
     <StyledBox>

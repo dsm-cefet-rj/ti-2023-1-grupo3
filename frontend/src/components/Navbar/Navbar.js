@@ -17,10 +17,7 @@ import {
   styled,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import {
-  selectIsUserInitialized,
-  selectUser,
-} from "../../store/slices/userSlice";
+import { selectLoggedUser } from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const StyledTypography = styled(Typography)(() => ({
@@ -39,10 +36,9 @@ function Navbar() {
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
-  const user = useSelector(selectUser);
-  const isUserInitialized = useSelector(selectIsUserInitialized);
+  const user = useSelector(selectLoggedUser);
 
-  const userLogged = isUserInitialized && !!user;
+  const userLogged = !!user;
 
   const navigate = useNavigate();
 
