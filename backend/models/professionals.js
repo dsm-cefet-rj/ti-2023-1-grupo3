@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const normalize = require('normalize-mongoose');
 
 const professionalSchema = new Schema({
     jobTitle: {
@@ -31,8 +30,6 @@ const professionalSchema = new Schema({
         type: Date,
     }],
 })
-
-professionalSchema.plugin(normalize);
 
 var Projetos = mongoose.model('Professional', professionalSchema);
 
