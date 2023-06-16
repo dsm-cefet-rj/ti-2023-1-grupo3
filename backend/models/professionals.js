@@ -29,8 +29,12 @@ const professionalSchema = new Schema({
     scheduledHours: [{
         type: Date,
     }],
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 
-var Projetos = mongoose.model('Professional', professionalSchema);
+var Professional = mongoose.model('Professional', professionalSchema);
 
-module.exports = Projetos;
+module.exports = Professional;

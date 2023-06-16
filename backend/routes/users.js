@@ -2,17 +2,17 @@ var express = require('express');
 const bodyParser = require('body-parser');
 var router = express.Router();
 
-const Professionals = require('../models/professionals');
+const Users = require('../models/users');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/', async (req, res, next) => {
   try{
-    const dbProfessionals = await Professionals.find({}).populate('user');
+    const dbUsers = await Users.find({})
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.json(dbProfessionals);
+    res.json(dbUsers);
   } catch (err) {
     next(err);
   };
@@ -20,16 +20,15 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', urlencodedParser, async (req, res, next) => {
   try {
-    const userAlreadyHasProfessionalProfile = await Professionals.findOne({ "user": req.body.user })
+    const userAlreadyExists = await Users.findOne({ "cpf": req.body.cpf })
 
-    if(!userAlreadyHasProfessionalProfile){
+    if(!userAlreadyExists) { 
+      const dbUser = await Users.create(req.body);
 
-      const dbProfessional = await Professionals.create(req.body);
-      
-      console.log('>>>> Profissional criado: ', dbProfessional);
+      console.log('>>>> Usuário criado: ', dbUser);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.json(dbProfessional);
+      res.json(dbUser);
     } else {
       err = {};
       res.statusCode = 400;
@@ -42,19 +41,18 @@ router.post('/', urlencodedParser, async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try { 
-    const dbProfessional = await Professionals.findByIdAndRemove(req.params.id)
-    
-    if(dbProfessional) {
-      console.log('>>>> Usuário deletado: ', dbProfessional);
+    const dbUser = await Users.findByIdAndRemove(req.params.id)
+
+    if(dbUser) {
+      console.log('>>>> Usuário deletado: ', dbUser);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.json(dbProfessional);
+      res.json(dbUser);
     } else {
       err = {};
       res.statusCode = 404;
       res.json(err);
     }
-
   } catch (err) {
     next(err);
   }; 
@@ -62,15 +60,15 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:id', urlencodedParser, async (req, res, next) => {
   try {
-    const dbProfessional = await Professionals.findByIdAndUpdate(req.params.id, {
+    const dbUser = await Users.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, { new: true })
-    
-    if(dbProfessional) {
-      console.log('>>>> Profissional atualizado: ', dbProfessional);
+
+    if(dbUser) {
+      console.log('>>>> Usuário atualizado: ', dbUser);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.json(dbProfessional);
+      res.json(dbUser);
     } else {
       err = {};
       res.statusCode = 404;
