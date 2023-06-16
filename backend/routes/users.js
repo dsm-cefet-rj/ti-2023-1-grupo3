@@ -39,6 +39,25 @@ router.post('/', urlencodedParser, async (req, res, next) => {
   };
 });
 
+router.get('/:id', async (req, res, next) => {
+  try { 
+    const dbUser = await Users.findById(req.params.id)
+
+    if(dbUser) {
+      console.log('>>>> Usuário encontrado: ', dbUser);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(dbUser);
+    } else {
+      err = {};
+      res.statusCode = 404;
+      res.json(err);
+    }
+  } catch (err) {
+    next(err);
+  }; 
+})
+
 router.delete('/:id', async (req, res, next) => {
   try { 
     const dbUser = await Users.findByIdAndRemove(req.params.id)

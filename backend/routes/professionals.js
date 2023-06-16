@@ -40,12 +40,32 @@ router.post('/', urlencodedParser, async (req, res, next) => {
   };
 });
 
+router.get('/:id', async (req, res, next) => {
+  try { 
+    const dbProfessional = await Professionals.findById(req.params.id)
+    
+    if(dbProfessional) {
+      console.log('>>>> Profissional encontrado: ', dbProfessional);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(dbProfessional);
+    } else {
+      err = {};
+      res.statusCode = 404;
+      res.json(err);
+    }
+
+  } catch (err) {
+    next(err);
+  }; 
+})
+
 router.delete('/:id', async (req, res, next) => {
   try { 
     const dbProfessional = await Professionals.findByIdAndRemove(req.params.id)
     
     if(dbProfessional) {
-      console.log('>>>> Usuário deletado: ', dbProfessional);
+      console.log('>>>> Profissional deletado: ', dbProfessional);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(dbProfessional);
