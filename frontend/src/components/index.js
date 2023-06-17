@@ -7,4 +7,5 @@ export * from "./MediaCard";
 export * from "./Navbar";
 export * from "./ProfessionalCard";
 export * from "./ProfessionalForm";
+export * from "./ProtectedRoute";
 export * from "./VerticalSteper";

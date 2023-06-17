@@ -154,7 +154,7 @@ function ScheduleAppointment() {
             fullWidth
           >
             <MenuItem value="" disabled />
-            {professional?.locations.length > 0 ? (
+            {professional?.locations && professional?.locations.length > 0 ? (
               professional?.locations.map((loc, index) => (
                 <MenuItem value={loc} key={index}>
                   {loc.label}

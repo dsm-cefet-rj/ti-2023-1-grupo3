@@ -59,8 +59,7 @@ function Navbar() {
         <Toolbar disableGutters>
           <StyledTypography
             variant="h6"
-            component="a"
-            href="/"
+            onClick={() => handleNavigate("/")}
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
             noWrap
           >
@@ -107,8 +106,7 @@ function Navbar() {
 
           <StyledTypography
             variant="h5"
-            component="a"
-            href="/"
+            onClick={() => handleNavigate("/")}
             noWrap
             sx={{
               flexGrow: 1,
