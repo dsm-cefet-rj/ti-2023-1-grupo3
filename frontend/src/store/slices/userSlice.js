@@ -1,6 +1,6 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
-import { createUser, deleteUser, getUsers, updateUser } from "../thunks";
+import { createUser, deleteUser, getUsers, updateUser, login } from "../thunks";
 
 const userAdapter = createEntityAdapter();
 
@@ -8,6 +8,7 @@ const initialState = userAdapter.getInitialState({
   status: "not_loaded",
   error: null,
   loggedUser: null,
+  token: null,
 });
 
 export const userSlice = createSlice({
@@ -19,6 +20,9 @@ export const userSlice = createSlice({
     },
     setLoggedUser: (state, action) => {
       state.loggedUser = action.payload;
+    },
+    setToken: (state, action) => {
+      state.token = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -77,6 +81,21 @@ export const userSlice = createSlice({
       state.status = "error";
       state.error = action.error.message;
     });
+
+    builder.addCase(login.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.status = "success";
+      state.loggedUser = action.payload._doc;
+      state.token = action.payload.token;
+    });
+
+    builder.addCase(login.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
   },
 });
 
@@ -89,6 +108,8 @@ export const selectUserThunksError = (state) => state?.user.error;
 
 export const selectLoggedUser = (state) => state?.user.loggedUser;
 
-export const { setStatus, setLoggedUser } = userSlice.actions;
+export const selectToken = (state) => state?.user.token;
+
+export const { setStatus, setLoggedUser, setToken } = userSlice.actions;
 
 export default userSlice.reducer;

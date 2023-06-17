@@ -42,7 +42,8 @@ function MediaCard(props) {
     <StyledCard>
       <CardMedia
         sx={{ minHeight: 140 }}
-        image={professional?.user?.profilePicture}
+        image={professional?.user?.profilePicture ?? ""}
+        component="img"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -51,7 +52,7 @@ function MediaCard(props) {
         <Box display={"flex"} gap={1} mb={1}>
           <Rating
             name="size-small"
-            defaultValue={professional.rating ?? 0}
+            defaultValue={Number(professional.rating) ?? 0}
             size="small"
             readOnly
           />

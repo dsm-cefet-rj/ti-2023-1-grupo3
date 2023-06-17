@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-
+const normalize = require('normalize-mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
@@ -31,6 +31,7 @@ const userSchema = new Schema({
     },
 })
 
+userSchema.plugin(normalize);
 userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model('User', userSchema);

@@ -1,7 +1,7 @@
 import { axiosInstance } from "./axiosInstance";
 
 export const getUserById = async (id) => {
-  return await axiosInstance.get(`/users/${id}?_expand=professional`);
+  return await axiosInstance.get(`/users/${id}`);
 };
 
 export const getUsers = async () => {
@@ -18,4 +18,8 @@ export const createUser = async (user) => {
 
 export const deleteUser = async (id) => {
   return await axiosInstance.delete(`/users/${id}`);
+};
+
+export const login = async (user) => {
+  return await axiosInstance.post(`/users/login`, user);
 };

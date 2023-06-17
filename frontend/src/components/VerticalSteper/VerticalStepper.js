@@ -15,7 +15,7 @@ function VerticalStepper(props) {
   const { children, activeStep, handleNext, handleBack } = props ?? {};
 
   return (
-    <Box display={"flex"} alignItems={"center"}>
+    <Box maxWidth={1000} display={"flex"} alignItems={"center"}>
       <Box mr={10}>
         <Stepper activeStep={activeStep} orientation="vertical">
           {children &&
