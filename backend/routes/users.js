@@ -1,10 +1,13 @@
-var express = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
-var router = express.Router();
+const passport = require('passport');
+const authenticate = require('../authenticate');
+
+const router = express.Router();
 
 const Users = require('../models/users');
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/', async (req, res, next) => {
   try{
@@ -23,12 +26,21 @@ router.post('/', urlencodedParser, async (req, res, next) => {
     const userAlreadyExists = await Users.findOne({ "cpf": req.body.cpf })
 
     if(!userAlreadyExists) { 
-      const dbUser = await Users.create(req.body);
-
-      console.log('>>>> Usuário criado: ', dbUser);
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.json(dbUser);
+      Users.register(new Users({username: req.body.username, ...req.body}), req.body.password, 
+      (err, user) => {
+          if (err) {
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.json({err: err});
+          } else {
+              passport.authenticate('local')(req, res, () => {
+                console.log('>>>> Usuário criado: ', user);
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(Object.assign({success: true, status: 'Registration Successful!'}, user));
+              });
+          }
+      });
     } else {
       err = {};
       res.statusCode = 400;
@@ -37,6 +49,32 @@ router.post('/', urlencodedParser, async (req, res, next) => {
   } catch (err) {
     next(err);
   };
+});
+
+router.post('/login', urlencodedParser, passport.authenticate('local'), async (req, res) => {
+  const token = authenticate.getToken({ _id: req.user._id} );
+  
+  if (token) {
+    try {
+      const dbUser = await Users.findById(req.user._id)
+      
+      if(dbUser) {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({id: req.user._id, token: token, ...dbUser});
+      } else {
+        err = {};
+        res.statusCode = 403;
+        res.json(err);
+      }
+    } catch (err) {
+      next(err);
+    };
+  } else {
+    err = {};
+    res.statusCode = 403;
+    res.json(err);
+  }
 });
 
 router.get('/:id', async (req, res, next) => {

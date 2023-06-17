@@ -35,6 +35,6 @@ const professionalSchema = new Schema({
     }
 })
 
-var Professional = mongoose.model('Professional', professionalSchema);
+const Professional = mongoose.model('Professional', professionalSchema);
 
 module.exports = Professional;

@@ -1,10 +1,11 @@
-var express = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
-var router = express.Router();
+const router = express.Router();
+const authenticate = require('../authenticate');
 
 const Professionals = require('../models/professionals');
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 router.get('/', async (req, res, next) => {
   try{
@@ -40,7 +41,7 @@ router.post('/', urlencodedParser, async (req, res, next) => {
   };
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', authenticate.verifyUser, async (req, res, next) => {
   try { 
     const dbProfessional = await Professionals.findById(req.params.id)
     
@@ -54,13 +55,12 @@ router.get('/:id', async (req, res, next) => {
       res.statusCode = 404;
       res.json(err);
     }
-
   } catch (err) {
     next(err);
   }; 
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authenticate.verifyUser, async (req, res, next) => {
   try { 
     const dbProfessional = await Professionals.findByIdAndRemove(req.params.id)
     
@@ -80,7 +80,7 @@ router.delete('/:id', async (req, res, next) => {
   }; 
 })
 
-router.put('/:id', urlencodedParser, async (req, res, next) => {
+router.put('/:id', urlencodedParser, authenticate.verifyUser, async (req, res, next) => {
   try {
     const dbProfessional = await Professionals.findByIdAndUpdate(req.params.id, {
       $set: req.body
