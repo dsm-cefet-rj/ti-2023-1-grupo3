@@ -21,7 +21,7 @@ const professionalSchema = new Schema({
     },
     rating: {
         type: String,
-        required: true,
+        default: "0"
     },
     cfp: {
         type: String,

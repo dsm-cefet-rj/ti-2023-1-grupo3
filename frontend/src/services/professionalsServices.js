@@ -12,6 +12,10 @@ export const createProfessional = async (professional) => {
   return await axiosInstance.post(`/professionals`, professional);
 };
 
+export const createFullProfessional = async (professional) => {
+  return await axiosInstance.post(`/professionals/full`, professional);
+};
+
 export const deleteProfessional = async (id) => {
   return await axiosInstance.delete(`/professionals/${id}`);
 };

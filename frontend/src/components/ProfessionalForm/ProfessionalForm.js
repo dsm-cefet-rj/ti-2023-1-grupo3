@@ -19,10 +19,6 @@ import {
   validationSchema,
 } from "./validation";
 import { cellphoneMask, cfpMask, cpfMask } from "../../helpers";
-import {
-  selectUserThunksError,
-  selectUserThunksStatus,
-} from "../../store/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -31,7 +27,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { createLocation } from "../../store";
+import { createFullProfessional } from "../../store";
+import { useNavigate } from "react-router-dom";
+import {
+  selectProfessionalsThunksError,
+  selectProfessionalsThunksStatus,
+} from "../../store/slices/professionalSlice";
 
 function ProfessionalForm() {
   const [tempSpeciality, setTempSpeciality] = useState("");
@@ -49,46 +50,44 @@ function ProfessionalForm() {
     event.preventDefault();
   };
 
-  const status = useSelector(selectUserThunksStatus);
-  const error = useSelector(selectUserThunksError);
+  const status = useSelector(selectProfessionalsThunksStatus);
+  const error = useSelector(selectProfessionalsThunksError);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     if (!values) return;
 
-    const locationsData = values.locations.map((item) => {
-      return {
-        label: item.label,
-        link: item.link,
-        street: item.street,
-        number: item.number,
-        complement: item.complement,
-        cep: item.cep,
-        city: item.city,
-        state: item.state,
-        neighborhood: item.neighborhood,
-        appointmentType: item.appointmentType,
-      };
-    });
+    // const locationsData = values.locations.map((item) => {
+    //   return {
+    //     label: item.label,
+    //     link: item.link,
+    //     street: item.street,
+    //     number: item.number,
+    //     complement: item.complement,
+    //     cep: item.cep,
+    //     city: item.city,
+    //     state: item.state,
+    //     neighborhood: item.neighborhood,
+    //     appointmentType: item.appointmentType,
+    //   };
+    // });
 
-    locationsData.map((location) => dispatch(createLocation(location)));
+    // locationsData.map((location) => dispatch(createLocation(location)));
 
     // await Promise.all(savedLocations).then((items) => console.log(items));
 
     // console.log("---", savedLocations);
 
-    const professionalData = {
+    const data = {
       jobTitle: values.jobTitle,
       description: values.description,
       specialities: values.specialities ?? [],
       hourRate: values.hourRate,
-      cfp: values.cpf,
-    };
-
-    const userData = {
+      cfp: values.cfp,
       name: values.name,
-      email: values.email,
+      username: values.email,
       password: values.password,
       cpf: values.cpf,
       cellphone: values.cellphone,
@@ -97,9 +96,7 @@ function ProfessionalForm() {
       type: "PROFESSIONAL",
     };
 
-    console.log(userData, locationsData, professionalData);
-
-    // dispatch(createUser(userData));
+    dispatch(createFullProfessional(data));
   };
 
   const {
@@ -279,9 +276,10 @@ function ProfessionalForm() {
   };
 
   useEffect(() => {
-    if (status === "saved") toast.success("Usuário foi cadastrado com sucesso");
-
-    if (error) {
+    if (status === "saved") {
+      toast.success("Usuário foi cadastrado com sucesso");
+      navigate("/login");
+    } else if (error) {
       console.error(error);
       toast.error("Ocorreu um erro");
     }

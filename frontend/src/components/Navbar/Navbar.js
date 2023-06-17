@@ -51,10 +51,7 @@ function Navbar() {
     { label: "Consultas Marcadas", link: "/appointments" },
     { label: "Sair", link: "" },
   ];
-  const unloggedLinks = [
-    { label: "Login", link: "/login" },
-    { label: "Cadastrar", link: "/signup" },
-  ];
+  const unloggedLinks = [{ label: "Login", link: "/login" }];
 
   return (
     <AppBar position="static">

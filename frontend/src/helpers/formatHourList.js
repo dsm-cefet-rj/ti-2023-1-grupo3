@@ -6,10 +6,5 @@ export const formatHourList = (hours, day) => {
     isSameDay(new Date(day), item)
   );
 
-  console.log(
-    filteredList,
-    filteredList.map((item) => format(item, "HH:mm"))
-  );
-
   return filteredList.map((item) => format(item, "HH:mm"));
 };
