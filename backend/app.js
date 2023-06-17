@@ -1,31 +1,43 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var professionalsRouter = require('./routes/professionals');
+const professionalsRouter = require('./routes/professionals');
+const usersRouter = require('./routes/users');
 
-var config = require('./config');
+const config = require('./config');
 
 const mongoose = require('mongoose');
 
 const url =  config.mongoUrl;
 const connect = mongoose.connect(url);
 
-connect.then((db) => {
+connect.then(() => {
   console.log("Connected correctly to server");
 }, (err) => { console.log(err); });
 
-var app = express();
+const app = express();
 
+app.use(session({
+  secret: config.secretKey,
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+
+app.use(passport.initialize());
+
+app.use('/users', usersRouter);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/professionals', professionalsRouter);
 
 module.exports = app;

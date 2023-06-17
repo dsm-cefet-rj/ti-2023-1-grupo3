@@ -1,45 +1,104 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const bodyParser = require('body-parser');
+const router = express.Router();
+const authenticate = require('../authenticate');
+const cors = require('./cors');
+
 const Professionals = require('../models/professionals');
 
-router.get('/', async (req, res, next) => {
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+router.route('/')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, async (req, res, next) => {
   try{
-    const dbProfessionals = await Professionals.find({});
+    const dbProfessionals = await Professionals.find({}).populate('user');
+
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(dbProfessionals);
   } catch (err) {
     next(err);
   };
-}).post(async (req, res, next) => {
+})
+.post(cors.corsWithOptions, urlencodedParser, async (req, res, next) => {
   try {
-    const dbProfessional = await Professionals.create(req.body);
-    console.log('>>>> Profissional criado: ', professional);
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(projprofessionaleto);
+    const userAlreadyHasProfessionalProfile = await Professionals.findOne({ "user": req.body.user })
+
+    console.log('userAlreadyHasProfessionalProfile', userAlreadyHasProfessionalProfile)
+    if(!userAlreadyHasProfessionalProfile){
+
+      const dbProfessional = await Professionals.create(req.body);
+      
+      console.log('>>>> Profissional criado: ', dbProfessional);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(dbProfessional);
+    } else {
+      err = {};
+      res.statusCode = 400;
+      res.json(err);
+    }
   } catch (err) {
     next(err);
   };
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.route('/:id')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
   try { 
-    const response = await Professionals.findByIdAndRemove(req.params.id)
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(response.id);
+    const dbProfessional = await Professionals.findById(req.params.id)
+    
+    if(dbProfessional) {
+      console.log('>>>> Profissional encontrado: ', dbProfessional);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(dbProfessional);
+    } else {
+      err = {};
+      res.statusCode = 404;
+      res.json(err);
+    }
   } catch (err) {
     next(err);
   }; 
-}).put(async (req, res, next) => {
+})
+.delete(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+  try { 
+    const dbProfessional = await Professionals.findByIdAndRemove(req.params.id)
+    
+    if(dbProfessional) {
+      console.log('>>>> Profissional deletado: ', dbProfessional);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(dbProfessional);
+    } else {
+      err = {};
+      res.statusCode = 404;
+      res.json(err);
+    }
+
+  } catch (err) {
+    next(err);
+  }; 
+})
+.put(cors.corsWithOptions, urlencodedParser, authenticate.verifyUser, async (req, res, next) => {
   try {
     const dbProfessional = await Professionals.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, { new: true })
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(dbProfessional);
+    
+    if(dbProfessional) {
+      console.log('>>>> Profissional atualizado: ', dbProfessional);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(dbProfessional);
+    } else {
+      err = {};
+      res.statusCode = 404;
+      res.json(err);
+    }
   } catch (err) {
     next(err);
   }; 
