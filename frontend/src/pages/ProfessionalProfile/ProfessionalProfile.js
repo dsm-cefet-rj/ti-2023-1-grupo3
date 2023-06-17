@@ -43,7 +43,7 @@ function ProfessionalProfile() {
         <Box display={"flex"} gap={1} mb={1}>
           <Rating
             name="size-small"
-            defaultValue={professional?.rating}
+            defaultValue={Number(professional?.rating) ?? 0}
             size="small"
             readOnly
           />

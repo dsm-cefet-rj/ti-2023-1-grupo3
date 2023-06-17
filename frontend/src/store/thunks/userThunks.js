@@ -5,6 +5,7 @@ import {
   updateUser as updateUserService,
   createUser as createUserService,
   deleteUser as deleteUserService,
+  login as loginService,
 } from "../../services";
 
 export const getUsers = createAsyncThunk("user/getUsers", async () => {
@@ -27,6 +28,12 @@ export const createUser = createAsyncThunk("user/createUser", async (user) => {
 
 export const deleteUser = createAsyncThunk("user/deleteUser", async (id) => {
   const response = await deleteUserService(id);
+
+  return response.data;
+});
+
+export const login = createAsyncThunk("user/login", async (loginData) => {
+  const response = await loginService(loginData);
 
   return response.data;
 });

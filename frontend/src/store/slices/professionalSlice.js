@@ -2,6 +2,7 @@ import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
 import {
   createProfessional,
+  createFullProfessional,
   deleteProfessional,
   getProfessionals,
   updateProfessional,
@@ -75,6 +76,20 @@ export const professionalSlice = createSlice({
     });
 
     builder.addCase(deleteProfessional.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+
+    builder.addCase(createFullProfessional.pending, (state) => {
+      state.status = "loading";
+    });
+
+    builder.addCase(createFullProfessional.fulfilled, (state, action) => {
+      state.status = "saved";
+      professionalAdapter.addOne(state, action.payload);
+    });
+
+    builder.addCase(createFullProfessional.rejected, (state, action) => {
       state.status = "error";
       state.error = action.error.message;
     });

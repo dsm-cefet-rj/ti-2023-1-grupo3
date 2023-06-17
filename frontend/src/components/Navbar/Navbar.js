@@ -17,7 +17,7 @@ import {
   styled,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { selectLoggedUser } from "../../store/slices/userSlice";
+import { selectLoggedUser, selectToken } from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const StyledTypography = styled(Typography)(() => ({
@@ -37,8 +37,9 @@ function Navbar() {
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
   const user = useSelector(selectLoggedUser);
+  const token = useSelector(selectToken);
 
-  const userLogged = !!user;
+  const loggedUser = !!user && !!token;
 
   const navigate = useNavigate();
 
@@ -50,10 +51,7 @@ function Navbar() {
     { label: "Consultas Marcadas", link: "/appointments" },
     { label: "Sair", link: "" },
   ];
-  const unloggedLinks = [
-    { label: "Login", link: "/login" },
-    { label: "Cadastrar", link: "/signup" },
-  ];
+  const unloggedLinks = [{ label: "Login", link: "/login" }];
 
   return (
     <AppBar position="static">
@@ -61,8 +59,7 @@ function Navbar() {
         <Toolbar disableGutters>
           <StyledTypography
             variant="h6"
-            component="a"
-            href="/"
+            onClick={() => handleNavigate("/")}
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
             noWrap
           >
@@ -109,8 +106,7 @@ function Navbar() {
 
           <StyledTypography
             variant="h5"
-            component="a"
-            href="/"
+            onClick={() => handleNavigate("/")}
             noWrap
             sx={{
               flexGrow: 1,
@@ -136,10 +132,10 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip
-              title={userLogged ? "Configurações" : "Faça login ou cadastre-se"}
+              title={loggedUser ? "Configurações" : "Faça login ou cadastre-se"}
             >
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src={userLogged ? user.profilePicture : undefined} />
+                <Avatar src={loggedUser ? user.profilePicture : undefined} />
               </IconButton>
             </Tooltip>
 
@@ -159,7 +155,7 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {userLogged
+              {loggedUser
                 ? settingsLinks.map((setting) => (
                     <MenuItem
                       key={setting.label}

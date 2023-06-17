@@ -21,6 +21,7 @@ import { createUser } from "../../store";
 import { DatePicker } from "../DatePicker";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
 
 function ClientForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -41,13 +42,14 @@ function ClientForm() {
   const error = useSelector(selectUserThunksError);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (values) => {
     if (!values) return;
 
     const userData = {
       name: values.name,
-      email: values.email,
+      username: values.email,
       password: values.password,
       cpf: values.cpf,
       cellphone: values.cellphone,
@@ -113,9 +115,10 @@ function ClientForm() {
   };
 
   useEffect(() => {
-    if (status === "saved") toast.success("Usuário foi cadastrado com sucesso");
-
-    if (error) {
+    if (status === "saved") {
+      toast.success("Usuário foi cadastrado com sucesso");
+      navigate("/login");
+    } else if (error) {
       console.error(error);
       toast.error("Ocorreu um erro");
     }

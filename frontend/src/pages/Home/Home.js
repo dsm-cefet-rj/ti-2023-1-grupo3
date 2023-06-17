@@ -18,7 +18,6 @@ import {
   selectAllProfessionals,
   selectProfessionalsThunksStatus,
 } from "../../store/slices/professionalSlice";
-import { selectUserById, setLoggedUser } from "../../store/slices/userSlice";
 
 function Home() {
   const theme = useTheme();
@@ -33,15 +32,9 @@ function Home() {
   const shouldLoadStatus = ["not_loaded", "saved", "deleted"];
   const shouldLoad = shouldLoadStatus.includes(status);
 
-  const user = useSelector((state) => selectUserById(state, 21));
-
   useEffect(() => {
     dispatch(getUsers());
   }, []);
-
-  useEffect(() => {
-    dispatch(setLoggedUser(user));
-  }, [user]);
 
   useEffect(() => {
     shouldLoad && dispatch(getProfessionals());
@@ -57,7 +50,7 @@ function Home() {
 
   const highestRateProfessionals = useMemo(() => {
     return (professionals ?? [])
-      .sort((a, b) => b.rating - a.rating)
+      .sort((a, b) => Number(b.rating) - Number(a.rating))
       .slice(0, 5);
   }, [professionals]);
 

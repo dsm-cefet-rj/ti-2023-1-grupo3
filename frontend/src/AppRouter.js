@@ -9,7 +9,7 @@ import {
   LogIn,
   Appointments,
 } from "./pages";
-import { Navbar } from "./components";
+import { Navbar, ProtectedRoute } from "./components";
 
 function AppRouter() {
   return (
@@ -17,21 +17,23 @@ function AppRouter() {
       <Navbar />
       <Routes>
         <Route exact path={"/"} element={<Home />} />
-        <Route exact path={"/account"} element={<Account />} />
+        <Route exact path={"/login"} element={<LogIn />} />
+        <Route exact path={"/signup"} element={<SignUp />} />
         <Route
           exact
           path={"/professionals"}
           element={<ProfessionalsMarketplace />}
         />
         <Route exact path={"/profile/:id"} element={<ProfessionalProfile />} />
-        <Route
-          exact
-          path={"/schedule-appointment/:id"}
-          element={<ScheduleAppointment />}
-        />
-        <Route exact path={"/appointments"} element={<Appointments />} />
-        <Route exact path={"/signup"} element={<SignUp />} />
-        <Route exact path={"/login"} element={<LogIn />} />
+        <Route element={<ProtectedRoute />}>
+          <Route exact path={"/account"} element={<Account />} />
+          <Route
+            exact
+            path={"/schedule-appointment/:id"}
+            element={<ScheduleAppointment />}
+          />
+          <Route exact path={"/appointments"} element={<Appointments />} />
+        </Route>
       </Routes>
     </>
   );

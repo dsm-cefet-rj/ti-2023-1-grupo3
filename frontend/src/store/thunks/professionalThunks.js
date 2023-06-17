@@ -5,6 +5,7 @@ import {
   updateProfessional as updateProfessionalService,
   createProfessional as createProfessionalService,
   deleteProfessional as deleteProfessionalService,
+  createFullProfessional as createFullProfessionalService,
 } from "../../services";
 
 export const getProfessionals = createAsyncThunk(
@@ -29,6 +30,15 @@ export const createProfessional = createAsyncThunk(
   "professional/createProfessional",
   async (professional) => {
     const response = await createProfessionalService(professional);
+
+    return response.data;
+  }
+);
+
+export const createFullProfessional = createAsyncThunk(
+  "professional/createFullProfessional",
+  async (professional) => {
+    const response = await createFullProfessionalService(professional);
 
     return response.data;
   }
