@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 
-const indexRouter = require('./routes/index');
 const professionalsRouter = require('./routes/professionals');
 const usersRouter = require('./routes/users');
 
@@ -35,7 +34,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));

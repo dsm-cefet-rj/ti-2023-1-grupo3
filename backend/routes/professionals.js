@@ -2,12 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
 const authenticate = require('../authenticate');
+const cors = require('./cors');
 
 const Professionals = require('../models/professionals');
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-router.get('/', async (req, res, next) => {
+router.route('/')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, async (req, res, next) => {
   try{
     const dbProfessionals = await Professionals.find({}).populate('user');
 
@@ -18,11 +21,11 @@ router.get('/', async (req, res, next) => {
     next(err);
   };
 })
-
-router.post('/', urlencodedParser, async (req, res, next) => {
+.post(cors.corsWithOptions, urlencodedParser, async (req, res, next) => {
   try {
     const userAlreadyHasProfessionalProfile = await Professionals.findOne({ "user": req.body.user })
 
+    console.log('userAlreadyHasProfessionalProfile', userAlreadyHasProfessionalProfile)
     if(!userAlreadyHasProfessionalProfile){
 
       const dbProfessional = await Professionals.create(req.body);
@@ -41,7 +44,9 @@ router.post('/', urlencodedParser, async (req, res, next) => {
   };
 });
 
-router.get('/:id', authenticate.verifyUser, async (req, res, next) => {
+router.route('/:id')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
   try { 
     const dbProfessional = await Professionals.findById(req.params.id)
     
@@ -59,8 +64,7 @@ router.get('/:id', authenticate.verifyUser, async (req, res, next) => {
     next(err);
   }; 
 })
-
-router.delete('/:id', authenticate.verifyUser, async (req, res, next) => {
+.delete(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
   try { 
     const dbProfessional = await Professionals.findByIdAndRemove(req.params.id)
     
@@ -79,8 +83,7 @@ router.delete('/:id', authenticate.verifyUser, async (req, res, next) => {
     next(err);
   }; 
 })
-
-router.put('/:id', urlencodedParser, authenticate.verifyUser, async (req, res, next) => {
+.put(cors.corsWithOptions, urlencodedParser, authenticate.verifyUser, async (req, res, next) => {
   try {
     const dbProfessional = await Professionals.findByIdAndUpdate(req.params.id, {
       $set: req.body

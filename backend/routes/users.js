@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const authenticate = require('../authenticate');
+const cors = require('./cors');
 
 const router = express.Router();
 
@@ -9,7 +10,9 @@ const Users = require('../models/users');
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-router.get('/', async (req, res, next) => {
+router.route('/')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, async (req, res, next) => {
   try{
     const dbUsers = await Users.find({})
 
@@ -20,8 +23,7 @@ router.get('/', async (req, res, next) => {
     next(err);
   };
 })
-
-router.post('/', urlencodedParser, async (req, res, next) => {
+.post(cors.corsWithOptions, urlencodedParser, async (req, res, next) => {
   try {
     const userAlreadyExists = await Users.findOne({ "cpf": req.body.cpf })
 
@@ -51,7 +53,9 @@ router.post('/', urlencodedParser, async (req, res, next) => {
   };
 });
 
-router.post('/login', urlencodedParser, passport.authenticate('local'), async (req, res) => {
+router.route('/login')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.post(cors.corsWithOptions, urlencodedParser, passport.authenticate('local'), async (req, res) => {
   const token = authenticate.getToken({ _id: req.user._id} );
   
   if (token) {
@@ -77,7 +81,9 @@ router.post('/login', urlencodedParser, passport.authenticate('local'), async (r
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.route('/:id')
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, async (req, res, next) => {
   try { 
     const dbUser = await Users.findById(req.params.id)
 
@@ -95,8 +101,7 @@ router.get('/:id', async (req, res, next) => {
     next(err);
   }; 
 })
-
-router.delete('/:id', async (req, res, next) => {
+.delete(cors.corsWithOptions, async (req, res, next) => {
   try { 
     const dbUser = await Users.findByIdAndRemove(req.params.id)
 
@@ -114,8 +119,7 @@ router.delete('/:id', async (req, res, next) => {
     next(err);
   }; 
 })
-
-router.put('/:id', urlencodedParser, async (req, res, next) => {
+.put(cors.corsWithOptions, urlencodedParser, async (req, res, next) => {
   try {
     const dbUser = await Users.findByIdAndUpdate(req.params.id, {
       $set: req.body
