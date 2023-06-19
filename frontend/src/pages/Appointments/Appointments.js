@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
-
 import { Box, Pagination, styled } from "@mui/material";
-
-import { AppointmentCard } from "../../components/AppointmentCard";
-
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedUser } from "../../store/slices/userSlice";
@@ -54,10 +50,10 @@ function Appointments() {
     if (!user || !shouldLoad) return;
 
     if (user.type === "PROFESSIONAL")
-      dispatch(getProfessionalAppointments(Number(user.id)));
+      dispatch(getProfessionalAppointments(user.id));
 
-    dispatch(getClientAppointments(Number(user.id)));
-  }, [shouldLoad, page]);
+    dispatch(getClientAppointments(user.id));
+  }, [shouldLoad, page, dispatch, user]);
 
   const filteredAppointments = useMemo(() => {
     const beginSlice = page === 1 ? 0 : (page - 1) * 10;
@@ -65,7 +61,7 @@ function Appointments() {
 
     let appointmentsList = appointments ?? [];
 
-    setNumOfPages(Math.ceil(appointments.length / 10));
+    setNumOfPages(Math.ceil(appointmentsList.length / 10));
 
     const slice = appointmentsList.slice(beginSlice, endSlice);
 
@@ -74,19 +70,26 @@ function Appointments() {
 
   return (
     <StyledBox>
-      {filteredAppointments.map((appointment, index) => (
-        <AppointmentCard
-          appointment={appointment}
-          onClick={() => removeAppointment(appointment.id)}
-          key={index}
-        />
+      {filteredAppointments.map((appointment) => (
+        <div key={appointment._id}>
+          <h3>
+            {appointment.nome_profissional} {appointment.sobrenome_profissional}
+          </h3>
+          <p>Lugar: {appointment.lugar}</p>
+          <p>Data: {appointment.data}</p>
+          <p>Hora: {appointment.hora}</p>
+          <img src={appointment.foto_url} alt="Foto" />
+          <button onClick={() => removeAppointment(appointment._id)}>
+            Deletar
+          </button>
+        </div>
       ))}
 
       <Pagination
         defaultPage={1}
         page={page}
         count={numOfPages}
-        onChange={handleChangePage}
+        onChange={(_, value) => handleChangePage(value)}
       />
     </StyledBox>
   );
