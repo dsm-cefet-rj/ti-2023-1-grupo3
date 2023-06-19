@@ -1,12 +1,8 @@
 import * as React from "react";
-
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-import { Avatar, Box, Button, CardMedia, styled } from "@mui/material";
-import { format } from "date-fns";
-import { useSelector } from "react-redux";
-import { selectUserById } from "../../store/slices/userSlice";
+import { Box, Button, CardMedia, styled } from "@mui/material";
 
 const StyledCard = styled(Card)(() => ({
   width: "100%",
@@ -18,39 +14,29 @@ const StyledBox = styled(Box)(() => ({
   alignItems: "center",
 }));
 
-const StyledAvatar = styled(Avatar)(() => ({
-  width: 100,
-  height: 100,
-}));
-
 function AppointmentCard(props) {
   const { appointment, onClick } = props;
-  const { location, professional, date, time } = appointment || {};
-
-  const professionalUser = useSelector((state) =>
-    selectUserById(state, professional.userId)
-  );
 
   return (
     <StyledCard elevation={2}>
       <StyledBox>
         <CardMedia
           component={() => (
-            <StyledAvatar src={professionalUser?.profilePicture} />
+            <img src={appointment.foto_url} alt={appointment.nome_profissional} style={{ width: 100, height: 100 }} />
           )}
         />
         <CardContent>
-          <Typography variant="h5">
-            Consulta com: {professionalUser?.name}
+          <Typography variant="h5">{appointment.nome_profissional}</Typography>
+          <Typography variant="caption" gutterBottom>
+            {appointment.lugar}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            {location?.label}
+            Data: {appointment.data}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            {format(new Date(date), "dd/MM/yyyy")} - {time}h
+            Hora: {appointment.hora}
           </Typography>
-          <Typography color={"text.secondary"}>{appointment?.hour}</Typography>
-          <Button onClick={onClick}>Desmarcar</Button>
+          <Button onClick={onClick}>Ver mais</Button>
         </CardContent>
       </StyledBox>
     </StyledCard>

@@ -7,10 +7,6 @@ const appointmentSchema = new Schema({
     type: String,
     required: true,
   },
-  sobrenome_profissional: {
-    type: String,
-    required: true,
-  },
   lugar: {
     type: String,
     required: true,

@@ -1,18 +1,12 @@
-import { useState, useEffect } from "react";
-import { Box, Pagination, styled } from "@mui/material";
-import { toast } from "react-toastify";
+import { useState, useCallback, useMemo } from "react";
+import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+import { Box, InputAdornment, Pagination, styled } from "@mui/material";
+import { AppointmentCard } from "../../components/AppointmentCard";
+import debounce from "lodash.debounce";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLoggedUser } from "../../store/slices/userSlice";
-import {
-  deleteAppointment,
-  getClientAppointments,
-  getProfessionalAppointments,
-} from "../../store";
-import {
-  selectAllAppointments,
-  selectAppointmentsThunksStatus,
-} from "../../store/slices/appointmentSlice";
-import { useMemo } from "react";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -23,37 +17,37 @@ const StyledBox = styled(Box)(() => ({
 }));
 
 function Appointments() {
+  const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
-  const [numOfPages, setNumOfPages] = useState();
 
-  const user = useSelector(selectLoggedUser);
-  const appointments = useSelector(selectAllAppointments);
-  const status = useSelector(selectAppointmentsThunksStatus);
+  const setDebouncedSearch = useCallback(
+    debounce((nextValue) => setSearchText(nextValue), 800),
+    []
+  );
 
-  const handleChangePage = (value) => setPage(value);
+  const navigate = useNavigate();
+
+  const handleChange = (event) => setDebouncedSearch(event.target.value);
+
+  const handleChangePage = (event, value) => setPage(value);
+
+  const handleSeeMoreClick = (id) => navigate(`/appointment/${id}`);
+
+  const appointments = useSelector(state => state.appointments);
+  const status = useSelector(state => state.status);
+
+  const dispatch = useDispatch();
 
   const shouldLoadStatus = ["not_loaded", "saved", "deleted"];
   const shouldLoad = shouldLoadStatus.includes(status);
 
-  const dispatch = useDispatch();
-
-  const removeAppointment = (id) => {
-    dispatch(deleteAppointment(id))
-      .then(() => toast.success("Consulta deletada com sucesso"))
-      .catch((error) => {
-        toast.error("Ocorreu um erro");
-        console.log(error);
-      });
-  };
-
   useEffect(() => {
-    if (!user || !shouldLoad) return;
+    if (shouldLoad) {
+      dispatch(getAppointments());
+    }
+  }, [shouldLoad, dispatch]);
 
-    if (user.type === "PROFESSIONAL")
-      dispatch(getProfessionalAppointments(user.id));
-
-    dispatch(getClientAppointments(user.id));
-  }, [shouldLoad, page, dispatch, user]);
+  const [numOfPages, setNumOfPages] = useState();
 
   const filteredAppointments = useMemo(() => {
     const beginSlice = page === 1 ? 0 : (page - 1) * 10;
@@ -61,35 +55,50 @@ function Appointments() {
 
     let appointmentsList = appointments ?? [];
 
-    setNumOfPages(Math.ceil(appointmentsList.length / 10));
+    //setNumOfPages(Math.ceil(appointments.length / 10));
+
+    if (searchText && searchText !== "") {
+      appointmentsList = appointmentsList.filter((appointment) =>
+        (appointment.nome_profissional || "").toLowerCase().includes(searchText.toLowerCase())
+      );
+
+      setPage(1);
+      setNumOfPages(Math.ceil(appointmentsList.length / 10));
+    }
 
     const slice = appointmentsList.slice(beginSlice, endSlice);
 
     return slice;
-  }, [appointments, page]);
+  }, [appointments, page, searchText]);
 
   return (
     <StyledBox>
-      {filteredAppointments.map((appointment) => (
-        <div key={appointment._id}>
-          <h3>
-            {appointment.nome_profissional} {appointment.sobrenome_profissional}
-          </h3>
-          <p>Lugar: {appointment.lugar}</p>
-          <p>Data: {appointment.data}</p>
-          <p>Hora: {appointment.hora}</p>
-          <img src={appointment.foto_url} alt="Foto" />
-          <button onClick={() => removeAppointment(appointment._id)}>
-            Deletar
-          </button>
-        </div>
+      <TextField
+        placeholder="Encontre um appointment"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+        onChange={handleChange}
+        fullWidth
+      />
+
+      {filteredAppointments.map((appointment, index) => (
+        <AppointmentCard
+          appointment={appointment}
+          onClick={() => handleSeeMoreClick(appointment.id)}
+          key={index}
+        />
       ))}
 
       <Pagination
         defaultPage={1}
         page={page}
         count={numOfPages}
-        onChange={(_, value) => handleChangePage(value)}
+        onChange={handleChangePage}
       />
     </StyledBox>
   );
