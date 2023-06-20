@@ -1,0 +1,97 @@
+[{
+  "_id": {
+    "$oid": "6491f874a24f30ee908c2a70"
+  },
+  "jobTitle": "Psicólogo",
+  "description": "Sou um psicólogo muito bom",
+  "specialities": [
+    "Depressão",
+    "Ansiedade",
+    "Famílias"
+  ],
+  "hourRate": "100",
+  "rating": "4",
+  "cfp": "12/1234",
+  "scheduledHours": [],
+  "user": {
+    "$oid": "6491f874a24f30ee908c2a6c"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6491f9c7a24f30ee908c2a77"
+  },
+  "jobTitle": "Psicólogo",
+  "description": "Sou muito bom no que eu faço",
+  "specialities": [
+    "Ansiedade",
+    "Tudo"
+  ],
+  "hourRate": "200",
+  "rating": "3",
+  "cfp": "12/1234",
+  "scheduledHours": [],
+  "user": {
+    "$oid": "6491f9c6a24f30ee908c2a73"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6491fa93a24f30ee908c2a7e"
+  },
+  "jobTitle": "Psicólogo",
+  "description": "Sou um psicólogo famoso",
+  "specialities": [
+    "Sonhos",
+    "Família",
+    "Ansiedade"
+  ],
+  "hourRate": "1230",
+  "rating": "4",
+  "cfp": "12/3123",
+  "scheduledHours": [],
+  "user": {
+    "$oid": "6491fa93a24f30ee908c2a7a"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6491fb37a24f30ee908c2a85"
+  },
+  "jobTitle": "Psicanalista",
+  "description": "Sou um psicanalista formado pela internet",
+  "specialities": [
+    "Raiva",
+    "Emoções fortes"
+  ],
+  "hourRate": "500",
+  "rating": "5",
+  "cfp": "12/3123",
+  "scheduledHours": [],
+  "user": {
+    "$oid": "6491fb37a24f30ee908c2a81"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6491fbcaa24f30ee908c2a8e"
+  },
+  "jobTitle": "Psicanalista",
+  "description": "Sou um psicanalita excelente",
+  "specialities": [
+    "Ansiedade",
+    "Casais"
+  ],
+  "hourRate": "50",
+  "rating": "1",
+  "cfp": "12/1231",
+  "scheduledHours": [],
+  "user": {
+    "$oid": "6491fbc9a24f30ee908c2a8a"
+  },
+  "__v": 0
+}]
