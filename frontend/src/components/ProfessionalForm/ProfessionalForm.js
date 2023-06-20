@@ -32,6 +32,7 @@ import { useNavigate } from "react-router-dom";
 import {
   selectProfessionalsThunksError,
   selectProfessionalsThunksStatus,
+  setStatus,
 } from "../../store/slices/professionalSlice";
 
 function ProfessionalForm() {
@@ -277,11 +278,13 @@ function ProfessionalForm() {
 
   useEffect(() => {
     if (status === "saved") {
-      toast.success("Usuário foi cadastrado com sucesso");
+      toast.success("Profissional foi cadastrado com sucesso");
       navigate("/login");
+      dispatch(setStatus("loaded"));
     } else if (error) {
       console.error(error);
       toast.error("Ocorreu um erro");
+      dispatch(setStatus("loaded"));
     }
   }, [status, error]);
 

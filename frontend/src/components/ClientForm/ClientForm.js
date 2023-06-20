@@ -13,6 +13,7 @@ import { cellphoneMask, cpfMask } from "../../helpers";
 import {
   selectUserThunksError,
   selectUserThunksStatus,
+  setStatus,
 } from "../../store/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -118,9 +119,11 @@ function ClientForm() {
     if (status === "saved") {
       toast.success("Usuário foi cadastrado com sucesso");
       navigate("/login");
+      dispatch(setStatus("loaded"));
     } else if (error) {
       console.error(error);
       toast.error("Ocorreu um erro");
+      dispatch(setStatus("loaded"));
     }
   }, [status, error]);
 
