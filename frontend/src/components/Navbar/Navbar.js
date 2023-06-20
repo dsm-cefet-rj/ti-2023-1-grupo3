@@ -16,9 +16,17 @@ import {
   Tooltip,
   styled,
 } from "@mui/material";
-import { useSelector } from "react-redux";
-import { selectLoggedUser, selectToken } from "../../store/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  logout,
+  selectLoggedUser,
+  selectToken,
+  setLoggedUser,
+  setToken,
+} from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const StyledTypography = styled(Typography)(() => ({
   fontWeight: "bold",
@@ -39,6 +47,8 @@ function Navbar() {
   const user = useSelector(selectLoggedUser);
   const token = useSelector(selectToken);
 
+  const dispatch = useDispatch();
+
   const loggedUser = !!user && !!token;
 
   const navigate = useNavigate();
@@ -52,6 +62,24 @@ function Navbar() {
     { label: "Sair", link: "" },
   ];
   const unloggedLinks = [{ label: "Login", link: "/login" }];
+
+  const getUserInfoFromLocalStorage = () => {
+    const localUser = localStorage.getItem("user");
+    const localToken = localStorage.getItem("token");
+
+    if (localUser) dispatch(setLoggedUser(localUser));
+    if (localToken) dispatch(setToken(localToken));
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("Logout realizado com sucesso");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    getUserInfoFromLocalStorage();
+  }, []);
 
   return (
     <AppBar position="static">
@@ -159,7 +187,11 @@ function Navbar() {
                 ? settingsLinks.map((setting) => (
                     <MenuItem
                       key={setting.label}
-                      onClick={() => handleNavigate(setting.link)}
+                      onClick={() =>
+                        setting.label === "Sair"
+                          ? handleLogout()
+                          : handleNavigate(setting.link)
+                      }
                     >
                       <Typography textAlign="center">
                         {setting.label}
