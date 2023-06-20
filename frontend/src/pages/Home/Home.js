@@ -98,26 +98,30 @@ function Home() {
           </VerticalStepper>
         </Box>
 
-        <Divider flexItem sx={{ mb: 3 }} />
+        {highestRateProfessionals.length > 0 && (
+          <>
+            <Divider flexItem sx={{ mb: 3 }} />
 
-        <Typography variant="h4" mb={3}>
-          Conheça nossos especialistas
-        </Typography>
+            <Typography variant="h4" mb={3}>
+              Conheça nossos especialistas
+            </Typography>
 
-        <Box
-          display={"flex"}
-          flexWrap={"wrap"}
-          justifyContent={matchesXl ? "center" : "space-between"}
-          gap={2}
-        >
-          {highestRateProfessionals.map((professional, index) => (
-            <MediaCard
-              id={professional.id}
-              professional={professional}
-              key={index}
-            />
-          ))}
-        </Box>
+            <Box
+              display={"flex"}
+              flexWrap={"wrap"}
+              justifyContent={matchesXl ? "center" : "space-between"}
+              gap={2}
+            >
+              {highestRateProfessionals.map((professional, index) => (
+                <MediaCard
+                  id={professional.id}
+                  professional={professional}
+                  key={index}
+                />
+              ))}
+            </Box>
+          </>
+        )}
       </Box>
     </>
   );

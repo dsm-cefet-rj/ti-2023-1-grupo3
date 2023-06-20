@@ -22,7 +22,11 @@ function AppointmentCard(props) {
       <StyledBox>
         <CardMedia
           component={() => (
-            <img src={appointment.foto_url} alt={appointment.nome_profissional} style={{ width: 100, height: 100 }} />
+            <img
+              src={appointment.foto_url}
+              alt={appointment.nome_profissional}
+              style={{ width: 100, height: 100 }}
+            />
           )}
         />
         <CardContent>

@@ -33,8 +33,8 @@ function Appointments() {
 
   const handleSeeMoreClick = (id) => navigate(`/appointment/${id}`);
 
-  const appointments = useSelector(state => state.appointments);
-  const status = useSelector(state => state.status);
+  const appointments = useSelector((state) => state.appointments);
+  const status = useSelector((state) => state.status);
 
   const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ function Appointments() {
 
   useEffect(() => {
     if (shouldLoad) {
-      dispatch(getAppointments());
+      // dispatch(getAppointments());
     }
   }, [shouldLoad, dispatch]);
 
@@ -59,7 +59,9 @@ function Appointments() {
 
     if (searchText && searchText !== "") {
       appointmentsList = appointmentsList.filter((appointment) =>
-        (appointment.nome_profissional || "").toLowerCase().includes(searchText.toLowerCase())
+        (appointment.nome_profissional || "")
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
       );
 
       setPage(1);
