@@ -37,6 +37,7 @@ Para que a aplicação funcione corretamente, é necessário ter os seguintes pr
 - [Git](https://git-scm.com)
 - [Node.js](https://nodejs.org/)
 - [Yarn](https://yarnpkg.com/)
+- [MongoDb](https://www.mongodb.com/)
 
 ### Rodando a aplicação:
 
@@ -44,28 +45,29 @@ Para que a aplicação funcione corretamente, é necessário ter os seguintes pr
 # Primeiramente, clone o repositório
 git clone https://github.com/dsm-cefet-rj/ti-2023-1-grupo3.git
 
-# Acesse a pasta da aplicação
-cd frontend/
+# Acesse a pasta backend da aplicação
+cd backend/
 
 # Instale as dependências
 npm install
-#ou
-yarn
 
 # Rode o servidor
-npm run run:server
-# ou
-yarn run:server
+npm start
+
+# Em outro terminal acesse a pasta frontend da aplicação
+cd frontend/
+
+# Instale as dependências
+yarn
 
 # Rode a aplicação
-npm start
-#ou
 yarn start
 ```
 
 - Após rodar a aplicação, é possível acessar no seu navegador, colocando a seguinte url: `localhost:3000`.
 
-> Caso esteja rodando o `JSON-Server`, tente coloque a seguinte url: `localhost:3001`.
+> O backend está rodando na porta 3004.
+> É necessário criar um servidor no MongoDb chamado pac.
 
 ## 👨‍💻 Gerentes e Desenvolvedores
 
