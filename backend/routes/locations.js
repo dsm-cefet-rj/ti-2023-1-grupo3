@@ -12,7 +12,7 @@ router
   })
   .get(cors.corsWithOptions, async (req, res, next) => {
     try {
-      const dbLocation = await Location.find({});
+      const dbLocation = await Locations.find({});
 
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
@@ -23,7 +23,7 @@ router
   })
   .post(
     cors.corsWithOptions,
-    authenticate.verifyUser,
+    //authenticate.verifyUser,
     async (req, res, next) => {
       try {
         const newLocation = req.body;
@@ -46,7 +46,7 @@ router
   })
   .get(cors.corsWithOptions, async (req, res, next) => {
     try {
-      const dbLocation = await Location.findById(req.params.id);
+      const dbLocation = await Locations.findById(req.params.id);
 
       if (dbLocation) {
         console.log(">>>> Local encontrado: ", dbLocation);
@@ -67,7 +67,7 @@ router
     authenticate.verifyUser,
     async (req, res, next) => {
       try {
-        const dbLocation = await Location.findByIdAndRemove(req.params.id);
+        const dbLocation = await Locations.findByIdAndRemove(req.params.id);
 
         if (dbLocation) {
           console.log(">>>> Local deletado: ", dbLocation);
@@ -89,7 +89,7 @@ router
     authenticate.verifyUser,
     async (req, res, next) => {
       try {
-        const dbLocation = await Location.findByIdAndUpdate(
+        const dbLocation = await Locations.findByIdAndUpdate(
           req.params.id,
           {
             $set: req.body,

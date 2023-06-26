@@ -5,45 +5,47 @@ const normalize = require("normalize-mongoose");
 const locationSchema = new Schema({
   label: {
     type: String,
-    required: true,
+    //   required: true,
   },
   link: {
     type: String,
-    required: true,
   },
   street: {
     type: String,
-    required: true,
+    //  required: true,
   },
   number: {
     type: String,
-    required: true,
+    //   required: true,
   },
   complement: {
     type: String,
-    required: true,
   },
   cep: {
     type: String,
-    required: true,
+    //   required: true,
   },
 
   city: {
     type: String,
-    required: true,
+    //  required: true,
   },
   state: {
     type: String,
-    required: true,
+    //required: true,
   },
   neighborhood: {
     type: String,
-    required: true,
+    // required: true,
   },
   appointmentType: {
     type: String,
-    required: true,
+    // required: true,
     enum: ["ON_SITE", "REMOTE"],
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 

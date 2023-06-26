@@ -34,7 +34,7 @@ import {
   selectProfessionalsThunksStatus,
   setStatus,
 } from "../../store/slices/professionalSlice";
-
+import { createLocation } from "../../services";
 function ProfessionalForm() {
   const [tempSpeciality, setTempSpeciality] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -59,28 +59,6 @@ function ProfessionalForm() {
 
   const onSubmit = async (values) => {
     if (!values) return;
-
-    // const locationsData = values.locations.map((item) => {
-    //   return {
-    //     label: item.label,
-    //     link: item.link,
-    //     street: item.street,
-    //     number: item.number,
-    //     complement: item.complement,
-    //     cep: item.cep,
-    //     city: item.city,
-    //     state: item.state,
-    //     neighborhood: item.neighborhood,
-    //     appointmentType: item.appointmentType,
-    //   };
-    // });
-
-    // locationsData.map((location) => dispatch(createLocation(location)));
-
-    // await Promise.all(savedLocations).then((items) => console.log(items));
-
-    // console.log("---", savedLocations);
-
     const data = {
       jobTitle: values.jobTitle,
       description: values.description,
@@ -96,8 +74,25 @@ function ProfessionalForm() {
       profilePicture: "",
       type: "PROFESSIONAL",
     };
-
     dispatch(createFullProfessional(data));
+    const locationsData = values.locations.map((item) => {
+      return {
+        label: item.label,
+        link: item.link,
+        street: item.street,
+        number: item.number,
+        complement: item.complement,
+        cep: item.cep,
+        city: item.city,
+        state: item.state,
+        neighborhood: item.neighborhood,
+        appointmentType: item.appointmentType,
+      };
+    });
+
+    locationsData.map((location) => dispatch(createLocation(location)));
+
+    await Promise.all(locationsData);
   };
 
   const {
