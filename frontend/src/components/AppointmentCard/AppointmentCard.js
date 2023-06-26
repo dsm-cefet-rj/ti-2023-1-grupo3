@@ -23,22 +23,24 @@ function AppointmentCard(props) {
         <CardMedia
           component={() => (
             <img
-              src={appointment.foto_url}
-              alt={appointment.nome_profissional}
+              src={appointment.picture_url}
+              alt={appointment.professional.user.name}
               style={{ width: 100, height: 100 }}
             />
           )}
         />
         <CardContent>
-          <Typography variant="h5">{appointment.nome_profissional}</Typography>
+          <Typography variant="h5">
+            {appointment.professional.user.name}
+          </Typography>
           <Typography variant="caption" gutterBottom>
-            {appointment.lugar}
+            {appointment.address}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Data: {appointment.data}
+            Data: {appointment.date}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Hora: {appointment.hora}
+            Hora: {appointment.time}
           </Typography>
           <Button onClick={onClick}>Ver mais</Button>
         </CardContent>

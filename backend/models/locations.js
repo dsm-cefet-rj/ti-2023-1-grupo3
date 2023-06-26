@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+onst mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const normalize = require("normalize-mongoose");
 

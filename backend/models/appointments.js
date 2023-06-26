@@ -3,26 +3,27 @@ const Schema = mongoose.Schema;
 const normalize = require('normalize-mongoose');
 
 const appointmentSchema = new Schema({
-  nome_profissional: {
+  user_cpf: {
     type: String,
     required: true,
   },
-  lugar: {
+  address: {
     type: String,
     required: true,
   },
-  data: {
+  date: {
     type: String,
     required: true,
   },
-  hora: {
+  time: {
     type: String,
     required: true,
   },
-  foto_url: {
+  picture_url: {
     type: String,
     required: true,
   },
+  professional: { type: Schema.Types.ObjectId, ref: 'Professional' }
 });
 
 appointmentSchema.plugin(normalize);

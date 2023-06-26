@@ -1,9 +1,11 @@
 import { axiosInstance } from "./axiosInstance";
 
-export const getClientAppointments = async (id) => {
-  return await axiosInstance.get(
-    `/appointments?userId=${id}&_expand=professional&_expand=user&_expand=location`
-  );
+export const getClientAppointments = async (token) => {
+  return await axiosInstance.get(`/appointments`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const getProfessionalAppointments = async (id) => {

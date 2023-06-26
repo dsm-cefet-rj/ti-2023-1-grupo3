@@ -3,10 +3,16 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, InputAdornment, Pagination, styled } from "@mui/material";
 import { AppointmentCard } from "../../components/AppointmentCard";
+import {
+  selectAllAppointments,
+  selectAppointmentsThunksStatus,
+} from "../../store/slices/appointmentSlice";
 import debounce from "lodash.debounce";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getClientAppointments } from "../../store";
+import { selectToken } from "../../store/slices/userSlice";
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -17,6 +23,7 @@ const StyledBox = styled(Box)(() => ({
 }));
 
 function Appointments() {
+  const token = useSelector(selectToken);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
 
@@ -33,8 +40,8 @@ function Appointments() {
 
   const handleSeeMoreClick = (id) => navigate(`/appointment/${id}`);
 
-  const appointments = useSelector((state) => state.appointments);
-  const status = useSelector((state) => state.status);
+  const appointments = useSelector((state) => selectAllAppointments(state));
+  const status = useSelector(selectAppointmentsThunksStatus);
 
   const dispatch = useDispatch();
 
@@ -42,10 +49,8 @@ function Appointments() {
   const shouldLoad = shouldLoadStatus.includes(status);
 
   useEffect(() => {
-    if (shouldLoad) {
-      // dispatch(getAppointments());
-    }
-  }, [shouldLoad, dispatch]);
+    shouldLoad && dispatch(getClientAppointments(token));
+  }, [shouldLoad]);
 
   const [numOfPages, setNumOfPages] = useState();
 
@@ -59,7 +64,7 @@ function Appointments() {
 
     if (searchText && searchText !== "") {
       appointmentsList = appointmentsList.filter((appointment) =>
-        (appointment.nome_profissional || "")
+        (appointment.professional.user.name || "")
           .toLowerCase()
           .includes(searchText.toLowerCase())
       );

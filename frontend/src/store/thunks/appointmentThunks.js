@@ -10,9 +10,8 @@ import {
 
 export const getClientAppointments = createAsyncThunk(
   "appointment/getClientAppointments",
-  async (id) => {
-    const response = await getClientAppointmentsService(id);
-
+  async (token) => {
+    const response = await getClientAppointmentsService(token);
     return response.data;
   }
 );
