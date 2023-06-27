@@ -1,0 +1,56 @@
+[{
+  "_id": {
+    "$oid": "649a3fd00ea6ccff7f9089e7"
+  },
+  "user_cpf": "161.573.927-03",
+  "address": "Consultório 1",
+  "date": "20/08/2023",
+  "time": "18:00",
+  "picture_url": "teste",
+  "professional": {
+    "$oid": "648f64838ce1342b55cbd007"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "649a5108c22a45269e87bdf9"
+  },
+  "user_cpf": "161.573.927-03",
+  "address": "Consultório 3",
+  "date": "20/09/2023",
+  "time": "13:00",
+  "picture_url": "teste",
+  "professional": {
+    "$oid": "648fe6896f11571a8d456199"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "649a6761f86a9102a43b46f7"
+  },
+  "user_cpf": "161.573.927-03",
+  "address": "Rua Dias da Cruz, 140",
+  "date": "06/10/2023",
+  "time": "07:00",
+  "picture_url": "teste",
+  "professional": {
+    "$oid": "6491f874a24f30ee908c2a70"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "649a677af86a9102a43b46fb"
+  },
+  "user_cpf": "161.573.927-03",
+  "address": "Rua Dias da Cruz, 140",
+  "date": "07/10/2023",
+  "time": "10:00",
+  "picture_url": "teste",
+  "professional": {
+    "$oid": "6491f874a24f30ee908c2a70"
+  },
+  "__v": 0
+}]

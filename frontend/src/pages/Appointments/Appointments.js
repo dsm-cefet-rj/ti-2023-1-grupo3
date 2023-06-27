@@ -7,12 +7,14 @@ import {
   selectAllAppointments,
   selectAppointmentsThunksStatus,
 } from "../../store/slices/appointmentSlice";
+import { toast } from "react-toastify";
 import debounce from "lodash.debounce";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getClientAppointments, deleteAppointment } from "../../store";
 import { selectToken } from "../../store/slices/userSlice";
+
 
 const StyledBox = styled(Box)(() => ({
   display: "flex",
@@ -38,7 +40,20 @@ function Appointments() {
 
   const handleChangePage = (event, value) => setPage(value);
 
-  const handleSeeMoreClick = (id) => navigate(`/appointment/${id}`);
+  const handleRemoveAppointment = async (id, token) => {
+    try {
+      const response = await deleteAppointment(id, token);
+      if (response.status === 200) {
+        toast.success("Consulta desmarcada com sucesso");
+      } else {
+        toast.error("Ocorreu um erro ao desmarcar a consulta");
+      }
+    } catch (error) {
+      toast.error("Ocorreu um erro ao deletar");
+      console.log(error);
+    }
+  };
+  
 
   const appointments = useSelector((state) => selectAllAppointments(state));
   const status = useSelector(selectAppointmentsThunksStatus);
@@ -60,7 +75,7 @@ function Appointments() {
 
     let appointmentsList = appointments ?? [];
 
-    //setNumOfPages(Math.ceil(appointments.length / 10));
+    setNumOfPages(Math.ceil(appointments.length / 10));
 
     if (searchText && searchText !== "") {
       appointmentsList = appointmentsList.filter((appointment) =>
@@ -96,7 +111,7 @@ function Appointments() {
       {filteredAppointments.map((appointment, index) => (
         <AppointmentCard
           appointment={appointment}
-          onClick={() => handleSeeMoreClick(appointment.id)}
+          onClick={() => handleRemoveAppointment(appointment.id, token)}
           key={index}
         />
       ))}

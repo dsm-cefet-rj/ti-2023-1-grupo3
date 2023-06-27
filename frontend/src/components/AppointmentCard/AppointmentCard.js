@@ -42,7 +42,7 @@ function AppointmentCard(props) {
           <Typography variant="body1" gutterBottom>
             Hora: {appointment.time}
           </Typography>
-          <Button onClick={onClick}>Ver mais</Button>
+          <Button onClick={onClick}>Desmarcar</Button>
         </CardContent>
       </StyledBox>
     </StyledCard>

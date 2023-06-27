@@ -1,5 +1,43 @@
 [{
   "_id": {
+    "$oid": "648f64838ce1342b55cbd007"
+  },
+  "jobTitle": "Psicólogo",
+  "description": "Formado EAD",
+  "specialities": [
+    "Depressão",
+    "Ansiedade"
+  ],
+  "hourRate": "150",
+  "rating": "0",
+  "cfp": "16/5659",
+  "scheduledHours": [],
+  "user": {
+    "$oid": "648f64828ce1342b55cbd003"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648fe6896f11571a8d456199"
+  },
+  "jobTitle": "Psicólogo",
+  "description": "Muito bom no que faço",
+  "specialities": [
+    "Depressão",
+    "Falta de ânimo"
+  ],
+  "hourRate": "160",
+  "rating": "0",
+  "cfp": "56/9896",
+  "scheduledHours": [],
+  "user": {
+    "$oid": "648fe6886f11571a8d456195"
+  },
+  "__v": 0
+},
+{
+  "_id": {
     "$oid": "6491f874a24f30ee908c2a70"
   },
   "jobTitle": "Psicólogo",
@@ -92,6 +130,24 @@
   "scheduledHours": [],
   "user": {
     "$oid": "6491fbc9a24f30ee908c2a8a"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6499ec9cb3f11dbde655dd41"
+  },
+  "jobTitle": "Psicóloga",
+  "description": "Muito boa",
+  "specialities": [
+    "Tudo"
+  ],
+  "hourRate": "100",
+  "rating": "0",
+  "cfp": "15/6454",
+  "scheduledHours": [],
+  "user": {
+    "$oid": "6499ec9cb3f11dbde655dd3d"
   },
   "__v": 0
 }]
