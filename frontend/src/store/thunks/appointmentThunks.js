@@ -45,8 +45,8 @@ export const createAppointment = createAsyncThunk(
 
 export const deleteAppointment = createAsyncThunk(
   "appointment/deleteAppointment",
-  async (id) => {
-    const response = await deleteAppointmentService(id);
+  async (id, token) => {
+    const response = await deleteAppointmentService(id, token);
 
     return response.data;
   }

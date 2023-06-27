@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const session = require("express-session");
 
+const appointmentsRouter = require("./routes/appointments");
 const professionalsRouter = require("./routes/professionals");
 const usersRouter = require("./routes/users");
 const locationsRouter = require("./routes/locations");
@@ -46,6 +47,7 @@ app.use("/users", usersRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/appointments", appointmentsRouter);
 app.use("/professionals", professionalsRouter);
 app.use("/locations", locationsRouter);
 module.exports = app;

@@ -18,8 +18,12 @@ export const createAppointment = async (appointment) => {
   return await axiosInstance.post("/appointments", appointment);
 };
 
-export const deleteAppointment = async (id) => {
-  return await axiosInstance.delete(`/appointments/${id}`);
+export const deleteAppointment = async (id, token) => {
+  return await axiosInstance.delete(`/appointments/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const updateAppointment = async (id, appointment) => {

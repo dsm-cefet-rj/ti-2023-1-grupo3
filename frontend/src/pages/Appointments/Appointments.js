@@ -11,7 +11,7 @@ import debounce from "lodash.debounce";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getClientAppointments } from "../../store";
+import { getClientAppointments, deleteAppointment } from "../../store";
 import { selectToken } from "../../store/slices/userSlice";
 
 const StyledBox = styled(Box)(() => ({
